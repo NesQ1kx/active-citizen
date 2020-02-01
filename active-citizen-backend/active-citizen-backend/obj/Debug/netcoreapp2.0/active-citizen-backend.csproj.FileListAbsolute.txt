@@ -1,0 +1,13 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\active-citizen-backend.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\active-citizen-backend.runtimeconfig.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\active-citizen-backend.runtimeconfig.dev.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\active-citizen-backend.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\active-citizen-backend.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp2.0\Common.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.csprojResolveAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.csproj.CoreCompileInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp2.0\active-citizen-backend.pdb

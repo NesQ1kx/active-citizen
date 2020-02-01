@@ -1,0 +1,23 @@
+@import "../../assets/styles/variables.scss";
+
+.logo {
+  width: 90px;
+  height: 76px;
+  font-size: $font-size-big;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 22px;
+  background: url("../../assets/images/saratov_oblast.svg") no-repeat center;
+  background-size: 50px 76px;
+  text-decoration: none;
+
+  &.active > span {
+    color: black;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

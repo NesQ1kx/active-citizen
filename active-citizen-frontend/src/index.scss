@@ -1,0 +1,17 @@
+@import "./assets/styles/variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color-primary;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}

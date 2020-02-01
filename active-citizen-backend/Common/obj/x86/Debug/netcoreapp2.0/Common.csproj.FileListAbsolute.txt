@@ -1,0 +1,11 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\bin\x86\Debug\netcoreapp2.0\Common.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\bin\x86\Debug\netcoreapp2.0\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\bin\x86\Debug\netcoreapp2.0\Common.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\bin\x86\Debug\netcoreapp2.0\Microsoft.AspNetCore.Hosting.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\bin\x86\Debug\netcoreapp2.0\Microsoft.AspNetCore.Hosting.xml
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.csprojResolveAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\Common\obj\x86\Debug\netcoreapp2.0\Common.pdb

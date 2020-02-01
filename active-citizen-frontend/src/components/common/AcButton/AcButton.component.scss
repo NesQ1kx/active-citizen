@@ -1,0 +1,17 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-button {
+  padding: 0 16px;
+  height: 35px;
+  color: $color-primary;
+  border: 3px solid $color-primary;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  background-color: $background-color-white;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
