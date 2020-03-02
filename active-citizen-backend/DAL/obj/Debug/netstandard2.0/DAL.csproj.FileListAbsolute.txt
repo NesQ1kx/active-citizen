@@ -1,0 +1,11 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Debug\netstandard2.0\DAL.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Debug\netstandard2.0\DAL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Debug\netstandard2.0\DAL.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Debug\netstandard2.0\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Debug\netstandard2.0\DALContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.csprojAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.csproj.CopyComplete
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Debug\netstandard2.0\DAL.pdb

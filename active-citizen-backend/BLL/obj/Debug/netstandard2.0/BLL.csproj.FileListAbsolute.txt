@@ -1,0 +1,13 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\BLL.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\BLL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\BLL.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\BLLContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\BLLContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\bin\Debug\netstandard2.0\DALContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.csprojAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.csproj.CopyComplete
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLL\obj\Debug\netstandard2.0\BLL.pdb

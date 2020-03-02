@@ -1,0 +1,13 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\DALContracts.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\DALContracts.runtimeconfig.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\DALContracts.runtimeconfig.dev.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\DALContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.csprojAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.csproj.CopyComplete
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DALContracts\obj\Debug\netcoreapp3.1\DALContracts.pdb

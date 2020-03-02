@@ -15,3 +15,24 @@ a {
   color: black;
   text-decoration: none;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.hint {
+  color: $color-gray2;
+  font-size: $font-size-small;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  color: $color-red;
+  font-size: $font-size-small;
+  margin-bottom: 10px;
+}
+
+.active-link {
+  color: $color-primary !important;
+}

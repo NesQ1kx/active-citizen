@@ -34,10 +34,6 @@ namespace Common.Entities
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.Test)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Users>(entity =>
@@ -59,14 +55,6 @@ namespace Common.Entities
                     .HasMaxLength(250);
 
                 entity.Property(e => e.Patronym)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Role)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Snils)
                     .IsRequired()
                     .HasMaxLength(50);
 

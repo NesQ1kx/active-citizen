@@ -30,8 +30,20 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\BLL.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\BLL.csproj"
+              },
               "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj": {
                 "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\DAL.csproj"
               }
             }
           }
@@ -45,6 +57,115 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Formatters.Json": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj",
+        "projectName": "BLLContracts",
+        "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj",
+        "packagesPath": "C:\\Users\\NessQ1k\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NessQ1k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -71,9 +192,91 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\BLL.csproj",
+        "projectName": "BLL",
+        "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\BLL.csproj",
+        "packagesPath": "C:\\Users\\NessQ1k\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NessQ1k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\BLLContracts\\BLLContracts.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -119,6 +322,175 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj",
+        "projectName": "DALContracts",
+        "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj",
+        "packagesPath": "C:\\Users\\NessQ1k\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NessQ1k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\DAL.csproj",
+        "packagesPath": "C:\\Users\\NessQ1k\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NessQ1k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\Common\\Common.csproj"
+              },
+              "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj": {
+                "projectPath": "C:\\Users\\NessQ1k\\Desktop\\active-citizen\\active-citizen-backend\\DALContracts\\DALContracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.1, )"

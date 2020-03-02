@@ -1,0 +1,15 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\BLLContracts.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\BLLContracts.runtimeconfig.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\BLLContracts.runtimeconfig.dev.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\BLLContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\BLLContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\bin\Debug\netcoreapp3.1\DALContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.csprojAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.csproj.CopyComplete
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\BLLContracts\obj\Debug\netcoreapp3.1\BLLContracts.pdb

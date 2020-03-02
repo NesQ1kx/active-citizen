@@ -1,0 +1,11 @@
+@import "../../assets/styles/variables.scss";
+
+.signin-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  & > div {
+    flex-direction: column;
+  }
+}

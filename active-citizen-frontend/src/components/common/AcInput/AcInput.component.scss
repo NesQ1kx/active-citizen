@@ -1,0 +1,39 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+
+  & label {
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  & label.error {
+    color: $color-red;
+  }
+
+  & input {
+    width: 250px;
+    height: 35px;
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+    padding: 8px;
+    outline: none;
+    
+    &:focus {
+      border: 1px solid $color-primary;
+    }
+  }
+
+  & input.error {
+    border: 1px solid $color-red !important;
+  }
+
+  .error-msg {
+    height: 12px;
+    color: $color-red;
+    font-size: $font-size-small;
+  }
+}

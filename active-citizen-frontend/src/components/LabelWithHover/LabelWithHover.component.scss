@@ -1,0 +1,29 @@
+@import "../../assets/styles/variables.scss";
+
+.label-with-hover {
+  color: $color-primary;
+  position: relative;
+
+  .text {
+    position: absolute;
+    bottom: 31px;
+    left: -42px;
+    background-color: $color-black;
+    padding: 5px;
+    border-radius: 2px;
+    color: $background-color-white;
+    font-size: 10px;
+    opacity: 90%;
+    width: 100px;
+
+    .arrow {
+      position: absolute;
+      background-color: inherit;
+      width: 10px;
+      height: 10px;
+      right: 50%;
+      bottom: -4px;
+      transform: translateX(50%) rotate(45deg);
+    }
+  }
+}

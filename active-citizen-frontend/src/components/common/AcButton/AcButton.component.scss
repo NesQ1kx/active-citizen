@@ -4,14 +4,36 @@
   padding: 0 16px;
   height: 35px;
   color: $color-primary;
-  border: 3px solid $color-primary;
+  border: 1px solid $color-primary;
   text-transform: uppercase;
   font-weight: bold;
   display: flex;
   align-items: center;
   background-color: $background-color-white;
+  cursor: pointer;
+  outline: none;
+  transition: background-color .1s linear;
 
   &:hover {
-    cursor: pointer;
+    background-color: #c1e7f3;
   }
+}
+
+.primary {
+  border: none;
+  background-color: $color-primary;
+  color: $background-color-white;
+  text-transform: capitalize;
+  transition: none;
+
+  &:hover {
+    background-color: $color-primary;
+  }
+}
+
+.disabled {
+  background-color: $color-gray2;
+  border: none;
+  pointer-events: none;
+  color: $background-color-white;
 }
