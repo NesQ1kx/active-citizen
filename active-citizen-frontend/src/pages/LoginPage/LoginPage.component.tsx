@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Page, AcInput, AcButton } from "../../components";
+import { Page, AcInput, AcButton, AcLoader } from "../../components";
 import { RouteComponentProps } from "react-router";
 import { FormInput, SiginModel } from "../../types";
 import { requireValidationFunction, emailValidationFunction, passwordValidationFunction } from "../../constants";
 import { Autobind } from "../../helpers";
-import { UserService } from "../../services";
+import { UserService, LoadingService } from "../../services";
 
 import "./LoginPage.component.scss";
 
@@ -21,7 +21,8 @@ interface State {
 }
 
 export class LoginPage extends Component<Props, State> {
-  private userService: UserService
+  private userService: UserService;
+  private loadingService: LoadingService;
   public state: State = {
     isFormValid: false,
     formState: {
@@ -41,34 +42,37 @@ export class LoginPage extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
     this.userService = UserService.instance;
+    this.loadingService = LoadingService.instance;
   }
 
   public render() {
     return (
       <Page title="Вход" width="440">
-        <div className="signin-wrapper">
-          <div>
-            <AcInput inputType="text"
-              label="Адрес электронной почты"
-              isRequired={true}
-              onChange={(value, isValid) => this.inputChange("email", value, isValid)}
-              formInput={this.state.formState.email}
-            />
-            <AcInput inputType="password"
-              label="Пароль"
-              isRequired={true}
-              onChange={(value, isValid) => this.inputChange("password", value, isValid)}
-              formInput={this.state.formState.password}
-            />
-            <div className="hint">
-              *-поля, обязательные для заполнения
+        <AcLoader>
+          <div className="signin-wrapper">
+            <div>
+              <AcInput inputType="text"
+                label="Адрес электронной почты"
+                isRequired={true}
+                onChange={(value, isValid) => this.inputChange("email", value, isValid)}
+                formInput={this.state.formState.email}
+              />
+              <AcInput inputType="password"
+                label="Пароль"
+                isRequired={true}
+                onChange={(value, isValid) => this.inputChange("password", value, isValid)}
+                formInput={this.state.formState.password}
+              />
+              <div className="hint">
+                *-поля, обязательные для заполнения
+              </div>
+              <AcButton title="Войти"
+                isPrimary={true}
+                onClick={this.signin}
+                disabled={!this.state.isFormValid}/>
             </div>
-            <AcButton title="Войти"
-              isPrimary={true}
-              onClick={this.signin}
-              disabled={!this.state.isFormValid}/>
           </div>
-        </div>
+        </AcLoader>
       </Page>
     )
   }
@@ -103,6 +107,10 @@ export class LoginPage extends Component<Props, State> {
       Password: this.state.formState.password.value,
     }
 
-    this.userService.signin(model).then(() => this.props.history.push("/"));
+    this.loadingService.changeLoader(true);
+    this.userService.signin(model).then(() => {
+      this.props.history.push("/");
+      this.loadingService.changeLoader(false);
+    });
   }
 }

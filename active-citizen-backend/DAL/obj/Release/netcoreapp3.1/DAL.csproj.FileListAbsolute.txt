@@ -1,0 +1,15 @@
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DAL.deps.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DAL.runtimeconfig.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DAL.runtimeconfig.dev.json
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DAL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DAL.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\Common.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DALContracts.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\Common.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\bin\Release\netcoreapp3.1\DALContracts.pdb
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.csprojAssemblyReference.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.AssemblyInfo.cs
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.csproj.CopyComplete
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\DAL\obj\Release\netcoreapp3.1\DAL.pdb

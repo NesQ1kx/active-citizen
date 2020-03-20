@@ -5,3 +5,7 @@ export const USER = {
   GET_USER_DATA: `${url}/user/get`,
   SIGNIN: `${url}/user/signin`,
 }
+
+export const PROJECT = {
+  LOAD: `${url}/project/load`,
+}

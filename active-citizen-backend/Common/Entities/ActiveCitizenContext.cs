@@ -16,6 +16,7 @@ namespace Common.Entities
         }
 
         public virtual DbSet<Districts> Districts { get; set; }
+        public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +35,15 @@ namespace Common.Entities
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.Property(e => e.ProjectDescription).IsRequired();
+
+                entity.Property(e => e.ProjectTitle)
+                    .IsRequired()
+                    .HasMaxLength(250);
             });
 
             modelBuilder.Entity<Users>(entity =>

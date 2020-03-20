@@ -49,6 +49,8 @@ namespace active_citizen_backend
             services.AddControllers();
             services.AddScoped<IUserDal, UserDal>();
             services.AddScoped<IUserBll, UserBll>();
+            services.AddScoped<IProjectDal, ProjectDal>();
+            services.AddScoped<IProjectBll, ProjectBll>();
             services.AddCors();
             services.AddMvc().AddNewtonsoftJson(options =>
             {

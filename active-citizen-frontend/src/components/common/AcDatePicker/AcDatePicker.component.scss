@@ -1,0 +1,23 @@
+@import "../../../assets/styles/variables.scss";
+
+.custom-input {
+  height: 35px;
+  width: 100%;
+  border: 1px solid #D0D0D0;
+  border-radius: 4px;
+  padding: 8px;
+  outline: none;
+  margin-bottom: 25px;
+  font-size: $font-size-default;
+  cursor: pointer;
+
+  & > i {
+    margin-left: 10px;
+  }
+}
+
+.ac-date-picker {
+  .label {
+    margin-bottom: 5px;
+  }
+}

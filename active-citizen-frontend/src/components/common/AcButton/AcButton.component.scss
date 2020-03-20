@@ -25,6 +25,7 @@
   color: $background-color-white;
   text-transform: capitalize;
   transition: none;
+  border-radius: 2px;
 
   &:hover {
     background-color: $color-primary;

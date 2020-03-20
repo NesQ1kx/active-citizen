@@ -1,0 +1,31 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-loader {
+  position: relative;
+  
+  .bluring-content {
+    &.-loading {
+      filter: blur(3px);
+    }
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .spinner > i {
+    animation: rotating 1s linear infinite;
+    color: $color-primary;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

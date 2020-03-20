@@ -25,3 +25,13 @@ export interface SiginModel {
   Email: string;
   Password: string;
 }
+
+export interface LoadProjectModel {
+  ProjectTitle: string;
+  ProjectDescription: string;
+  ProposeStartDate: number;
+  ProposeEndDate: number;
+  VoteStartDate: number;
+  VoteEndDate: number;
+  IsProjectActive: boolean;
+}

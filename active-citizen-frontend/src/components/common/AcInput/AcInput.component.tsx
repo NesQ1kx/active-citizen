@@ -77,13 +77,17 @@ export class AcInput extends Component<Props, State> {
   private validateInput(value: any) {
     let isValid = false;
     let messages: string[] = [];
-    this.props.formInput!.validationFunctions.forEach(fn => {
-      const result = fn(value);
-      isValid = result.isValid;
-      if (!isValid) {
-        messages.push(result.errorMessage);
-      }
-    });
+    if (!this.props.formInput!.validationFunctions.length) {
+      isValid = true;
+    } else {
+      this.props.formInput!.validationFunctions.forEach(fn => {
+        const result = fn(value);
+        isValid = result.isValid;
+        if (!isValid) {
+          messages.push(result.errorMessage);
+        }
+      });
+    }
 
     return {
       isValid,

@@ -21,14 +21,16 @@
     border-radius: 4px;
     padding: 8px;
     outline: none;
+    transition: border .1s linear;
+    background-color: #f9f9f9;
     
     &:focus {
       border: 1px solid $color-primary;
     }
-  }
-
-  & input.error {
-    border: 1px solid $color-red !important;
+    
+    &.error {
+      border: 1px solid $color-red !important;
+    }
   }
 
   .error-msg {

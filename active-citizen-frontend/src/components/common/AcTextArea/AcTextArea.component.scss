@@ -1,0 +1,42 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-text-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+
+  & label {
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  & label.error {
+    color: $color-red;
+  }
+
+  & textarea {
+    width: 550px;
+    height: 250px;
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+    padding: 8px;
+    outline: none;
+    resize: none;
+    transition: border .1s linear;
+    background-color: #f9f9f9;
+    
+    &:focus {
+      border: 1px solid $color-primary;
+    }
+    
+    &.error {
+      border: 1px solid $color-red !important;
+    }
+  }
+
+  .error-msg {
+    height: 12px;
+    color: $color-red;
+    font-size: $font-size-small;
+  }
+}
