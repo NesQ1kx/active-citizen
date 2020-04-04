@@ -8,5 +8,11 @@ namespace BLLContracts
     public interface IProjectBll
     {
         void LoadProject(Project project);
+        IEnumerable<Project> GetAll();
+        Project GetById(int id);
+        bool UpdateProject(Project project);
+        bool DeleteProject(int id);
+        bool Participate(Participating participating);
+        bool IsParticipate(Participating participating);
     }
 }

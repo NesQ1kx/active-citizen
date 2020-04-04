@@ -2,10 +2,12 @@ import React, { Component, ChangeEvent } from "react";
 
 import "./AcToggle.component.scss";
 import { Autobind } from "../../../helpers";
+import { FormInput } from "../../../types";
 
 interface Props {
   title: string;
   onChange?: (value: any, valid: boolean) => void;
+  formInput?: FormInput;
 }
 
 interface State {
@@ -18,7 +20,7 @@ export class AcToggle extends Component<Props, State> {
       <div className="ac-toggle">
         <label>{this.props.title}</label>
         <label className="switch">
-          <input type="checkbox" onChange={this.onChange}/>
+          <input type="checkbox" checked={this.props.formInput!.value} onChange={this.onChange}/>
           <span className="slider round"></span>
         </label>
       </div>

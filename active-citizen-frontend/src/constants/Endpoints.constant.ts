@@ -8,4 +8,10 @@ export const USER = {
 
 export const PROJECT = {
   LOAD: `${url}/project/load`,
+  ALL: `${url}/project/all`,
+  BY_ID: `${url}/project`,
+  UPDATE: `${url}/project/update`,
+  DELETE: `${url}/project/delete`,
+  PARTICIPATE: `${url}/project/participate`,
+  IS_PARTICIPATE: `${url}/project/isParicipate`,
 }

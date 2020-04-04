@@ -14,5 +14,7 @@ namespace active_citizen_backend.ViewModels
         public long VoteStartDate { get; set; }
         public long VoteEndDate { get; set; }
         public bool IsProjectActive { get; set; }
+        public string ProjectImage { get; set; }
+        public IEnumerable<ProjectDirectionViewModel> ProjectDirection { get; set; }
     }
 }

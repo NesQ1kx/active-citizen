@@ -44,7 +44,7 @@ export class AcTextArea extends Component<Props, State> {
       <textarea className={!this.state.isValid ? "error" : ""}
              onChange={this.onChange}
              onBlur={this.onBlur}
-             value={this.state.value}/>
+             value={this.props.formInput!.value}/>
       <div className="error-msg">
         {this.state.errorMessages.map((message, index) => (<div key={index}>{message}</div>))}
       </div>

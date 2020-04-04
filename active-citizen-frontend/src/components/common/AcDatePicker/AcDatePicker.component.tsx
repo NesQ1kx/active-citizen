@@ -1,13 +1,15 @@
 import React, { Component, useState } from "react";
 import DatePicker from "react-datepicker";
+import { Autobind } from "../../../helpers";
+import { FormInput } from "../../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./AcDatePicker.component.scss";
-import { Autobind } from "../../../helpers";
+
 
 interface Props {
   label: string;
-  value?: any;
+  formInput?: FormInput;
   onChange?: (value: any) => void;
   minDate?: Date;
   maxDate?: Date;
@@ -29,7 +31,7 @@ const CustomInput = ({ value, onClick }: any) => {
 
 export class AcDatePciker extends Component<Props, State> {
   public state: State = {
-    selectedDate: new Date(),
+    selectedDate: this.props.formInput!.value || new Date(),
   }
   public render() {
     return (
@@ -41,7 +43,7 @@ export class AcDatePciker extends Component<Props, State> {
         minDate={this.props.minDate}
         maxDate={this.props.maxDate}
         dateFormat="dd.MM.yyyy"
-        selected={this.state.selectedDate}
+        selected={new Date(+this.props.formInput!.value || Date.now())}
         onChange={this.onDateChange}
         customInput={<CustomInput />}
       />

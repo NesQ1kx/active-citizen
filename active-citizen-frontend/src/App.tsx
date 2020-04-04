@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Header, AcToast, SubHeader } from './components';
-import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter } from 'react-router-dom';
-import { LoginPage, NewsPage, SignupPage } from './pages';
+import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter, Switch } from 'react-router-dom';
+import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject } from './pages';
 import { UserService } from './services';
 
 import './App.scss';
-import { LoadProject } from './pages/LoadProject';
 
 interface Props {}
 
@@ -30,10 +29,17 @@ class App extends Component<Props> {
         <Router>
           <Header />
           <SubHeader />
-          <Route exact path="/" component={NewsPage} />
-          <Route exact path="/signin" component={LoginPage} />
-          <Route exact path="/signup" component={SignupPage} />
-          <Route excat path="/load-project" component={LoadProject} />
+          <div className="main">
+            <Switch>
+              <Route exact path="/" component={NewsPage} />
+              <Route exact path="/signin" component={LoginPage} />
+              <Route exact path="/signup" component={SignupPage} />
+              <Route excat path="/load-project" component={LoadProject} />
+              <Route exact path="/current-projects/:id" component={ProjectPage} />
+              <Route exact path="/current-projects" component={CurrentProjects} />
+              <Route exact path="/edit-project/:id" component={EditProject} />
+            </Switch>
+          </div>
         </Router>
         <AcToast />
       </div>

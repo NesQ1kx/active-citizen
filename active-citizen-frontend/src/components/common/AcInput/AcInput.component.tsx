@@ -46,7 +46,7 @@ export class AcInput extends Component<Props, State> {
         <input className={!this.state.isValid ? "error" : ""} type={this.props.inputType}
                onChange={this.onChange}
                onBlur={this.onBlur}
-               value={this.state.value}/>
+               value={this.props.formInput!.value}/>
         <div className="error-msg">
           {this.state.errorMessages.map((message, index) => (<div key={index}>{message}</div>))}
         </div>

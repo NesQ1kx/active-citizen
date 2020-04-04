@@ -22,15 +22,18 @@ export class UserService {
   }
 
   public signup(model: SignupModel) {
-    this.httpService.post(USER.SIGNUP, model)
-    .then(
-      (response) => {
-        this.toastService.changeEvent({ show: true, type: EventType.Success, message: "Регистрация прошла успешно" });
-        localStorage.setItem("AccessToken", JSON.stringify({ value: response.data.Value.accessToken, email: response.data.Value.email }));
-        this.getUserData(response.data.Value.email);
-      },
-      (error) => { this.toastService.changeEvent({ show: true, type: EventType.Error, message: error.response.data.Value.message })
-    });
+    return new Promise((resolve, reject) => {
+      this.httpService.post(USER.SIGNUP, model)
+      .then(
+        (response) => {
+          this.toastService.changeEvent({ show: true, type: EventType.Success, message: "Регистрация прошла успешно" });
+          localStorage.setItem("AccessToken", JSON.stringify({ value: response.data.Value.accessToken, email: response.data.Value.email }));
+          this.getUserData(response.data.Value.email);
+          resolve();
+        },
+        (error) => { this.toastService.changeEvent({ show: true, type: EventType.Error, message: error.response.data.Value.message })
+      });
+    })
   }
 
   public signin(model: SiginModel) {
@@ -43,7 +46,9 @@ export class UserService {
           this.getUserData(response.data.Value.email);
           resolve();
         },
-        (error) => { this.toastService.changeEvent({ show: true, type: EventType.Error, message: error.response.data.message })
+        (error) => {
+          this.toastService.changeEvent({ show: true, type: EventType.Error, message: error.response.data.message });
+          reject();
       });
     })
   }

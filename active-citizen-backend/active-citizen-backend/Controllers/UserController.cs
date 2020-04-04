@@ -113,7 +113,8 @@ namespace active_citizen_backend.Controllers
                 Email = user.Email,
                 Sex = user.Sex,
                 IsConfirmedEmail = user.IsConfirmedEmail,
-                IsBlocked = user.IsBlocked, 
+                IsBlocked = user.IsBlocked,
+                Id = user.Id,
             };
 
             return Ok(new ObjectResult(response));

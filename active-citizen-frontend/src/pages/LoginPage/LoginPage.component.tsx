@@ -5,6 +5,7 @@ import { FormInput, SiginModel } from "../../types";
 import { requireValidationFunction, emailValidationFunction, passwordValidationFunction } from "../../constants";
 import { Autobind } from "../../helpers";
 import { UserService, LoadingService } from "../../services";
+import { Redirect } from "react-router";
 
 import "./LoginPage.component.scss";
 
@@ -18,12 +19,14 @@ interface FormFields {
 interface State {
   isFormValid: boolean;
   formState: FormFields;
+  redirect: boolean;
 }
 
 export class LoginPage extends Component<Props, State> {
   private userService: UserService;
   private loadingService: LoadingService;
   public state: State = {
+    redirect: false,
     isFormValid: false,
     formState: {
       email: {
@@ -67,12 +70,13 @@ export class LoginPage extends Component<Props, State> {
                 *-поля, обязательные для заполнения
               </div>
               <AcButton title="Войти"
-                isPrimary={true}
+                type="primary"
                 onClick={this.signin}
                 disabled={!this.state.isFormValid}/>
             </div>
           </div>
         </AcLoader>
+        { this.state.redirect ? <Redirect to="/" /> : ""}
       </Page>
     )
   }
@@ -109,7 +113,9 @@ export class LoginPage extends Component<Props, State> {
 
     this.loadingService.changeLoader(true);
     this.userService.signin(model).then(() => {
-      this.props.history.push("/");
+      this.loadingService.changeLoader(false);
+      this.setState({ redirect: true });
+    }, () => {
       this.loadingService.changeLoader(false);
     });
   }

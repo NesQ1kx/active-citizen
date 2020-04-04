@@ -5,6 +5,11 @@ namespace Common.Entities
 {
     public partial class Users
     {
+        public Users()
+        {
+            Participating = new HashSet<Participating>();
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,5 +24,6 @@ namespace Common.Entities
         public int Role { get; set; }
 
         public virtual Districts DistrictNavigation { get; set; }
+        public virtual ICollection<Participating> Participating { get; set; }
     }
 }

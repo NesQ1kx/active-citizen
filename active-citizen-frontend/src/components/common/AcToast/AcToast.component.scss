@@ -2,7 +2,7 @@
 
 .ac-toast {
   position: fixed;
-  top:  77px;
+  top: 100px;
   right: 10px;
   width: 239px;
   height: 66px;
@@ -13,7 +13,8 @@
   align-items: center;
   padding: 10px;
   font-size: $font-size-small;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.39);
+  
 
   &.error {
     background-color: $color-red;

@@ -21,6 +21,9 @@ export class SubHeader extends Component {
   constructor(props: any) {
     super(props);
     this.userService = UserService.instance;
+  }
+
+  public componentDidMount() {
     this.userService.$currentUser.subscribe(user => {
       this.setState({ isAuthenticated: !!user, currentUser: user });
     });
@@ -30,10 +33,9 @@ export class SubHeader extends Component {
       this.state.isAuthenticated && (
         <header className="sub-header">
         <div className="nav-container">
-          <NavLink activeClassName="active-link" to="propose-idea" className="sub-nav-item">Предложить идею</NavLink>
-          <NavLink activeClassName="active-link" to="current-projects" className="sub-nav-item">Текущие проекты</NavLink>
+          <NavLink activeClassName="active-link" to="/current-projects" className="sub-nav-item">Текущие проекты</NavLink>
           {this.state.currentUser!.Role === Roles.Admin && (
-            <NavLink activeClassName="active-link" to="load-project" className="sub-nav-item">Загрузить проект</NavLink>
+            <NavLink activeClassName="active-link" to="/load-project" className="sub-nav-item">Загрузить проект</NavLink>
           )}
         </div>
       </header>

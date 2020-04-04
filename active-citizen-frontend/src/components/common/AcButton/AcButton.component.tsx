@@ -7,13 +7,13 @@ interface Props {
   onClick?: () => void;
   title?: string;
   disabled?: boolean;
-  isPrimary?: boolean
+  type?: string
 }
 
 export class AcButton extends Component<Props> {
   public render() {
     return (
-      <button className={`ac-button ${this.props.isPrimary ? 'primary' : ''} ${this.props.disabled ? 'disabled' : ''}`}
+      <button className={`ac-button ${this.props.type} ${this.props.disabled ? 'disabled' : ''}`}
               onClick={this.props.onClick}>
         {this.props.title}
       </button>

@@ -1,3 +1,4 @@
+import { ProjectDirection } from './../models/ProjectDirection';
 export interface ValidationResult {
   isValid: boolean;
   errorMessage: string;
@@ -34,4 +35,19 @@ export interface LoadProjectModel {
   VoteStartDate: number;
   VoteEndDate: number;
   IsProjectActive: boolean;
+  ProjectImage: string;
+  ProjectDirection: any[];
+}
+
+export interface UpdateProjectModel {
+  Id: number;
+  ProjectTitle: string;
+  ProjectDescription: string;
+  ProposeStartDate: number;
+  ProposeEndDate: number;
+  VoteStartDate: number;
+  VoteEndDate: number;
+  IsProjectActive: boolean;
+  ProjectImage: string;
+  ProjectDirection: ProjectDirection[];
 }

@@ -1,15 +1,8 @@
 @import "../../assets/styles/variables.scss";
 
 .signup-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-
-  & > div {
-    display: inline-block;
-    
-    &:first-child {
-      margin-right: 50px;
-    }
-  }
+  align-items: start;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: 1fr 1fr;
 }

@@ -29,24 +29,25 @@ export class Header extends Component<Props> {
   public render() {
     return (
       <header className="header">
-        <div className="nav-container">
-          <Logo />
-          <nav className="navigation">
+        <nav className="nav-container">
+          <div className="navigation-items">
+            <Logo  />
             <span className="navigation-item">Как это работает</span>
             <span className="navigation-item">Выполненные проекты</span>
-          </nav>
+          </div>
+          <div className="actions">
           {this.state.isAuthenticated
           ? 
             (<div className="button-container">
               <NavLink to="">
                 <AcButton
-                  isPrimary={false}
+                  type="secondary"
                   title="Профиль"
                 />
               </NavLink>
               <NavLink to="">
                 <AcButton
-                  isPrimary={false}
+                  type="secondary"
                   title="Выйти"
                   onClick={this.signOut}
                 />
@@ -55,18 +56,19 @@ export class Header extends Component<Props> {
           : (<div className="button-container">
               <NavLink to="/signin">
                 <AcButton
-                  isPrimary={false}
+                  type="secondary"
                   title="Войти"
                 />
               </NavLink>
               <NavLink to="/signup">
                 <AcButton
-                  isPrimary={false}
+                  type="secondary"
                   title="Регистрация"
                 />
               </NavLink>
             </div>)}
-        </div>
+          </div>
+        </nav>
       </header>
     )
   }

@@ -1,3 +1,4 @@
+import { UserService } from './User.service';
 import { EventType } from './../types/Toast.types';
 import axios from "axios";
 import { ToastService } from "./Toast.service";
@@ -10,6 +11,7 @@ function axiosInstance() {
     if (error.response.status === 401) {
       localStorage.removeItem("AccessToken");
       ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Сессия истекла. Необхоима аутентификация" });
+      UserService.instance.$currentUser.next(undefined);
     }
     return Promise.reject(error);
   });
@@ -34,6 +36,14 @@ export class HttpService {
 
   public post(url: string, payload: any) {
     return this.axiosInstance.post(url, payload, { headers: this.getRequestConfig() });
+  }
+
+  public put(url: string, payload: any) {
+    return this.axiosInstance.put(url, payload, { headers: this.getRequestConfig() });
+  }
+
+  public delete(url: string) {
+    return this.axiosInstance.delete(url, { headers: this.getRequestConfig() });
   }
 
   private getRequestConfig() {

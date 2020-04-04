@@ -16,7 +16,9 @@ namespace Common.Entities
         }
 
         public virtual DbSet<Districts> Districts { get; set; }
+        public virtual DbSet<Participating> Participating { get; set; }
         public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<ProjectDirection> ProjectDirection { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,13 +39,47 @@ namespace Common.Entities
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<Participating>(entity =>
+            {
+                entity.HasKey(e => e.ParticipationId);
+
+                entity.HasOne(d => d.Project)
+                    .WithMany(p => p.Participating)
+                    .HasForeignKey(d => d.ProjectId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("FK_Participating_Project");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Participating)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("FK_Participating_Users");
+            });
+
             modelBuilder.Entity<Project>(entity =>
             {
                 entity.Property(e => e.ProjectDescription).IsRequired();
 
+                entity.Property(e => e.ProjectImage).IsRequired();
+
                 entity.Property(e => e.ProjectTitle)
                     .IsRequired()
                     .HasMaxLength(250);
+            });
+
+            modelBuilder.Entity<ProjectDirection>(entity =>
+            {
+                entity.Property(e => e.DirectionDescription).IsRequired();
+
+                entity.Property(e => e.DirectionTitle)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.HasOne(d => d.Project)
+                    .WithMany(p => p.ProjectDirection)
+                    .HasForeignKey(d => d.ProjectId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ProjectDirection_Project");
             });
 
             modelBuilder.Entity<Users>(entity =>
