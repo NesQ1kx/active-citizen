@@ -5,3 +5,6 @@ export * from "./LoadProject";
 export * from "./CurrentProjects";
 export * from "./Project";
 export * from "./EditProject";
+export * from "./Direction";
+export * from "./Profile";
+export * from "./AllIdeas";

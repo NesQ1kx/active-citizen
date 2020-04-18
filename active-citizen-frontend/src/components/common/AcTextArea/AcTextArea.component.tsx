@@ -12,7 +12,7 @@ interface Props {
   onChange?: (value: any, valid: boolean) => void;
   withHint?: boolean;
   hintText?: string;
-  formInput?: FormInput
+  formInput: FormInput
 }
 
 interface State {
@@ -28,6 +28,10 @@ export class AcTextArea extends Component<Props, State> {
     isRequiredError: false,
     value: '',
     errorMessages: [],
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.setState({ value: nextProps.formInput.value, isValid: nextProps.formInput.valid });
   }
 
   public render() {

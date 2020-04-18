@@ -4,3 +4,8 @@ export * from "./logo";
 export * from "./subheader";
 export * from "./LabelWithHover";
 export * from "./ProjectCard";
+export * from "./DirectionCard";
+export * from "./ProposeIdeaModal";
+export * from "./UserAvatar";
+export * from "./IdeaCard";
+export * from "./ReviewIdeaModal";

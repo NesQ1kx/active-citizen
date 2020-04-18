@@ -14,4 +14,8 @@ export const PROJECT = {
   DELETE: `${url}/project/delete`,
   PARTICIPATE: `${url}/project/participate`,
   IS_PARTICIPATE: `${url}/project/isParicipate`,
+  GET_DIRECTION: `${url}/project/direction`,
+  ADD_IDEA: `${url}/project/add-idea`,
+  GET_IDEAS: `${url}/project/ideas`,
+  UPDATE_IDEA: `${url}/project/update-idea`,
 }

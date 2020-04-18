@@ -14,5 +14,9 @@ namespace BLLContracts
         bool DeleteProject(int id);
         bool Participate(Participating participating);
         bool IsParticipate(Participating participating);
+        ProjectDirection GetDirection(int id);
+        bool AddIdea(DirectionIdea idea);
+        IEnumerable<DirectionIdea> GetAllIdeas(int id);
+        bool UpdateIdea(DirectionIdea idea);
     }
 }

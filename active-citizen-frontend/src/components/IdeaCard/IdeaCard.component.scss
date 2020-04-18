@@ -1,0 +1,42 @@
+@import "../../assets/styles/variables.scss";
+
+.idea-card {
+  padding: 10px;
+  background-color: #f1f0f0;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: box-shadow .1s linear;
+  display: flex;
+  flex-direction: row;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .user {
+      display: flex;
+    }
+
+    .description {
+      margin-top: 10px;
+      max-width: 450px;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;
+      display: -moz-box;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      -moz-line-clamp: 2;
+    }
+  }
+  &:hover {
+    box-shadow: 0 0 4px 0px #8a8a8a;
+  }
+
+  .create-date {
+    margin-left: auto;
+    color: $color-gray2;
+  }
+}

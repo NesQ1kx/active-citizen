@@ -13,6 +13,7 @@ interface Props {
   onChange?: (value: any) => void;
   minDate?: Date;
   maxDate?: Date;
+  isRequired?: boolean;
 }
 
 interface State {
@@ -37,7 +38,7 @@ export class AcDatePciker extends Component<Props, State> {
     return (
       <div className="ac-date-picker">
         <div className="label">
-          { this.props.label }
+          { this.props.label }{ this.props.isRequired ? "*" : "" }
         </div>
         <DatePicker
         minDate={this.props.minDate}
@@ -46,6 +47,9 @@ export class AcDatePciker extends Component<Props, State> {
         selected={new Date(+this.props.formInput!.value || Date.now())}
         onChange={this.onDateChange}
         customInput={<CustomInput />}
+        showMonthDropdown
+        showYearDropdown
+        dropdownMode="select"
       />
       </div>
     )

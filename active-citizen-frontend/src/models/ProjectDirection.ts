@@ -1,3 +1,4 @@
+import { DirectionIdea } from './DirectionIdea';
 export interface ProjectDirection {
   Id: number;
   DirectionTitle: string;
@@ -5,4 +6,5 @@ export interface ProjectDirection {
   CountOfIdeas: string;
   CountOfComments: string;
   ProjectId: string;
+  DirectionIdea: DirectionIdea[];
 }

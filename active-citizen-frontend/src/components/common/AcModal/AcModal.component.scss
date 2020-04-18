@@ -1,0 +1,56 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: white;
+    border-radius: 4px;
+    min-width: 320px;
+
+    .head {
+      display: flex;
+      padding: 10px;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $color-gray2;
+
+      & > i {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-enter.modal-enter-active {
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
+
+.modal-leave {
+  opacity: 1;
+}
+
+.modal-leave.modal-leave-active {
+  opacity: 0;
+  transition: opacity 200ms linear;
+}

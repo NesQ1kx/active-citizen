@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Page, AcButton } from '../../components';
+import { Page, AcButton, DirectionCard } from '../../components';
 import { ProjectService, LoadingService, UserService, ToastService } from '../../services';
 import { Project, User, Roles } from '../../models';
 
@@ -41,15 +41,19 @@ export class ProjectPage extends Component<Props, State> {
 
   public componentDidMount() {
     this.loadingService.changeLoader(true);
-    this.projectService.getProjectById(this.props.match.params.id).then((project: any) => {
-      this.setState({ project: project }, () => {
-        this.projectService.isUserParticipate(this.state.project!.Id, this.state.currentUser!.Id).then((response: any) => {
-          this.setState({ isUserParticipate: response });
-          this.loadingService.changeLoader(false);
+    
+    this.userService.$currentUser.subscribe(user => {
+      this.setState({ currentUser: user }, () => {
+        this.state.currentUser && this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
+          this.setState({ project: project }, () => {
+            this.projectService.isUserParticipate(this.state.project!.Id, this.state.currentUser!.Id).then((response: any) => {
+              this.setState({ isUserParticipate: response });
+              this.loadingService.changeLoader(false);
+            });
+          });
         });
       });
     });
-    this.userService.$currentUser.subscribe(user => this.setState({ currentUser: user }));
   }
 
   public render() {
@@ -117,6 +121,12 @@ export class ProjectPage extends Component<Props, State> {
                     Вы присоединились к проекту, но он ещё не начался. <br/> Мы пришлём вам уведомление о начале.
                   </strong>
                 </i>
+              ))}
+            </div>
+            <div className="divider"></div>
+            <div className="direction-block">
+              {this.state.project!.ProjectDirection.map((item, index) => (
+                <DirectionCard direction={item} key={index} />
               ))}
             </div>
           </div>

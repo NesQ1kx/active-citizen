@@ -13,4 +13,6 @@ export interface User {
   Sex: number;
   IsConfirmedEmail: boolean,
   IsBlocked: boolean;
+  DateOfBirth: number;
+  UserAvatar: string;
 }

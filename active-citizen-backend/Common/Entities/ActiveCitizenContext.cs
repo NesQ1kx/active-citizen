@@ -15,6 +15,7 @@ namespace Common.Entities
         {
         }
 
+        public virtual DbSet<DirectionIdea> DirectionIdea { get; set; }
         public virtual DbSet<Districts> Districts { get; set; }
         public virtual DbSet<Participating> Participating { get; set; }
         public virtual DbSet<Project> Project { get; set; }
@@ -32,6 +33,27 @@ namespace Common.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DirectionIdea>(entity =>
+            {
+                entity.Property(e => e.IdeaDescription).IsRequired();
+
+                entity.Property(e => e.IdeaTitle)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.HasOne(d => d.Direction)
+                    .WithMany(p => p.DirectionIdea)
+                    .HasForeignKey(d => d.DirectionId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_DirectionIdea_ProjectDirection");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.DirectionIdea)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("FK_DirectionIdea_Users");
+            });
+
             modelBuilder.Entity<Districts>(entity =>
             {
                 entity.Property(e => e.Name)

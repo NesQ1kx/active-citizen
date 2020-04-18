@@ -20,6 +20,8 @@ export interface SignupModel {
   Sex: number;
   Password: string;
   PasswordRepeat: string;
+  DateOfBirth: number;
+  UserAvatar?: string;
 }
 
 export interface SiginModel {
@@ -50,4 +52,12 @@ export interface UpdateProjectModel {
   IsProjectActive: boolean;
   ProjectImage: string;
   ProjectDirection: ProjectDirection[];
+}
+
+export interface AddIdeaModel {
+  IdeaTitle: string;
+  IdeaDescription: string;
+  DirectionId: number;
+  UserId: number;
+  CreateDate: number;
 }

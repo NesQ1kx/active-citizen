@@ -1,0 +1,10 @@
+@import "../../assets/styles/variables.scss";
+
+.propose-modal {
+  padding: 20px;
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

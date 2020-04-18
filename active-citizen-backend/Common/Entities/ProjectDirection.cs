@@ -5,6 +5,11 @@ namespace Common.Entities
 {
     public partial class ProjectDirection
     {
+        public ProjectDirection()
+        {
+            DirectionIdea = new HashSet<DirectionIdea>();
+        }
+
         public int Id { get; set; }
         public string DirectionTitle { get; set; }
         public string DirectionDescription { get; set; }
@@ -13,5 +18,6 @@ namespace Common.Entities
         public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
+        public virtual ICollection<DirectionIdea> DirectionIdea { get; set; }
     }
 }

@@ -6,16 +6,20 @@ import { UserService } from "../../services";
 import { Autobind } from "../../helpers";
 
 import "./Header.component.scss";
+import { User, Roles } from "../../models";
 
 interface Props {}
 
 interface State {
   isAuthenticated: boolean;
+  currentUser?: User;
+  isDropDownVisible: boolean;
 }
 
 export class Header extends Component<Props> {
   public state: State = {
     isAuthenticated: false,
+    isDropDownVisible: false,
   };
   private userService: UserService;
 
@@ -23,7 +27,7 @@ export class Header extends Component<Props> {
     super(props);
     this.userService = UserService.instance;
     this.userService.$currentUser.subscribe(user => {
-      this.setState({ isAuthenticated: !!user });
+      this.setState({ isAuthenticated: !!user, currentUser: user });
     });
   }
   public render() {
@@ -32,14 +36,29 @@ export class Header extends Component<Props> {
         <nav className="nav-container">
           <div className="navigation-items">
             <Logo  />
-            <span className="navigation-item">Как это работает</span>
-            <span className="navigation-item">Выполненные проекты</span>
+            <NavLink to="" className="navigation-item">Как это работает</NavLink>
+            <NavLink to="" className="navigation-item">Выполненные проекты</NavLink>
+            <NavLink to="/current-projects" activeClassName="active-link" className="navigation-item">Текущие проекты</NavLink>
+            {this.state.isAuthenticated && this.state.currentUser!.Role === Roles.Admin && (
+              <div className="navigation-item with-drop-down"
+                   onMouseOver={() => this.setState({ isDropDownVisible: true })}
+                   onMouseLeave={() => this.setState({ isDropDownVisible: false })}
+                   >
+                Администратор
+               {this.state.isDropDownVisible && (
+                  <div className="drop-down">
+                    <NavLink to="/load-project" className="navigation-item" activeClassName="active-link">Загрузить проект</NavLink>
+                    <NavLink to="" className="navigation-item">Найти пользователя</NavLink>
+                  </div>
+               )}
+              </div>
+            )}
           </div>
           <div className="actions">
           {this.state.isAuthenticated
           ? 
             (<div className="button-container">
-              <NavLink to="">
+              <NavLink to={`/profile/${this.state.currentUser!.Id}`}>
                 <AcButton
                   type="secondary"
                   title="Профиль"

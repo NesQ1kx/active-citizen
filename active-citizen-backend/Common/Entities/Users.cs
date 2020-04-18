@@ -7,6 +7,7 @@ namespace Common.Entities
     {
         public Users()
         {
+            DirectionIdea = new HashSet<DirectionIdea>();
             Participating = new HashSet<Participating>();
         }
 
@@ -22,8 +23,11 @@ namespace Common.Entities
         public string Password { get; set; }
         public bool IsConfirmedEmail { get; set; }
         public int Role { get; set; }
+        public string UserAvatar { get; set; }
+        public long DateOfBirth { get; set; }
 
         public virtual Districts DistrictNavigation { get; set; }
+        public virtual ICollection<DirectionIdea> DirectionIdea { get; set; }
         public virtual ICollection<Participating> Participating { get; set; }
     }
 }

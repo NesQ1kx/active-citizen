@@ -17,5 +17,7 @@ namespace active_citizen_backend.ViewModels
         public int Sex { get; set; }
         public string Password { get; set; }
         public string PasswordRepeat { get; set; }
+        public long DateOfBirth { get; set; }
+        public string? UserAvatar { get; set; }
     }
 }

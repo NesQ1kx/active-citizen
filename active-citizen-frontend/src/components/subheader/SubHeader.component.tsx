@@ -33,7 +33,7 @@ export class SubHeader extends Component {
       this.state.isAuthenticated && (
         <header className="sub-header">
         <div className="nav-container">
-          <NavLink activeClassName="active-link" to="/current-projects" className="sub-nav-item">Текущие проекты</NavLink>
+          {/* <NavLink activeClassName="active-link" to="/current-projects" className="sub-nav-item">Текущие проекты</NavLink> */}
           {this.state.currentUser!.Role === Roles.Admin && (
             <NavLink activeClassName="active-link" to="/load-project" className="sub-nav-item">Загрузить проект</NavLink>
           )}

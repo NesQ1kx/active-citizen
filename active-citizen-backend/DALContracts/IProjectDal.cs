@@ -17,5 +17,9 @@ namespace DALContracts
         bool AddDirection(ProjectDirection direction);
         bool DeleteDirection(ProjectDirection direction);
         bool UpdateDirection(ProjectDirection direction);
+        ProjectDirection GetDirection(int id);
+        bool AddIdea(DirectionIdea idea);
+        IEnumerable<DirectionIdea> GetAllIdeas(int id);
+        bool UpdateIdea(DirectionIdea idea);
     }
 }

@@ -63,7 +63,7 @@ namespace DAL
                 {
                     project.ParticipantsCount++;
                 }
-                return db.SaveChanges() > 1;
+                return db.SaveChanges() > 0;
             }
         }
 
@@ -98,6 +98,47 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 db.Entry(db.ProjectDirection.Find(direction.Id)).CurrentValues.SetValues(direction);
+                return db.SaveChanges() > 0;
+            }
+        }
+
+        public ProjectDirection GetDirection(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.ProjectDirection.Where(d => d.Id == id)
+                    .Include("DirectionIdea.User")
+                    .FirstOrDefault();
+            }
+        }
+
+        public bool AddIdea(DirectionIdea idea)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.DirectionIdea.Add(idea);
+                return db.SaveChanges() > 0;
+            }
+        }
+
+        public IEnumerable<DirectionIdea> GetAllIdeas(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.DirectionIdea.Where(i => i.DirectionId == id).Include("User").ToList();
+            }
+        }
+
+        public bool UpdateIdea(DirectionIdea idea)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.Entry(db.DirectionIdea.Find(idea.Id)).CurrentValues.SetValues(idea);
+                if (idea.Status == 0)
+                {
+                    db.ProjectDirection.Find(idea.DirectionId).CountOfIdeas++;
+                    return db.SaveChanges() > 1;
+                }
                 return db.SaveChanges() > 0;
             }
         }

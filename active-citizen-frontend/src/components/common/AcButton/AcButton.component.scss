@@ -12,7 +12,7 @@
   transition: background-color .1s linear;
 
   &.secondary {
-    background-color: $background-color-white;
+    background-color: inherit;
     border: 1px solid $color-primary;
     color: $color-primary;
     text-transform: uppercase;

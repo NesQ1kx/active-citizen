@@ -76,5 +76,24 @@ namespace BLL
         {
             return _projectDal.IsParticipate(participating);
         }
+
+        public ProjectDirection GetDirection(int id)
+        {
+            return _projectDal.GetDirection(id);
+        }
+        public bool AddIdea(DirectionIdea idea)
+        {
+            return _projectDal.AddIdea(idea);
+        }
+
+        public IEnumerable<DirectionIdea> GetAllIdeas(int id)
+        {
+            return _projectDal.GetAllIdeas(id);
+        }
+
+        public bool UpdateIdea(DirectionIdea idea)
+        {
+            return _projectDal.UpdateIdea(idea);
+        }
     }
 }

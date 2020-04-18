@@ -46,6 +46,8 @@ namespace active_citizen_backend.Controllers
                     IsConfirmedEmail = false,
                     Snils = model.Snils,
                     Role = 1,
+                    DateOfBirth = model.DateOfBirth,
+                    UserAvatar = model.UserAvatar,
                 };
 
                 _userBll.AddUser(user);
@@ -115,6 +117,8 @@ namespace active_citizen_backend.Controllers
                 IsConfirmedEmail = user.IsConfirmedEmail,
                 IsBlocked = user.IsBlocked,
                 Id = user.Id,
+                DateOfBirth = user.DateOfBirth,
+                UserAvatar = user.UserAvatar,
             };
 
             return Ok(new ObjectResult(response));

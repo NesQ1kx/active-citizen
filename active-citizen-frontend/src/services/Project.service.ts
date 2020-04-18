@@ -1,9 +1,11 @@
+import { DirectionIdea } from './../models/DirectionIdea';
 import { PROJECT } from './../constants/Endpoints.constant';
-import { LoadProjectModel, UpdateProjectModel } from './../types/Form.types';
+import { LoadProjectModel, UpdateProjectModel, AddIdeaModel } from './../types/Form.types';
 import { ToastService, HttpService } from ".";
 import { EventType } from '../types';
 import { Project } from '../models';
 import { resolve } from 'dns';
+import { reject } from 'q';
 
 export class ProjectService {
   private toastService = ToastService.instance;
@@ -88,5 +90,37 @@ export class ProjectService {
         reject();
       })
     })
+  }
+
+  public getDirectionById(id: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.GET_DIRECTION}/${id}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
+    })
+  }
+
+  public addIdea(model: AddIdeaModel) {
+    return new Promise((resolve, reject) => {
+      this.httpService.post(PROJECT.ADD_IDEA, model).then(response => {
+        resolve();
+      }, error => reject());
+    })
+  }
+
+  public getIdeas(directionId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.GET_IDEAS}/${directionId}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
+    });
+  }
+
+  public updateIdea(idea: DirectionIdea) {
+    return new Promise((resolve, reject) => {
+      this.httpService.put(PROJECT.UPDATE_IDEA, idea).then(response => {
+        resolve();
+      }, error => reject());
+    });
   }
 }

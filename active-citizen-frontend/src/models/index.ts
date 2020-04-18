@@ -3,3 +3,4 @@ export * from "./District.model";
 export * from "./Project.model";
 export * from "./Roles";
 export * from "./ProjectDirection";
+export * from "./DirectionIdea";

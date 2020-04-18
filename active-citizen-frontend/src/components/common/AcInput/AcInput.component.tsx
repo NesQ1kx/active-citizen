@@ -13,7 +13,7 @@ interface Props {
   onChange?: (value: any, valid: boolean) => void;
   withHint?: boolean;
   hintText?: string;
-  formInput?: FormInput
+  formInput: FormInput
 }
 
 interface State {
@@ -32,6 +32,10 @@ export class AcInput extends Component<Props, State> {
     errorMessages: [],
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    this.setState({ value: nextProps.formInput.value, isValid: nextProps.formInput.valid });
+  }
+
   public render() {
     return (
       <div className="ac-input">
@@ -46,7 +50,7 @@ export class AcInput extends Component<Props, State> {
         <input className={!this.state.isValid ? "error" : ""} type={this.props.inputType}
                onChange={this.onChange}
                onBlur={this.onBlur}
-               value={this.props.formInput!.value}/>
+               value={this.state.value}/>
         <div className="error-msg">
           {this.state.errorMessages.map((message, index) => (<div key={index}>{message}</div>))}
         </div>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Page, AcInput, AcDropDown, AcButton, AcLoader } from "../../components";
+import { Page, AcInput, AcDropDown, AcButton, AcLoader, AcDatePciker, AcFileInput } from "../../components";
 import { Autobind } from "../../helpers";
 import {  requireValidationFunction, emailValidationFunction, passwordValidationFunction, snilsValidationFunction } from "../../constants";
 import { districts, sex } from "./Constants";
@@ -21,7 +21,9 @@ interface FormFields {
   district: FormInput;
   sex: FormInput;
   password: FormInput;
-  passwordRepeat: FormInput; 
+  passwordRepeat: FormInput;
+  userAvatar: FormInput;
+  dateOfBirth: FormInput;
 }
 
 interface State {
@@ -60,13 +62,13 @@ export class SignupPage extends Component<Props, State> {
         valid: false,
       },
       sex: {
-        value: '',
+        value: '1',
         validationFunctions: [requireValidationFunction],
         valid: true,
       },
       snils:  {
         value: '',
-        validationFunctions: [requireValidationFunction],
+        validationFunctions: [requireValidationFunction, snilsValidationFunction],
         valid: false,
       },
       password: {
@@ -84,6 +86,16 @@ export class SignupPage extends Component<Props, State> {
         validationFunctions: [requireValidationFunction, emailValidationFunction],
         valid: false,
       },
+      dateOfBirth: {
+        value: '',
+        validationFunctions: [requireValidationFunction],
+        valid: false,
+      },
+      userAvatar: {
+        value: '',
+        validationFunctions: [],
+        valid: true,
+      }
     }
   }
   
@@ -135,6 +147,13 @@ export class SignupPage extends Component<Props, State> {
                 isRequired={true}
                 onChange={(value) => this.inputChange("district", value, true)}
               />
+              <AcDatePciker
+                formInput={this.state.formState.dateOfBirth}
+                label="Дата рождения"
+                isRequired={true}
+                maxDate={new Date()}
+                onChange={(value) => this.inputChange("dateOfBirth", value, true)}
+              />
               <AcDropDown list={sex}
                 label="Пол"
                 isRequired={true}
@@ -154,6 +173,10 @@ export class SignupPage extends Component<Props, State> {
                 isRequired={true}
                 onChange={(value, isValid) => this.inputChange("passwordRepeat", value, isValid)}
                 formInput={this.state.formState.passwordRepeat}
+              />
+              <AcFileInput 
+                onChange={(value) => this.inputChange("userAvatar", value, true)}
+                title="Изображение пользователя"
               />
             </div>
 
@@ -198,7 +221,9 @@ export class SignupPage extends Component<Props, State> {
       Snils: +this.state.formState.snils.value,
       Sex: +this.state.formState.sex.value,
       Password: this.state.formState.password.value,
-      PasswordRepeat: this.state.formState.passwordRepeat.value
+      PasswordRepeat: this.state.formState.passwordRepeat.value,
+      DateOfBirth: +this.state.formState.dateOfBirth.value,
+      UserAvatar: this.state.formState.userAvatar.value,
     }
 
     this.loadingService.changeLoader(true);
@@ -216,7 +241,6 @@ export class SignupPage extends Component<Props, State> {
     });
 
     const isPasswordEquals = this.state.formState.password.value === this.state.formState.passwordRepeat.value;
-
     this.setState({
       isFormValid: valid && isPasswordEquals,
       isPasswordEquals

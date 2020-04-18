@@ -21,9 +21,23 @@
 
   .actions {
     margin-top: 20px;
-
+    margin-bottom: 20px;
+    
     & button {
       margin-bottom: 10px;
     }
+  }
+
+  .divider {
+    height: 0px;
+    width: 100%;
+    border-bottom: 1px solid $color-gray2;
+  }
+
+  .direction-block {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
   }
 }

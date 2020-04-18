@@ -9,3 +9,5 @@ export * from "./AcTextArea";
 export * from "./AcToggle";
 export * from "./AcEmptyState";
 export * from "./AcFileInput";
+export * from "./AcModal";
+export * from "./AcRadio";

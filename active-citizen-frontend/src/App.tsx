@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, AcToast, SubHeader } from './components';
 import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter, Switch } from 'react-router-dom';
-import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject } from './pages';
+import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject, Direction, ProfilePage, AllIdeasPage } from './pages';
 import { UserService } from './services';
 
 import './App.scss';
@@ -28,16 +28,19 @@ class App extends Component<Props> {
       <div className="App" id="app">
         <Router>
           <Header />
-          <SubHeader />
+          {/* <SubHeader /> */}
           <div className="main">
             <Switch>
               <Route exact path="/" component={NewsPage} />
-              <Route exact path="/signin" component={LoginPage} />
-              <Route exact path="/signup" component={SignupPage} />
-              <Route excat path="/load-project" component={LoadProject} />
-              <Route exact path="/current-projects/:id" component={ProjectPage} />
-              <Route exact path="/current-projects" component={CurrentProjects} />
-              <Route exact path="/edit-project/:id" component={EditProject} />
+              <Route path="/signin" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
+              <Route path="/load-project" component={LoadProject} />
+              <Route path="/current-projects/:projectId" component={ProjectPage} />
+              <Route path="/current-projects" component={CurrentProjects} />
+              <Route path="/edit-project/:projectId" component={EditProject} />
+              <Route path="/direction/:directionId" component={Direction} />
+              <Route path="/profile/:userId" component={ProfilePage} />
+              <Route path="/all-ideas/:directionId" component={AllIdeasPage} />
             </Switch>
           </div>
         </Router>

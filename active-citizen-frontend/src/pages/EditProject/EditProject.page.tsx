@@ -91,7 +91,7 @@ export class EditProject extends Component<Props, State> {
 
   public componentDidMount() {
     this.loadingService.changeLoader(true);
-    this.projectService.getProjectById(this.props.match.params.id).then((project: any) => {
+    this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
       this.setState({ project: project }, () => {
         this.setState({
           formState: {

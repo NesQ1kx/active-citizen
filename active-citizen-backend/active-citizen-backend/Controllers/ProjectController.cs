@@ -124,5 +124,55 @@ namespace active_citizen_backend.Controllers
             }
             return Ok(Json(new { isParicipate = false }));
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("direction/{id}")]
+        public ActionResult GetDirection(int id)
+        {
+            return Ok(Json(_projectBll.GetDirection(id)));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("add-idea")]
+        public ActionResult AddIdea([FromBody] AddIdeaViewModel model)
+        {
+            var idea = new DirectionIdea
+            {
+                DirectionId = model.DirectionId,
+                IdeaDescription = model.IdeaDescription,
+                IdeaTitle = model.IdeaTitle,
+                UserId = model.UserId,
+                VotesCount = 0,
+                Status = 0,
+                RejectReason = 0,
+                CreateDate = model.CreateDate,
+            };
+
+            if (_projectBll.AddIdea(idea))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("ideas/{id}")]
+        public ActionResult GetAllIdeas(int id)
+        {
+            return Ok(Json(_projectBll.GetAllIdeas(id).ToArray()));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "2")]
+        [HttpPut("update-idea")]
+        public ActionResult UpdateIdea([FromBody] DirectionIdea idea)
+        {
+            if (_projectBll.UpdateIdea(idea))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }
