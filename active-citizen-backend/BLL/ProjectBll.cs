@@ -95,5 +95,10 @@ namespace BLL
         {
             return _projectDal.UpdateIdea(idea);
         }
+        
+        public DirectionIdea GetIdeaById(int id)
+        {
+            return _projectDal.GetIdeaById(id);
+        }
     }
 }

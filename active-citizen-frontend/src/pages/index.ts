@@ -8,3 +8,4 @@ export * from "./EditProject";
 export * from "./Direction";
 export * from "./Profile";
 export * from "./AllIdeas";
+export * from "./Idea";

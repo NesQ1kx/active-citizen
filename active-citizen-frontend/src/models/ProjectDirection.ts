@@ -1,4 +1,5 @@
 import { DirectionIdea } from './DirectionIdea';
+import { Project } from '.';
 export interface ProjectDirection {
   Id: number;
   DirectionTitle: string;
@@ -7,4 +8,5 @@ export interface ProjectDirection {
   CountOfComments: string;
   ProjectId: string;
   DirectionIdea: DirectionIdea[];
+  Project: Project;
 }

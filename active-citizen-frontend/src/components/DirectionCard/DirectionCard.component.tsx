@@ -4,22 +4,23 @@ import { ProjectDirection } from "../../models";
 import "./DirectionCard.component.scss";
 import { Redirect } from "react-router";
 import { Autobind } from "../../helpers";
+import { RouterService } from "../../services/Router.service";
 
 interface Props {
   direction: ProjectDirection
 }
 
-interface State {
-  isRedirect: boolean;
-}
 
-export class DirectionCard extends Component<Props, State> {
-  public state: State = {
-    isRedirect: false,
+export class DirectionCard extends Component<Props> {
+  private routerService: RouterService;
+  constructor(props: Props) {
+    super(props);
+    this.routerService = RouterService.instance;
   }
+
   public render() {
     return (
-      <div className="direction-card" onClick={this.redirect}>
+      <div className="direction-card" onClick={this.openDirection}>
         <span className="head">Направление</span>
         <div className="divider-white"></div>
         <span className="title">
@@ -36,13 +37,12 @@ export class DirectionCard extends Component<Props, State> {
             <span className="count">{this.props.direction.CountOfComments}</span>
           </div>
         </div>
-        {this.state.isRedirect && (<Redirect to={`/direction/${this.props.direction.Id}`} />)}
       </div>
     )
   }
 
   @Autobind
-  private redirect() {
-    this.setState({ isRedirect: true });
+  private openDirection() {
+    this.routerService.redirect(`/direction/${this.props.direction.Id}`);
   }
 }

@@ -7,6 +7,7 @@ import "./EditProject.page.scss";
 import { LoadingService, ProjectService, ToastService } from "../../services";
 import { Redirect } from "react-router";
 import { Project } from "../../models";
+import { RouterService } from "../../services/Router.service";
 
 interface DirectionInternal {
   DirectionTitle: FormInput;
@@ -30,7 +31,6 @@ interface Props {
 interface State {
   isFormValid: boolean;
   formState: FormFields;
-  redirect: boolean;
   project?: Project;
   directions: DirectionInternal[];
 }
@@ -39,6 +39,8 @@ export class EditProject extends Component<Props, State> {
   private loadingService: LoadingService;
   private projectService: ProjectService;
   private toastService: ToastService;
+  private routerService: RouterService;
+
   public state: State = {
     isFormValid: true,
     directions: [],
@@ -79,7 +81,6 @@ export class EditProject extends Component<Props, State> {
         value: ''
       },
     },
-    redirect: false
   }
 
   public constructor(props: any) {
@@ -87,6 +88,7 @@ export class EditProject extends Component<Props, State> {
     this.loadingService = LoadingService.instance;
     this.projectService = ProjectService.instance;
     this.toastService = ToastService.instance;
+    this.routerService = RouterService.instance;
   }
 
   public componentDidMount() {
@@ -213,7 +215,6 @@ export class EditProject extends Component<Props, State> {
             </div>
           </div>
         </AcLoader>
-        { this.state.redirect ? <Redirect to={`/current-projects/${this.state.project!.Id}`}/> : "" }
       </Page>
     )
   }
@@ -282,7 +283,7 @@ export class EditProject extends Component<Props, State> {
     this.loadingService.changeLoader(true);
     this.projectService.updateProject(model).then(() => {
       this.loadingService.changeLoader(false);
-      this.setState({ redirect: true });
+      this.routerService.redirect(`/current-projects/${this.state.project!.Id}`);
       this.toastService.changeEvent({ message: "Проект отредактирован", type: EventType.Success, show: true });
     }, () => {
       this.loadingService.changeLoader(false);

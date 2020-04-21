@@ -8,6 +8,7 @@ import { UserService, LoadingService } from "../../services";
 import { Redirect } from "react-router";
 
 import "./LoginPage.component.scss";
+import { RouterService } from "../../services/Router.service";
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -19,14 +20,14 @@ interface FormFields {
 interface State {
   isFormValid: boolean;
   formState: FormFields;
-  redirect: boolean;
 }
 
 export class LoginPage extends Component<Props, State> {
   private userService: UserService;
   private loadingService: LoadingService;
+  private routerService: RouterService;
+
   public state: State = {
-    redirect: false,
     isFormValid: false,
     formState: {
       email: {
@@ -46,6 +47,7 @@ export class LoginPage extends Component<Props, State> {
     super(props);
     this.userService = UserService.instance;
     this.loadingService = LoadingService.instance;
+    this.routerService = RouterService.instance;
   }
 
   public render() {
@@ -76,7 +78,6 @@ export class LoginPage extends Component<Props, State> {
             </div>
           </div>
         </AcLoader>
-        { this.state.redirect ? <Redirect to="/" /> : ""}
       </Page>
     )
   }
@@ -114,7 +115,7 @@ export class LoginPage extends Component<Props, State> {
     this.loadingService.changeLoader(true);
     this.userService.signin(model).then(() => {
       this.loadingService.changeLoader(false);
-      this.setState({ redirect: true });
+      this.routerService.redirect("/");
     }, () => {
       this.loadingService.changeLoader(false);
     });

@@ -9,6 +9,7 @@ import { RouteComponentProps, Redirect } from "react-router";
 
 
 import "./SignupPage.component.scss";
+import { RouterService } from "../../services/Router.service";
 
 
 interface Props extends RouteComponentProps<any> {}
@@ -30,14 +31,14 @@ interface State {
   isPasswordEquals: boolean;
   isFormValid: boolean;
   formState: FormFields;
-  redirect: boolean;
 }
 
 export class SignupPage extends Component<Props, State> {
   private loadingService: LoadingService;
   private userService: UserService;
+  private routerService: RouterService;
+
   public state: State = {
-    redirect: false,
     isPasswordEquals: true,
     isFormValid: false,
     formState: {
@@ -103,6 +104,7 @@ export class SignupPage extends Component<Props, State> {
     super(props);
     this.userService = UserService.instance; 
     this.loadingService = LoadingService.instance;
+    this.routerService = RouterService.instance;
   }
   public render() {
     return (
@@ -194,7 +196,6 @@ export class SignupPage extends Component<Props, State> {
             onClick={this.signup}
             disabled={!this.state.isFormValid}/>
         </AcLoader>
-        {this.state.redirect ? <Redirect to="/" /> : ""}
       </Page>
     )
   }
@@ -229,7 +230,7 @@ export class SignupPage extends Component<Props, State> {
     this.loadingService.changeLoader(true);
     this.userService.signup(model).then(() => {
       this.loadingService.changeLoader(false);
-      this.setState({ redirect: true });
+      this.routerService.redirect("/");
     });
   }
 

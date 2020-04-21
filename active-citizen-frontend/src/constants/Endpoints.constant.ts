@@ -18,4 +18,5 @@ export const PROJECT = {
   ADD_IDEA: `${url}/project/add-idea`,
   GET_IDEAS: `${url}/project/ideas`,
   UPDATE_IDEA: `${url}/project/update-idea`,
+  GET_IDEA: `${url}/project/idea`,
 }

@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import { Header, AcToast, SubHeader } from './components';
-import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter, Switch } from 'react-router-dom';
-import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject, Direction, ProfilePage, AllIdeasPage } from './pages';
+import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject, Direction, ProfilePage, AllIdeasPage, Idea } from './pages';
 import { UserService } from './services';
 
 import './App.scss';
+import { RouterService } from './services/Router.service';
 
 interface Props {}
 
-class App extends Component<Props> {
+interface State {
+  redirectTo?: string;
+}
+
+class App extends Component<Props, State> {
+  public state: State = {
+    redirectTo: undefined,
+  }
   private userService: UserService;
+  private routerService: RouterService;
 
   constructor(props: any) {
     super(props);
     this.userService = UserService.instance;
+    this.routerService = RouterService.instance;
   }
 
   public componentDidMount() {
@@ -21,6 +31,9 @@ class App extends Component<Props> {
     if (userInfo) {
       this.userService.getUserData(userInfo.email);
     }
+    this.routerService.$routeChange.subscribe(route => {
+      this.setState({ redirectTo: route });
+    });
   }
 
   public render() {
@@ -28,7 +41,6 @@ class App extends Component<Props> {
       <div className="App" id="app">
         <Router>
           <Header />
-          {/* <SubHeader /> */}
           <div className="main">
             <Switch>
               <Route exact path="/" component={NewsPage} />
@@ -41,8 +53,10 @@ class App extends Component<Props> {
               <Route path="/direction/:directionId" component={Direction} />
               <Route path="/profile/:userId" component={ProfilePage} />
               <Route path="/all-ideas/:directionId" component={AllIdeasPage} />
+              <Route path="/idea/:ideaId" component={Idea} />
             </Switch>
           </div>
+        {this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
         </Router>
         <AcToast />
       </div>

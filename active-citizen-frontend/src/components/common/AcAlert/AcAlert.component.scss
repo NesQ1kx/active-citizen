@@ -1,0 +1,12 @@
+@import "../../../assets/styles/variables.scss";
+
+.ac-alert {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $color-primary;
+  background-color: #c1e7f3;
+  font-weight: bold;
+}

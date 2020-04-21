@@ -123,4 +123,12 @@ export class ProjectService {
       }, error => reject());
     });
   }
+
+  public getIdea(id: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.GET_IDEA}/${id}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
+    });
+  }
 }

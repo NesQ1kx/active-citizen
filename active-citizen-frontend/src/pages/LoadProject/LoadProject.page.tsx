@@ -6,6 +6,7 @@ import { Autobind } from "../../helpers";
 import "./LoadProject.page.scss";
 import { LoadingService, ProjectService } from "../../services";
 import { Redirect } from "react-router";
+import { RouterService } from "../../services/Router.service";
 
 interface DirectionInternal {
   DirectionTitle: FormInput;
@@ -26,13 +27,14 @@ interface FormFields {
 interface State {
   isFormValid: boolean;
   formState: FormFields;
-  redirect: boolean;
   directions: DirectionInternal[];
 }
 
 export class LoadProject extends Component {
   private loadingService: LoadingService;
   private projectService: ProjectService;
+  private routerService: RouterService;
+
   public state: State = {
     directions: [],
     isFormValid: false,
@@ -78,13 +80,13 @@ export class LoadProject extends Component {
         value: '',
       }
     },
-    redirect: false
   }
 
   public constructor(props: any) {
     super(props);
     this.loadingService = LoadingService.instance;
     this.projectService = ProjectService.instance;
+    this.routerService = RouterService.instance;
   }
   public render() {
     return (
@@ -180,7 +182,6 @@ export class LoadProject extends Component {
             </div>
           </div>
         </AcLoader>
-        { this.state.redirect ? <Redirect to="/current-projects"/> : "" }
       </Page>
     )
   }
@@ -241,7 +242,7 @@ export class LoadProject extends Component {
     this.loadingService.changeLoader(true);
     this.projectService.loadProject(model).then(() => {
       this.loadingService.changeLoader(false);
-      this.setState({ redirect: true });
+      this.routerService.redirect("/current-projects");
     });
   }
 }

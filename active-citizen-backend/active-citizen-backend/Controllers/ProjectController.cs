@@ -58,14 +58,12 @@ namespace active_citizen_backend.Controllers
             return BadRequest();
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("all")]
         public ActionResult GetAll()
         {
             return Ok(Json(_projectBll.GetAll().ToArray()));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id}")]
         public ActionResult GetById(int id)
         {
@@ -125,7 +123,6 @@ namespace active_citizen_backend.Controllers
             return Ok(Json(new { isParicipate = false }));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("direction/{id}")]
         public ActionResult GetDirection(int id)
         {
@@ -172,6 +169,13 @@ namespace active_citizen_backend.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("idea/{id}")]
+        public ActionResult GetIdeaById(int id)
+        {
+            return Ok(Json(_projectBll.GetIdeaById(id)));
         }
 
     }

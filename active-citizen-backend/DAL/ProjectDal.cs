@@ -108,6 +108,7 @@ namespace DAL
             {
                 return db.ProjectDirection.Where(d => d.Id == id)
                     .Include("DirectionIdea.User")
+                    .Include("Project")
                     .FirstOrDefault();
             }
         }
@@ -134,12 +135,20 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 db.Entry(db.DirectionIdea.Find(idea.Id)).CurrentValues.SetValues(idea);
-                if (idea.Status == 0)
+                if (idea.Status == 1)
                 {
                     db.ProjectDirection.Find(idea.DirectionId).CountOfIdeas++;
                     return db.SaveChanges() > 1;
                 }
                 return db.SaveChanges() > 0;
+            }
+        }
+
+        public DirectionIdea GetIdeaById(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.DirectionIdea.Where(i => i.Id == id).Include("Direction.Project").Include("User").FirstOrDefault();
             }
         }
     }

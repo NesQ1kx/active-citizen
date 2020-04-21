@@ -22,7 +22,9 @@ export class ProjectCard extends Component<Props> {
             <h3 className="title">{this.props.project.ProjectTitle}</h3>
             <div className="description">{this.props.project.ProjectDescription}</div>
             <div className={`status ${projectStatus.type}`}>
-              <i>{projectStatus.message}</i>
+              <i>
+                <h4>{projectStatus.message}</h4>
+              </i>
             </div>
           </div>
         </div>

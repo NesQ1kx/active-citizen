@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Page, AcButton, DirectionCard } from '../../components';
+import { Page, AcButton, DirectionCard, AcAlert } from '../../components';
 import { ProjectService, LoadingService, UserService, ToastService } from '../../services';
 import { Project, User, Roles } from '../../models';
 
@@ -7,6 +7,7 @@ import "./Project.page.scss";
 import { Link, Redirect } from 'react-router-dom';
 import { EventType } from '../../types';
 import { Autobind } from '../../helpers';
+import { RouterService } from '../../services/Router.service';
 
 interface Props {
   match: any;
@@ -15,7 +16,6 @@ interface Props {
 interface State {
   project?: Project;
   currentUser?: User;
-  redirect: boolean;
   isUserParticipate: boolean;
 }
 
@@ -23,13 +23,13 @@ export class ProjectPage extends Component<Props, State> {
   public state: State = {
     project: undefined,
     currentUser: undefined,
-    redirect: false,
     isUserParticipate: false,
   }
   private projectService: ProjectService;
   private loadingService: LoadingService;
   private userService: UserService;
   private toastService: ToastService;
+  private routerService: RouterService;
 
   constructor(props: Props) {
     super(props);
@@ -37,6 +37,7 @@ export class ProjectPage extends Component<Props, State> {
     this.loadingService = LoadingService.instance;
     this.userService = UserService.instance;
     this.toastService = ToastService.instance;
+    this.routerService = RouterService.instance;
   }
 
   public componentDidMount() {
@@ -44,11 +45,11 @@ export class ProjectPage extends Component<Props, State> {
     
     this.userService.$currentUser.subscribe(user => {
       this.setState({ currentUser: user }, () => {
-        this.state.currentUser && this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
+        this.state.currentUser &&  this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
+          this.loadingService.changeLoader(false);
           this.setState({ project: project }, () => {
             this.projectService.isUserParticipate(this.state.project!.Id, this.state.currentUser!.Id).then((response: any) => {
               this.setState({ isUserParticipate: response });
-              this.loadingService.changeLoader(false);
             });
           });
         });
@@ -85,44 +86,37 @@ export class ProjectPage extends Component<Props, State> {
                 {this.state.project.ProjectDescription}
               </pre>
             </div>
-            <div className="actions">
-              {!this.state.isUserParticipate && (
-                <AcButton
-                type="secondary"
-                title="Присоединиться"
-                onClick={this.participate}
-              />
-              )}
-              {this.state.isUserParticipate && (!(this.state.project!.ProposeStartDate > Date.now()) 
-              ? (
-                  <div>
-                    {Date.now() > this.state.project!.ProposeEndDate
-                    ? (
-                        <AcButton
-                          type="secondary"
-                          title="Перейти к голосованию"
-                        />
-                      )
-                    : (
-                        <AcButton
-                          type="secondary"
-                          title="Предложить идею"
-                        />
-                      )}
+            {this.state.currentUser
+              ? (<div className="actions">
+                  {!this.state.isUserParticipate && (
                     <AcButton
-                      type="secondary"
-                      title="К обсуждению идей"
-                    />
-                  </div>
-                )
-              : (
-                <i>
-                  <strong>
-                    Вы присоединились к проекту, но он ещё не начался. <br/> Мы пришлём вам уведомление о начале.
-                  </strong>
-                </i>
-              ))}
-            </div>
+                    type="secondary"
+                    title="Присоединиться"
+                    onClick={this.participate}
+                  />
+                  )}
+                  {this.state.isUserParticipate && (this.state.project!.ProposeStartDate > Date.now()) && (
+                    <AcAlert>
+                      <div>
+                        Вы присоединились к проекту, но он ещё не начался.
+                      </div>
+                      <div>
+                        Мы пришлём вам уведомление о начале.
+                      </div>
+                      <div>
+                        Пока что, вы можете ознакомиться с направлениями проекта и подумать над идеями.
+                      </div>
+                    </AcAlert>
+                  )}
+                  {this.state.isUserParticipate && (Date.now() > this.state.project!.ProposeStartDate) && (
+                      <AcAlert>
+                        Проект стартовал! Вы можете предлагать свои идеи.
+                      </AcAlert>
+                  )}
+                </div>)
+              : (<AcAlert>
+                  Войдите в систему, чтобы принять участие в проекте
+                </AcAlert>)}
             <div className="divider"></div>
             <div className="direction-block">
               {this.state.project!.ProjectDirection.map((item, index) => (
@@ -130,7 +124,6 @@ export class ProjectPage extends Component<Props, State> {
               ))}
             </div>
           </div>
-          {this.state.redirect && <Redirect to="/current-projects"/>}
         </Page>
       ) || <div></div>
     )
@@ -140,7 +133,7 @@ export class ProjectPage extends Component<Props, State> {
   private deleteProject() {
     this.projectService.deleteProject(this.state.project!.Id).then(() => {
       this.toastService.changeEvent({ message: "Проект успешно удалён", type: EventType.Success, show: true });
-      this.setState({ redirect: true });
+      this.routerService.redirect("/current-projects")
     })
   }
 

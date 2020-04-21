@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Page, AcLoader, AcButton, AcModal, ProposeIdeaModal, AcEmptyState, IdeaCard } from "../../components";
+import { Page, AcLoader, AcButton, AcModal, ProposeIdeaModal, AcEmptyState, IdeaCard, AcAlert } from "../../components";
 import { ProjectService, LoadingService, ToastService, ModalService, UserService } from "../../services";
-import { ProjectDirection, User } from "../../models";
+import { ProjectDirection, User, Roles, DirectionIdea } from "../../models";
 
 import "./Direction.page.scss"
 import { Autobind } from "../../helpers";
 import { AddIdeaModel, EventType } from "../../types";
 import { Redirect } from "react-router";
+import { RouterService } from "../../services/Router.service";
 
 interface Props {
   match: any;
@@ -15,19 +16,20 @@ interface Props {
 interface State {
   direction?: ProjectDirection;
   currentUser?: User;
-  redirect: boolean;
+  isUserParticipate: boolean;
 }
 
 export class Direction extends Component<Props, State> {
   public state: State = {
     direction: undefined,
-    redirect: false,
+    isUserParticipate: false,
   }
   private projectService: ProjectService;
   private loadingService: LoadingService;
   private toastService: ToastService;
   private modalService: ModalService;
   private userService: UserService;
+  private routerService: RouterService;
 
   constructor(props: Props) {
     super(props);
@@ -36,18 +38,18 @@ export class Direction extends Component<Props, State> {
     this.toastService = ToastService.instance;
     this.modalService = ModalService.instance;
     this.userService = UserService.instance;
+    this.routerService = RouterService.instance;
   }
 
   public componentDidMount() {
    this.loadDirection();
-   this.userService.$currentUser.subscribe((user: any) => this.setState({ currentUser: user }));
   }
 
   public render() {
     const ideasToShow = this.state.direction ? this.state.direction.DirectionIdea.filter(idea => idea.Status === 1) : [];
     return (
       this.state.direction && (
-        <Page title={this.state.direction!.DirectionTitle}>
+        <Page title={`Направление: "${this.state.direction!.DirectionTitle}"`}>
           <AcLoader>
             <div className="direction-page">
               <div className="description">
@@ -55,30 +57,57 @@ export class Direction extends Component<Props, State> {
                   {this.state.direction!.DirectionDescription}
                 </pre>
               </div>
-              <div className="button-container">
-                <AcButton 
-                  title="Предложить идею"
-                  type="secondary"
-                  onClick={this.openProposeForm}
-                />
-                <AcButton 
-                  title="Рассмотрение идей"
-                  type="secondary"
-                  onClick={() => this.setState({ redirect: true })}
-                />
-              </div>
+              {this.state.currentUser
+              ? (
+                Date.now() > this.state.direction!.Project.ProposeStartDate
+                ? Date.now() < this.state.direction!.Project.ProposeEndDate
+                  ? this.state.isUserParticipate 
+                    ? (
+                      <div className="button-container">
+                        {this.state.currentUser!.Role === Roles.User && (
+                          <AcButton 
+                            title="Предложить идею"
+                            type="secondary"
+                            onClick={this.openProposeForm}
+                          />
+                        )}
+                        {this.state.currentUser!.Role === Roles.Expert && (
+                          <AcButton 
+                            title="Рассмотрение идей"
+                            type="secondary"
+                            onClick={this.openReviewIdeaPage}
+                          />
+                        )}
+                      </div>)
+                    : (<AcAlert>
+                      Подвердите участие на странице проекта
+                    </AcAlert>)
+                  : (<AcAlert>
+                      <div>
+                        Фаза подачи идей завершена
+                      </div>
+                      <div>
+                        Вы можете ознакомиться с идеями и поддержать понравившуюся
+                      </div>
+                    </AcAlert>)
+                :  (<AcAlert>
+                    Дождитесь начала проекта
+                  </AcAlert>)
+              )
+              : (<AcAlert>
+                  Войдите в систему
+                </AcAlert>)}
               <div className="divider"></div>
               {ideasToShow.length ? (
                 <div className="ideas">
                   {ideasToShow.map((item, index) => (
-                    <div onClick={() => {}} key={index}>
+                    <div onClick={() => this.openIdea(item)} key={index}>
                       <IdeaCard idea={item} />
                     </div>
                   ))}
                 </div>
               ): <AcEmptyState text="Ещё никто не предложил идеи. Будьте первым!" /> }
             </div>
-            {this.state.redirect && <Redirect to={`/all-ideas/${this.props.match.params.directionId}`} /> }
           </AcLoader>
           <AcModal title="Подача идеи">
             <ProposeIdeaModal
@@ -95,7 +124,14 @@ export class Direction extends Component<Props, State> {
     this.loadingService.changeLoader(true);
     this.projectService.getDirectionById(this.props.match.params.directionId).then((data: any) => {
       this.setState({ direction: data });
-    this.loadingService.changeLoader(false);
+      this.loadingService.changeLoader(false);
+      this.userService.$currentUser.subscribe((user: any) => { 
+        this.setState({ currentUser: user }, () => {
+         this.state.direction && this.state.currentUser &&  this.projectService.isUserParticipate(this.state.direction!.Project.Id, this.state.currentUser!.Id).then((response: any) => {
+           this.setState({ isUserParticipate: response });
+         });
+        });
+       });
     });
   }
 
@@ -119,5 +155,15 @@ export class Direction extends Component<Props, State> {
       this.modalService.changeModalVisibility(false);
       this.loadDirection();
     })
+  }
+
+  @Autobind
+  private openIdea(idea: DirectionIdea) {
+    this.routerService.redirect(`/idea/${idea.Id}`);
+  }
+
+  @Autobind
+  private openReviewIdeaPage() {
+    this.routerService.redirect(`/all-ideas/${this.props.match.params.directionId}`);
   }
 }

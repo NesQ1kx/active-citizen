@@ -1,3 +1,5 @@
+import { ProjectDirection } from './ProjectDirection';
+import { Project } from './Project.model';
 import { User } from ".";
 
 export interface DirectionIdea {
@@ -11,4 +13,5 @@ export interface DirectionIdea {
   Status: number;
   RejectReason: number;
   CreateDate: number;
+  Direction?: ProjectDirection
 }

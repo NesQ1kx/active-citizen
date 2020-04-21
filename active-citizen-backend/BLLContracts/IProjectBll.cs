@@ -18,5 +18,6 @@ namespace BLLContracts
         bool AddIdea(DirectionIdea idea);
         IEnumerable<DirectionIdea> GetAllIdeas(int id);
         bool UpdateIdea(DirectionIdea idea);
+        DirectionIdea GetIdeaById(int id);
     }
 }
