@@ -31,7 +31,7 @@ export class AcTextArea extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    this.setState({ value: nextProps.formInput.value, isValid: nextProps.formInput.valid });
+    this.setState({ value: nextProps.formInput.value });
   }
 
   public render() {

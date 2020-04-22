@@ -22,5 +22,7 @@ namespace DALContracts
         IEnumerable<DirectionIdea> GetAllIdeas(int id);
         bool UpdateIdea(DirectionIdea idea);
         DirectionIdea GetIdeaById(int id);
+        bool VoteForIdea(Voting voting);
+        bool IsUserVoted(Voting voting);
     }
 }

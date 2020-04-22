@@ -100,5 +100,15 @@ namespace BLL
         {
             return _projectDal.GetIdeaById(id);
         }
+
+        public bool VoteForIdea(Voting voting)
+        {
+            return _projectDal.VoteForIdea(voting);
+        }
+
+        public bool IsUserVoted(Voting voting)
+        {
+            return _projectDal.IsUserVoted(voting);
+        }
     }
 }

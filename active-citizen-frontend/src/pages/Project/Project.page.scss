@@ -1,13 +1,6 @@
 @import "../../assets/styles/variables.scss";
 
 .project-page {
-  .button-container {
-    display: flex;
-    width: 250px;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
   .dates {
     font-weight: bold;
     font-size: $font-size-large;

@@ -37,3 +37,24 @@ input::-webkit-inner-spin-button {
 .active-link {
   color: $color-primary !important;
 }
+
+.divider {
+  height: 0px;
+  width: 100%;
+  border-bottom: 1px solid $color-gray2;
+  margin: 20px 0;
+}
+
+.button-container {
+  display: flex;
+
+  & > button:not(:first-child) {
+    margin-left: 20px;
+  }
+}
+
+.page-actions {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+}

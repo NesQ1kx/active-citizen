@@ -14,4 +14,5 @@ export interface DirectionIdea {
   RejectReason: number;
   CreateDate: number;
   Direction?: ProjectDirection
+  CountOfComments: number;
 }

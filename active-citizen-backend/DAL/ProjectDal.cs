@@ -151,5 +151,23 @@ namespace DAL
                 return db.DirectionIdea.Where(i => i.Id == id).Include("Direction.Project").Include("User").FirstOrDefault();
             }
         }
+
+        public bool VoteForIdea(Voting voting)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.Voting.Add(voting);
+                db.DirectionIdea.Find(voting.IdeaId).VotesCount++;
+                return db.SaveChanges() > 1;
+            }
+        }
+
+        public bool IsUserVoted(Voting voting)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.Voting.FirstOrDefault(v => v.UserId == voting.UserId && v.IdeaId == voting.IdeaId) != null;
+            }
+        }
     }
 }

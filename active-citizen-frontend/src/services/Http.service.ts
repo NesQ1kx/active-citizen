@@ -1,3 +1,5 @@
+import { RouterService } from './Router.service';
+import { LoadingService } from './Loading.service';
 import { UserService } from './User.service';
 import { EventType } from './../types/Toast.types';
 import axios from "axios";
@@ -12,6 +14,8 @@ function axiosInstance() {
       localStorage.removeItem("AccessToken");
       ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Сессия истекла. Необхоима аутентификация" });
       UserService.instance.$currentUser.next(undefined);
+      LoadingService.instance.changeLoader(false);
+      RouterService.instance.redirect("/signin");
     }
     return Promise.reject(error);
   });

@@ -5,6 +5,11 @@ namespace Common.Entities
 {
     public partial class DirectionIdea
     {
+        public DirectionIdea()
+        {
+            Voting = new HashSet<Voting>();
+        }
+
         public int Id { get; set; }
         public string IdeaTitle { get; set; }
         public string IdeaDescription { get; set; }
@@ -14,8 +19,10 @@ namespace Common.Entities
         public int Status { get; set; }
         public int RejectReason { get; set; }
         public long CreateDate { get; set; }
+        public int? CountOfComments { get; set; }
 
         public virtual ProjectDirection Direction { get; set; }
         public virtual Users User { get; set; }
+        public virtual ICollection<Voting> Voting { get; set; }
     }
 }

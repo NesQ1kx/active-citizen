@@ -1,0 +1,55 @@
+@import "../../assets/styles/variables.scss";
+
+.idea-page {
+  .main-content {
+    display: flex;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      .user {
+        display: flex;
+
+        & h4:hover {
+          color: $color-primary;
+        }
+      }
+  
+      .description {
+        margin-top: 10px;
+        max-width: 450px;
+        line-height: 30px;
+        text-align: justify;
+      }
+    }
+  
+    .additional-info {
+      display: flex;
+      margin-left: auto;
+      flex-direction: column;
+
+      .create-date {
+        color: $color-gray2;
+      }
+
+      .scores {
+        margin-top: 20px;
+      }
+
+      .score-item {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+
+        .score-value {
+          font-size: $font-size-large;
+          margin-left: 10px;
+          color: $color-primary;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

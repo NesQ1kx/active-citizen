@@ -45,7 +45,6 @@ namespace active_citizen_backend.Controllers
                     {
                         DirectionTitle = item.DirectionTitle,
                         DirectionDescription = item.DirectionDescription,
-                        CountOfComments = 0,
                         CountOfIdeas = 0,
                     });
                 }
@@ -140,6 +139,7 @@ namespace active_citizen_backend.Controllers
                 IdeaTitle = model.IdeaTitle,
                 UserId = model.UserId,
                 VotesCount = 0,
+                CountOfComments = 0,
                 Status = 0,
                 RejectReason = 0,
                 CreateDate = model.CreateDate,
@@ -176,6 +176,25 @@ namespace active_citizen_backend.Controllers
         public ActionResult GetIdeaById(int id)
         {
             return Ok(Json(_projectBll.GetIdeaById(id)));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("vote")]
+        public ActionResult ViteForIdea([FromBody] Voting voting)
+        {
+            if (_projectBll.VoteForIdea(voting))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("isVoted")]
+        public ActionResult IsUserVoted([FromBody] Voting voting)
+        {
+            return Ok(Json(new { isVoted = _projectBll.IsUserVoted(voting) }));
         }
 
     }

@@ -79,24 +79,11 @@ export class Direction extends Component<Props, State> {
                           />
                         )}
                       </div>)
-                    : (<AcAlert>
-                      Подвердите участие на странице проекта
-                    </AcAlert>)
-                  : (<AcAlert>
-                      <div>
-                        Фаза подачи идей завершена
-                      </div>
-                      <div>
-                        Вы можете ознакомиться с идеями и поддержать понравившуюся
-                      </div>
-                    </AcAlert>)
-                :  (<AcAlert>
-                    Дождитесь начала проекта
-                  </AcAlert>)
+                    : (<AcAlert text="Подвердите участие на странице проекта" type="negative" />)
+                  : (<AcAlert text="Фаза подачи идей завершена. Вы можете ознакомиться с идеями и поддержать понравившуюся"/>)
+                :  (<AcAlert text="Дождитесь начала проекта" />)
               )
-              : (<AcAlert>
-                  Войдите в систему
-                </AcAlert>)}
+              : (<AcAlert text="Войдите в систему" type="negative" />)}
               <div className="divider"></div>
               {ideasToShow.length ? (
                 <div className="ideas">

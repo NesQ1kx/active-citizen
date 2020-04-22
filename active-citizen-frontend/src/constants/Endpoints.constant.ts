@@ -19,4 +19,6 @@ export const PROJECT = {
   GET_IDEAS: `${url}/project/ideas`,
   UPDATE_IDEA: `${url}/project/update-idea`,
   GET_IDEA: `${url}/project/idea`,
+  VOTE: `${url}/project/vote`,
+  IS_VOTED: `${url}/project/isVoted`,
 }

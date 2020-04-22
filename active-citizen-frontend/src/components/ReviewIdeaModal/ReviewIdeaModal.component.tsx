@@ -188,6 +188,7 @@ export class ReviewIdeaModal extends Component<Props, State> {
       Status: this.state.rejected ? -1 : 1,
       RejectReason: rejectReason,
       VotesCount: this.props.idea.VotesCount,
+      CountOfComments: this.props.idea.CountOfComments
     };
 
     this.projectService.updateIdea(model).then(() => {

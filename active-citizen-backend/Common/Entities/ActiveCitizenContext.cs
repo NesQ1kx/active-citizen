@@ -21,6 +21,7 @@ namespace Common.Entities
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<ProjectDirection> ProjectDirection { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Voting> Voting { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -130,6 +131,21 @@ namespace Common.Entities
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.District)
                     .HasConstraintName("FK_Users_Districts");
+            });
+
+            modelBuilder.Entity<Voting>(entity =>
+            {
+                entity.HasOne(d => d.Idea)
+                    .WithMany(p => p.Voting)
+                    .HasForeignKey(d => d.IdeaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Voting_DirectionIdea");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Voting)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Voting_Users");
             });
 
             OnModelCreatingPartial(modelBuilder);

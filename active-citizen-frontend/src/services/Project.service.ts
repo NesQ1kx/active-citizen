@@ -131,4 +131,20 @@ export class ProjectService {
       }, error => reject());
     });
   }
+
+  public voteForIdea(voting: any) {
+    return new Promise((resolve, reject) => {
+      this.httpService.post(PROJECT.VOTE, { UserId: voting.userId, IdeaId: voting.ideaId }).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+  public isUserVoted(voting: any) {
+    return new Promise((resolve, reject) => {
+      this.httpService.post(PROJECT.IS_VOTED, { UserId: voting.userId, IdeaId: voting.ideaId }).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
+    });
+  }
 }

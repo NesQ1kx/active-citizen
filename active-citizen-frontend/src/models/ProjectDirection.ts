@@ -5,7 +5,6 @@ export interface ProjectDirection {
   DirectionTitle: string;
   DirectionDescription: string;
   CountOfIdeas: string;
-  CountOfComments: string;
   ProjectId: string;
   DirectionIdea: DirectionIdea[];
   Project: Project;

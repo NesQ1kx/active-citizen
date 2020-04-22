@@ -208,6 +208,7 @@ export class EditProject extends Component<Props, State> {
                     type="negative"
                     onClick={() => this.deleteDirection(index)}
                   />
+                  <div className="divider"></div>
                 </div>
               ))}
              </div>

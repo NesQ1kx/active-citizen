@@ -42,13 +42,12 @@ export class ProjectPage extends Component<Props, State> {
 
   public componentDidMount() {
     this.loadingService.changeLoader(true);
-    
-    this.userService.$currentUser.subscribe(user => {
-      this.setState({ currentUser: user }, () => {
-        this.state.currentUser &&  this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
-          this.loadingService.changeLoader(false);
-          this.setState({ project: project }, () => {
-            this.projectService.isUserParticipate(this.state.project!.Id, this.state.currentUser!.Id).then((response: any) => {
+    this.projectService.getProjectById(this.props.match.params.projectId).then((project: any) => {
+      this.loadingService.changeLoader(false);
+      this.setState({ project: project }, () => {
+        this.userService.$currentUser.subscribe(user => {
+          this.setState({ currentUser: user }, () => {
+            this.state.currentUser && this.projectService.isUserParticipate(this.state.project!.Id, this.state.currentUser!.Id).then((response: any) => {
               this.setState({ isUserParticipate: response });
             });
           });
@@ -61,22 +60,24 @@ export class ProjectPage extends Component<Props, State> {
     return (
       this.state.project && (
         <Page title={this.state.project!.ProjectTitle}>
-          <div className="project-page">
-            {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
-            <div className="button-container">
-              <Link to={`/edit-project/${this.state.project!.Id}`}>
+           {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
+            <div className="page-actions">
+              <div className="button-container">
+                <Link to={`/edit-project/${this.state.project!.Id}`}>
+                  <AcButton
+                    type="primary"
+                    title="Редактировать"  
+                  />
+                </Link>
                 <AcButton
-                  type="primary"
-                  title="Редактировать"  
+                  type="negative"
+                  title="Удалить"
+                  onClick={this.deleteProject}
                 />
-              </Link>
-              <AcButton
-                type="negative"
-                title="Удалить"
-                onClick={this.deleteProject}
-              />
+              </div>
             </div>
             )}
+          <div className="project-page">
             <div className="dates">
               <span>{ new Date(this.state.project!.ProposeStartDate).toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) } </span>-
               <span> { new Date(this.state.project!.VoteEndDate).toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) }</span>
@@ -96,27 +97,11 @@ export class ProjectPage extends Component<Props, State> {
                   />
                   )}
                   {this.state.isUserParticipate && (this.state.project!.ProposeStartDate > Date.now()) && (
-                    <AcAlert>
-                      <div>
-                        Вы присоединились к проекту, но он ещё не начался.
-                      </div>
-                      <div>
-                        Мы пришлём вам уведомление о начале.
-                      </div>
-                      <div>
-                        Пока что, вы можете ознакомиться с направлениями проекта и подумать над идеями.
-                      </div>
-                    </AcAlert>
-                  )}
+                    <AcAlert type="positive" text="Вы присоединились к проекту, но он ещё не начался. Мы пришлём вам уведомление о начале. Пока что, вы можете ознакомиться с направлениями проекта и подумать над идеями." />                  )}
                   {this.state.isUserParticipate && (Date.now() > this.state.project!.ProposeStartDate) && (
-                      <AcAlert>
-                        Проект стартовал! Вы можете предлагать свои идеи.
-                      </AcAlert>
-                  )}
+                    <AcAlert text="Проект стартовал! Вы можете предлагать свои идеи." type="positive" />)}
                 </div>)
-              : (<AcAlert>
-                  Войдите в систему, чтобы принять участие в проекте
-                </AcAlert>)}
+              : (<AcAlert text="Войдите в систему, чтобы принять участие в проекте." type="negative" />)}
             <div className="divider"></div>
             <div className="direction-block">
               {this.state.project!.ProjectDirection.map((item, index) => (

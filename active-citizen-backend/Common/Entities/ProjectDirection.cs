@@ -14,7 +14,6 @@ namespace Common.Entities
         public string DirectionTitle { get; set; }
         public string DirectionDescription { get; set; }
         public int CountOfIdeas { get; set; }
-        public int CountOfComments { get; set; }
         public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }

@@ -34,7 +34,7 @@ export class DirectionCard extends Component<Props> {
           </div>
           <div className="statistic-item">
             <i className="fas fa-comment-dots fa-2x"></i>
-            <span className="count">{this.props.direction.CountOfComments}</span>
+            <span className="count">{this.props.direction.DirectionIdea.map(item => item.CountOfComments).reduce((sum, value) => sum + value, 0)}</span>
           </div>
         </div>
       </div>
