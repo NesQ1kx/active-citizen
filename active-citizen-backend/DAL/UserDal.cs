@@ -26,5 +26,13 @@ namespace DAL
                 db.SaveChanges();
             }
         }
+
+        public Users GetUserById(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.Users.Find(id);
+            }
+        }
     }
 }

@@ -1,0 +1,23 @@
+@import "../../assets/styles/variables.scss";
+
+.comment {
+  padding: 10px;
+  background-color: #f1f0f0;
+  margin-bottom: 40px;
+  display: flex;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .text {
+      margin-top: 10px;
+    }
+  }
+
+  .create-date {
+    margin-left: auto;
+    color: $color-gray2;
+    width: 100%;
+  }
+}

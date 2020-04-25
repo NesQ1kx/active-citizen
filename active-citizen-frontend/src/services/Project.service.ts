@@ -4,8 +4,6 @@ import { LoadProjectModel, UpdateProjectModel, AddIdeaModel } from './../types/F
 import { ToastService, HttpService } from ".";
 import { EventType } from '../types';
 import { Project } from '../models';
-import { resolve } from 'dns';
-import { reject } from 'q';
 
 export class ProjectService {
   private toastService = ToastService.instance;

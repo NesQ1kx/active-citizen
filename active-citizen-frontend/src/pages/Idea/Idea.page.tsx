@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Page, AcButton, UserAvatar, LabelWithHover } from "../../components";
-import { ProjectService, UserService, LoadingService, ToastService } from "../../services";
+import { Page, AcButton, UserAvatar, LabelWithHover, AcEmptyState, AcModal, AddCommentModal, Comment } from "../../components";
+import { ProjectService, UserService, LoadingService, ToastService, CommentsService, ModalService } from "../../services";
 import { DirectionIdea, User, Roles } from "../../models";
 
 import "./Idea.page.scss";
@@ -8,6 +8,7 @@ import { GetDefaultAvatar } from "../../helpers/GetDefaultAvatar.helper";
 import { NavLink } from "react-router-dom";
 import { Autobind } from "../../helpers";
 import { EventType } from "../../types";
+import { IdeaComment } from "../../models/IdeaComment";
 
 interface Props {
   match: any;
@@ -17,6 +18,8 @@ interface State {
   idea?: DirectionIdea;
   currentUser?: User;
   isVoted: boolean;
+  ideaComments: IdeaComment[];
+  countOfComments: number;
 }
 
 export class Idea extends Component<Props, State> {
@@ -24,11 +27,15 @@ export class Idea extends Component<Props, State> {
     idea: undefined,
     currentUser: undefined,
     isVoted: false,
+    ideaComments: [],
+    countOfComments: 0,
   }
   private projectService: ProjectService;
   private userService: UserService;
   private loadingService: LoadingService;
   private toastService: ToastService;
+  private commentsService: CommentsService;
+  private modalService: ModalService;
 
   constructor(props: Props) {
     super(props);
@@ -36,10 +43,19 @@ export class Idea extends Component<Props, State> {
     this.userService = UserService.instance;
     this.loadingService = LoadingService.instance;
     this.toastService = ToastService.instance;
+    this.commentsService = CommentsService.instance;
+    this.modalService = ModalService.instance;
   }
 
   public componentDidMount() {
     this.loadIdea();
+    this.commentsService.connect();
+    this.commentsService.getComment().subscribe(comment => {
+      const comments = this.state.ideaComments;
+      comments.push(comment);
+      const countOfComments = this.state.countOfComments + 1
+      this.setState({ ideaComments: comments, countOfComments });
+    });
   }
 
   public render() {
@@ -94,7 +110,7 @@ export class Idea extends Component<Props, State> {
                     <i className="fas fa-comment-dots fa-2x"></i>
                   </LabelWithHover>
                   <span className="score-value">
-                    {this.state.idea.CountOfComments}
+                    {this.state.countOfComments}
                   </span>
                 </div>
               </div>
@@ -112,9 +128,22 @@ export class Idea extends Component<Props, State> {
             <AcButton
               type="secondary"
               title="Добавить комментарий"
+              onClick={this.openAddCommentModal}
             />
           </div>
+          <div className="divider"></div>
+          <div className="comments-block">
+            {this.state.ideaComments.length 
+              ? (this.state.ideaComments.map((item, index) => (
+                <Comment comment={item} key={index} />
+              )))
+              : (<AcEmptyState text="Пока что никто не оставлял комментариев." />)
+            }
+          </div>
         </div>
+        <AcModal title="Добавить комментарий">
+            <AddCommentModal onAddComment={(commentText) => this.addComment(commentText)} />
+        </AcModal>
       </Page>
       ) || <div></div>
     )
@@ -124,7 +153,7 @@ export class Idea extends Component<Props, State> {
   private loadIdea() {
     this.loadingService.changeLoader(true);
     this.projectService.getIdea(this.props.match.params.ideaId).then((idea: any) => {
-      this.setState({ idea });
+      this.setState({ idea }, () => this.setState({ ideaComments: this.state.idea!.IdeaComment!, countOfComments: this.state.idea!.CountOfComments }));
       this.loadingService.changeLoader(false);
       this.userService.$currentUser.subscribe((user: any) => {
         this.setState({ currentUser: user }, () => {
@@ -142,5 +171,22 @@ export class Idea extends Component<Props, State> {
       this.toastService.changeEvent({ message: "Ваш голос принят", type: EventType.Success, show: true });
       this.loadIdea();
     }, () => this.toastService.changeEvent({ message: "Не удалось проголосвать за идею", type: EventType.Error, show: true }));
+  }
+
+  @Autobind
+  private openAddCommentModal() {
+    this.modalService.changeModalVisibility(true);
+  }
+
+  @Autobind addComment(commentText: string) {
+    const comment: IdeaComment = {
+      CommentText: commentText,
+      CreateDate: Date.now(),
+      IdeaId: this.state.idea!.Id,
+      UserId: this.state.currentUser!.Id,
+      ChildComments: [],
+    }
+    this.commentsService.sendComment(comment);
+    this.modalService.changeModalVisibility(false);
   }
 }

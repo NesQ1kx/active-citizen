@@ -144,4 +144,8 @@ C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-ba
 C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\System.Web.Cors.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Microsoft.Owin.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Microsoft.Owin.Cors.dll
+C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\bin\Debug\netcoreapp3.1\Owin.dll
 C:\Users\NessQ1k\Desktop\active-citizen\active-citizen-backend\active-citizen-backend\obj\Debug\netcoreapp3.1\active-citizen-backend.MvcApplicationPartsAssemblyInfo.cache

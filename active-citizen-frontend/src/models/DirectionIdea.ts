@@ -1,6 +1,7 @@
 import { ProjectDirection } from './ProjectDirection';
 import { Project } from './Project.model';
 import { User } from ".";
+import { IdeaComment } from './IdeaComment';
 
 export interface DirectionIdea {
   Id: number;
@@ -15,4 +16,5 @@ export interface DirectionIdea {
   CreateDate: number;
   Direction?: ProjectDirection
   CountOfComments: number;
+  IdeaComment?: IdeaComment[];
 }

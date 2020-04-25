@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -148,7 +149,7 @@ namespace DAL
         {
             using (var db = new ActiveCitizenContext())
             {
-                return db.DirectionIdea.Where(i => i.Id == id).Include("Direction.Project").Include("User").FirstOrDefault();
+                return db.DirectionIdea.Where(i => i.Id == id).Include("Direction.Project").Include("User").Include("IdeaComment.User").FirstOrDefault();
             }
         }
 
@@ -167,6 +168,24 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 return db.Voting.FirstOrDefault(v => v.UserId == voting.UserId && v.IdeaId == voting.IdeaId) != null;
+            }
+        }
+
+        public bool AddComment(IdeaComment comment)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.IdeaComment.Add(comment);
+                db.DirectionIdea.Find(comment.IdeaId).CountOfComments++;
+                return db.SaveChanges() > 1;
+            }
+        }
+
+        public IdeaComment GetCommentById(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.IdeaComment.Find(id);
             }
         }
     }

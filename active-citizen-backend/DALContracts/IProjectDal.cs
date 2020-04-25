@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DALContracts
 {
@@ -24,5 +25,7 @@ namespace DALContracts
         DirectionIdea GetIdeaById(int id);
         bool VoteForIdea(Voting voting);
         bool IsUserVoted(Voting voting);
+        bool AddComment(IdeaComment comment);
+        IdeaComment GetCommentById(int id);
     }
 }

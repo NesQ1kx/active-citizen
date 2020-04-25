@@ -9,3 +9,5 @@ export * from "./ProposeIdeaModal";
 export * from "./UserAvatar";
 export * from "./IdeaCard";
 export * from "./ReviewIdeaModal";
+export * from "./AddCommentModal";
+export * from "./Comment";

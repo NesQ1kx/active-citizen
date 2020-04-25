@@ -7,6 +7,7 @@ namespace Common.Entities
     {
         public DirectionIdea()
         {
+            IdeaComment = new HashSet<IdeaComment>();
             Voting = new HashSet<Voting>();
         }
 
@@ -23,6 +24,7 @@ namespace Common.Entities
 
         public virtual ProjectDirection Direction { get; set; }
         public virtual Users User { get; set; }
+        public virtual ICollection<IdeaComment> IdeaComment { get; set; }
         public virtual ICollection<Voting> Voting { get; set; }
     }
 }

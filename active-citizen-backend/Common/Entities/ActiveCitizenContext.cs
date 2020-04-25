@@ -17,6 +17,7 @@ namespace Common.Entities
 
         public virtual DbSet<DirectionIdea> DirectionIdea { get; set; }
         public virtual DbSet<Districts> Districts { get; set; }
+        public virtual DbSet<IdeaComment> IdeaComment { get; set; }
         public virtual DbSet<Participating> Participating { get; set; }
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<ProjectDirection> ProjectDirection { get; set; }
@@ -60,6 +61,26 @@ namespace Common.Entities
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<IdeaComment>(entity =>
+            {
+                entity.Property(e => e.CommentText).IsRequired();
+
+                entity.HasOne(d => d.Idea)
+                    .WithMany(p => p.IdeaComment)
+                    .HasForeignKey(d => d.IdeaId)
+                    .HasConstraintName("FK_IdeaComment_DirectionIdea");
+
+                entity.HasOne(d => d.ParrentCommentNavigation)
+                    .WithMany(p => p.InverseParrentCommentNavigation)
+                    .HasForeignKey(d => d.ParrentComment)
+                    .HasConstraintName("FK_IdeaComment_IdeaComment");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.IdeaComment)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_IdeaComment_Users");
             });
 
             modelBuilder.Entity<Participating>(entity =>

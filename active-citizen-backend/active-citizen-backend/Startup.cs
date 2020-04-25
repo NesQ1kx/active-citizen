@@ -1,15 +1,10 @@
-﻿using System.Buffers;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using BLL;
+﻿using BLL;
 using BLLContracts;
 using DAL;
 using DALContracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -52,10 +47,11 @@ namespace active_citizen_backend
             services.AddScoped<IProjectDal, ProjectDal>();
             services.AddScoped<IProjectBll, ProjectBll>();
             services.AddCors();
+            services.AddSignalR();
             services.AddMvc().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
         }
 
@@ -67,19 +63,28 @@ namespace active_citizen_backend
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(
-                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
-            );
+
+            app.UseCors(builder =>
+            {
+                builder
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowCredentials()
+                 .WithOrigins("http://localhost:3000");
+            });
+
+            app.UseWebSockets();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<CommentsHub>("/commentsHub");
             });
         }
     }

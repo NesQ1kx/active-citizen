@@ -4,3 +4,4 @@ export * from "./Http.service";
 export * from "./Loading.service";
 export * from "./Project.service";
 export * from "./Modal.service";
+export * from "./Comments.service";
