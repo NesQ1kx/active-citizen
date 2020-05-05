@@ -10,5 +10,6 @@ export interface Project {
   IsProjectActive: boolean;
   ProjectImage: string;
   ParticipantsCount: number;
+  IdeasCount: number;
   ProjectDirection: ProjectDirection[];
 }

@@ -27,5 +27,6 @@ namespace DALContracts
         bool IsUserVoted(Voting voting);
         bool AddComment(IdeaComment comment);
         IdeaComment GetCommentById(int id);
+        List<Participating> GetParticipants(int projectId);
     }
 }

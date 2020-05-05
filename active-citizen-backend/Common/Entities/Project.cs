@@ -20,7 +20,8 @@ namespace Common.Entities
         public long VoteEndDate { get; set; }
         public bool IsProjectActive { get; set; }
         public string ProjectImage { get; set; }
-        public int? ParticipantsCount { get; set; }
+        public int ParticipantsCount { get; set; }
+        public int IdeasCount { get; set; }
 
         public virtual ICollection<Participating> Participating { get; set; }
         public virtual ICollection<ProjectDirection> ProjectDirection { get; set; }

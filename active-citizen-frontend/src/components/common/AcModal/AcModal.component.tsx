@@ -4,19 +4,20 @@ import "./AcModal.component.scss";
 import { ModalService } from "../../../services/Modal.service";
 import { Autobind } from "../../../helpers";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { ModalContent } from "../../../types";
 
 interface Props {
-  title: string;
+  title?: string;
 }
 
 interface State {
-  isVisible: boolean;
+  content?: ModalContent
 }
 
 export class AcModal extends Component<Props, State> {
   private modalService: ModalService;
   public state: State = {
-    isVisible: false,
+    content: undefined,
   }
   constructor(props: Props) {
     super(props);
@@ -24,7 +25,7 @@ export class AcModal extends Component<Props, State> {
   }
 
   public componentDidMount() {
-    this.modalService.$modalVisibilityChange.subscribe(value => this.setState({ isVisible: value }));
+    this.modalService.$modalVisibilityChange.subscribe(value => this.setState({ content: value }));
   }
 
   public render() {
@@ -37,15 +38,15 @@ export class AcModal extends Component<Props, State> {
         transitionLeave={true}
         transitionLeaveTimeout={200}
       >
-        {this.state.isVisible && (
+        {this.state.content && (
         <div className="ac-modal">
           <div className="wrapper" onClick={this.closeModal}></div>
           <div className="content">
             <div className="head">
-              <h3>{this.props.title}</h3>
+              <h3>{this.state.content.title}</h3>
               <i className="fas fa-times" onClick={this.closeModal}></i>
             </div>
-            {this.props.children}
+            {this.state.content.body}
           </div>
         </div>
       )}

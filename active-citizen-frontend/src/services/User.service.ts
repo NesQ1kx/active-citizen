@@ -26,9 +26,9 @@ export class UserService {
       this.httpService.post(USER.SIGNUP, model)
       .then(
         (response) => {
-          this.toastService.changeEvent({ show: true, type: EventType.Success, message: "Регистрация прошла успешно" });
-          localStorage.setItem("AccessToken", JSON.stringify({ value: response.data.Value.accessToken, email: response.data.Value.email }));
-          this.getUserData(response.data.Value.email);
+          // this.toastService.changeEvent({ show: true, type: EventType.Success, message: "Регистрация прошла успешно" });
+          // localStorage.setItem("AccessToken", JSON.stringify({ value: response.data.Value.accessToken, email: response.data.Value.email }));
+          // this.getUserData(response.data.Value.email);
           resolve();
         },
         (error) => { this.toastService.changeEvent({ show: true, type: EventType.Error, message: error.response.data.Value.message })
@@ -53,6 +53,17 @@ export class UserService {
     })
   }
 
+  public confirmEmail(token: string) {
+    return new Promise((resolve, reject) => {
+      this.httpService.post(USER.CONFIRM_EMAIL, { Token: token }).then(response => {
+        this.toastService.changeEvent({ show: true, type: EventType.Success, message: "Регистрация завершена" });
+        localStorage.setItem("AccessToken", JSON.stringify({ value: response.data.Value.accessToken, email: response.data.Value.email }));
+        this.getUserData(response.data.Value.email);
+        resolve();
+      }, error => reject());
+    });
+  }
+
   public singOunt() {
     return new Promise((resolve, reject) => {
       localStorage.removeItem("AccessToken");
@@ -66,6 +77,22 @@ export class UserService {
     this.httpService.get(`${USER.GET_USER_DATA}/${email}`).then((reposnse) => {
       this.currentUser = reposnse.data.Value;
       this.$currentUser.next(this.currentUser);
+    });
+  }
+
+  public getUserById(id: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${USER.GET_USER_BY_ID}/${id}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
+    });
+  }
+
+  public notifyUsersAboutProjectStart(projectId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${USER.NOTIFY}/${projectId}`).then(response => {
+        resolve();
+      }, error => reject());
     });
   }
 

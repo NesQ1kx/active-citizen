@@ -27,6 +27,7 @@
                 font-weight: bold;
                 color: white;
                 font-size: $font-size-default;
+                transition: color .1s linear;
 
                 &:hover {
                     cursor: pointer;

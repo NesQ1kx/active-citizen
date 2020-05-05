@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLLContracts;
+using Common;
 using DAL;
 using DALContracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,6 +47,7 @@ namespace active_citizen_backend
             services.AddScoped<IUserBll, UserBll>();
             services.AddScoped<IProjectDal, ProjectDal>();
             services.AddScoped<IProjectBll, ProjectBll>();
+            services.AddScoped<EmailSender>();
             services.AddCors();
             services.AddSignalR();
             services.AddMvc().AddNewtonsoftJson(options =>

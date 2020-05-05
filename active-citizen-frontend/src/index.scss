@@ -48,13 +48,35 @@ input::-webkit-inner-spin-button {
 .button-container {
   display: flex;
 
-  & > button:not(:first-child) {
-    margin-left: 20px;
+  & > button:not(:last-child),
+      a:not(:last-child)  {
+        margin-right: 20px;
   }
 }
 
 .page-actions {
   margin-bottom: 20px;
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

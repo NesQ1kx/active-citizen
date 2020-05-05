@@ -5,19 +5,44 @@
   background-color: #f1f0f0;
   margin-bottom: 40px;
   display: flex;
+  justify-content: space-between;
 
-  .info {
+  .block {
     display: flex;
-    flex-direction: column;
 
-    .text {
-      margin-top: 10px;
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+  
+      .text {
+        margin-top: 10px;
+        max-width: 500px;
+        text-align: justify;
+        margin-bottom: 10px;
+      }
+
+      .link {
+        color: gray;
+        font-size: $font-size-default;
+        text-decoration: underline;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
     }
+  
   }
-
   .create-date {
     margin-left: auto;
     color: $color-gray2;
-    width: 100%;
   }
+}
+
+.child-comments {
+  width: 80%;
+  margin-left: auto;
 }

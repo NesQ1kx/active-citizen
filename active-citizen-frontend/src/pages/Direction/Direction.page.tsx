@@ -4,7 +4,7 @@ import { ProjectService, LoadingService, ToastService, ModalService, UserService
 import { ProjectDirection, User, Roles, DirectionIdea } from "../../models";
 
 import "./Direction.page.scss"
-import { Autobind } from "../../helpers";
+import { Autobind, GetProjectPhase } from "../../helpers";
 import { AddIdeaModel, EventType } from "../../types";
 import { Redirect } from "react-router";
 import { RouterService } from "../../services/Router.service";
@@ -47,6 +47,7 @@ export class Direction extends Component<Props, State> {
 
   public render() {
     const ideasToShow = this.state.direction ? this.state.direction.DirectionIdea.filter(idea => idea.Status === 1) : [];
+    const projectPhase = this.state.direction && GetProjectPhase(this.state.direction.Project);
     return (
       this.state.direction && (
         <Page title={`Направление: "${this.state.direction!.DirectionTitle}"`}>
@@ -58,6 +59,31 @@ export class Direction extends Component<Props, State> {
                 </pre>
               </div>
               {this.state.currentUser
+                ? this.state.isUserParticipate
+                  ? projectPhase === "NOT_STARTED" && (<AcAlert text="Проект пока что не началася. Вы можете ознакомиться с направлением и подумать, какие идеи можно предложить" type="positive" />) ||
+                    projectPhase === "VOTING" && (<AcAlert text="Фаза подачи идей завершена. Вы можете ознакомиться с идеями и поддержать понравившуюся"/>) ||
+                    projectPhase === "PROPOSE" && (
+                      <div className="button-container">
+                      {this.state.currentUser!.Role === Roles.User && (
+                        <AcButton 
+                          title="Предложить идею"
+                          type="secondary"
+                          onClick={this.openProposeForm}
+                        />
+                      )}
+                      {this.state.currentUser!.Role === Roles.Expert && (
+                        <AcButton 
+                          title="Рассмотрение идей"
+                          type="secondary"
+                          onClick={this.openReviewIdeaPage}
+                        />
+                      )}
+                    </div>
+                    )
+                  : (<AcAlert text="Подвердите участие на странице проекта" type="negative" />)
+                 : (<AcAlert text="Войдите в систему" type="negative" />)   
+              }
+              {/* {this.state.currentUser
               ? (
                 Date.now() > this.state.direction!.Project.ProposeStartDate
                 ? Date.now() < this.state.direction!.Project.ProposeEndDate
@@ -83,7 +109,7 @@ export class Direction extends Component<Props, State> {
                   : (<AcAlert text="Фаза подачи идей завершена. Вы можете ознакомиться с идеями и поддержать понравившуюся"/>)
                 :  (<AcAlert text="Дождитесь начала проекта" />)
               )
-              : (<AcAlert text="Войдите в систему" type="negative" />)}
+              : (<AcAlert text="Войдите в систему" type="negative" />)} */}
               <div className="divider"></div>
               {ideasToShow.length ? (
                 <div className="ideas">
@@ -96,11 +122,6 @@ export class Direction extends Component<Props, State> {
               ): <AcEmptyState text="Ещё никто не предложил идеи. Будьте первым!" /> }
             </div>
           </AcLoader>
-          <AcModal title="Подача идеи">
-            <ProposeIdeaModal
-              onConfirm={(idea: any) => this.onModalConfirm(idea)}
-            />
-          </AcModal>
         </Page>
       ) || <div></div>
     )
@@ -124,7 +145,7 @@ export class Direction extends Component<Props, State> {
 
   @Autobind
   private openProposeForm() {
-    this.modalService.changeModalVisibility(true);
+    this.modalService.changeModalVisibility(true, { title: "Подача идеи", body: (<ProposeIdeaModal onConfirm={(idea: any) => this.onModalConfirm(idea)} />) });
   }
 
   @Autobind

@@ -48,16 +48,15 @@ export class AllIdeasPage extends Component<Props, State> {
           </div>
           ): <AcEmptyState text="Идеи для рассмотрения пока что отсутствуют"/>}
         </AcLoader>
-        <AcModal title="Рассмотрение идеи">
-          <ReviewIdeaModal idea={this.state.selectedIdea!} onConfirm={this.onModlaConfirm} />
-        </AcModal>
       </Page>
     )
   }
 
   @Autobind
   private openModal(idea: DirectionIdea) {
-    this.setState({ selectedIdea: idea}, () => this.modalService.changeModalVisibility(true));
+    this.setState({ selectedIdea: idea}, () => {
+      this.modalService.changeModalVisibility(true, { title: "Рассмотрение идей", body: (<ReviewIdeaModal idea={this.state.selectedIdea!} onConfirm={this.onModlaConfirm} />)})
+    });
   }
 
   @Autobind

@@ -43,7 +43,7 @@ export class SignupPage extends Component<Props, State> {
     isFormValid: false,
     formState: {
       district:  {
-        value: '',
+        value: '1',
         validationFunctions: [requireValidationFunction],
         valid: true,
       },
@@ -230,7 +230,7 @@ export class SignupPage extends Component<Props, State> {
     this.loadingService.changeLoader(true);
     this.userService.signup(model).then(() => {
       this.loadingService.changeLoader(false);
-      this.routerService.redirect("/");
+      this.routerService.redirect("/confirm");
     });
   }
 

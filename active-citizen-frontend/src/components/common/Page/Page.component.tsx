@@ -12,9 +12,9 @@ export class Page extends Component<Props> {
   public render() {
     return (
       <div className="page" style={{gridTemplateColumns: `minmax(100%, ${this.props.width ? this.props.width : 768}px)`}}>
-        <h2 className="page-title">
+        <h1 className="page-title">
           {this.props.title}
-        </h2>
+        </h1>
         <div className="page-content">
           {this.props.children}
         </div>

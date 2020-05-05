@@ -36,7 +36,8 @@ namespace active_citizen_backend.Controllers
                     VoteEndDate = model.VoteEndDate,
                     IsProjectActive = model.IsProjectActive,
                     ProjectImage = model.ProjectImage,
-                    ParticipantsCount = 0
+                    ParticipantsCount = 0,
+                    IdeasCount = 0,
                 };
 
                 foreach (var item in model.ProjectDirection)

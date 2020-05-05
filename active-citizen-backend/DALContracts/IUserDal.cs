@@ -8,5 +8,6 @@ namespace DALContracts
         Users GetUserByEmail(string email);
         void AddUser(Users user);
         Users GetUserById(int id);
+        bool ConfirmUserEmail(int id);
     }
 }

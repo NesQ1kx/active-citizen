@@ -4,6 +4,9 @@ export const USER = {
   SIGNUP: `${url}/user/signup`,
   GET_USER_DATA: `${url}/user/get`,
   SIGNIN: `${url}/user/signin`,
+  GET_USER_BY_ID: `${url}/user/get-by-id`,
+  CONFIRM_EMAIL: `${url}/user/confirm`,
+  NOTIFY: `${url}/user/notify`,
 }
 
 export const PROJECT = {
@@ -21,4 +24,5 @@ export const PROJECT = {
   GET_IDEA: `${url}/project/idea`,
   VOTE: `${url}/project/vote`,
   IS_VOTED: `${url}/project/isVoted`,
+
 }

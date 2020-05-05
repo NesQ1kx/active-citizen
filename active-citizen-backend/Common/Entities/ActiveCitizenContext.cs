@@ -90,13 +90,11 @@ namespace Common.Entities
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.Participating)
                     .HasForeignKey(d => d.ProjectId)
-                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_Participating_Project");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Participating)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_Participating_Users");
             });
 

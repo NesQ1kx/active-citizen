@@ -31,7 +31,9 @@ namespace DAL
         {
             using(var db = new ActiveCitizenContext())
             {
-                return db.Project.Where(p => p.Id == id).Include("ProjectDirection").FirstOrDefault();
+                return db.Project.Where(p => p.Id == id)
+                    .Include("ProjectDirection.DirectionIdea.User")
+                    .FirstOrDefault();
             }
         }
 
@@ -64,7 +66,7 @@ namespace DAL
                 {
                     project.ParticipantsCount++;
                 }
-                return db.SaveChanges() > 0;
+                return db.SaveChanges() > 1;
             }
         }
 
@@ -119,6 +121,8 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 db.DirectionIdea.Add(idea);
+                var direction = db.ProjectDirection.Find(idea.DirectionId);
+                db.Project.Find(direction.ProjectId).IdeasCount++;
                 return db.SaveChanges() > 0;
             }
         }
@@ -127,7 +131,9 @@ namespace DAL
         {
             using (var db = new ActiveCitizenContext())
             {
-                return db.DirectionIdea.Where(i => i.DirectionId == id).Include("User").ToList();
+                return db.DirectionIdea.Where(i => i.DirectionId == id)
+                    .Include("User")
+                    .ToList();
             }
         }
 
@@ -149,7 +155,11 @@ namespace DAL
         {
             using (var db = new ActiveCitizenContext())
             {
-                return db.DirectionIdea.Where(i => i.Id == id).Include("Direction.Project").Include("User").Include("IdeaComment.User").FirstOrDefault();
+                return db.DirectionIdea.Where(i => i.Id == id)
+                    .Include("Direction.Project")
+                    .Include("User")
+                    .Include("IdeaComment.User")
+                    .FirstOrDefault();
             }
         }
 
@@ -186,6 +196,14 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 return db.IdeaComment.Find(id);
+            }
+        }
+
+        public List<Participating> GetParticipants(int projectId)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.Participating.Where(p => p.ProjectId == projectId).ToList();
             }
         }
     }

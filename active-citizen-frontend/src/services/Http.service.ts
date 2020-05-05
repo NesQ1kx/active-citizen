@@ -10,13 +10,20 @@ function axiosInstance() {
   axiosInstance.interceptors.response.use(response => {
     return response;
   }, error => {
+    LoadingService.instance.changeLoader(false);
+
+    if (!error.response) {
+      ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Ошибка сервера" });
+      return Promise.reject({ ...error, response: { data: { message: "Ошибка сервера" } } });
+    }
+
     if (error.response.status === 401) {
       localStorage.removeItem("AccessToken");
       ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Сессия истекла. Необхоима аутентификация" });
       UserService.instance.$currentUser.next(undefined);
-      LoadingService.instance.changeLoader(false);
       RouterService.instance.redirect("/signin");
     }
+    
     return Promise.reject(error);
   });
   return axiosInstance;

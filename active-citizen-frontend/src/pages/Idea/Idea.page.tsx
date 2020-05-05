@@ -51,10 +51,12 @@ export class Idea extends Component<Props, State> {
     this.loadIdea();
     this.commentsService.connect();
     this.commentsService.getComment().subscribe(comment => {
-      const comments = this.state.ideaComments;
-      comments.push(comment);
-      const countOfComments = this.state.countOfComments + 1
-      this.setState({ ideaComments: comments, countOfComments });
+      if (comment.IdeaId === this.state.idea!.Id) {
+        const comments = this.state.ideaComments;
+        comments.push(comment);
+        const countOfComments = this.state.countOfComments + 1
+        this.setState({ ideaComments: comments, countOfComments });
+      }
     });
   }
 
@@ -135,15 +137,12 @@ export class Idea extends Component<Props, State> {
           <div className="comments-block">
             {this.state.ideaComments.length 
               ? (this.state.ideaComments.map((item, index) => (
-                <Comment comment={item} key={index} />
+                !item.ParrentComment && <Comment comment={item} key={index} parentComments={this.state.ideaComments.filter(comment => comment.ParrentComment === item.Id)} />
               )))
               : (<AcEmptyState text="Пока что никто не оставлял комментариев." />)
             }
           </div>
         </div>
-        <AcModal title="Добавить комментарий">
-            <AddCommentModal onAddComment={(commentText) => this.addComment(commentText)} />
-        </AcModal>
       </Page>
       ) || <div></div>
     )
@@ -175,7 +174,7 @@ export class Idea extends Component<Props, State> {
 
   @Autobind
   private openAddCommentModal() {
-    this.modalService.changeModalVisibility(true);
+    this.modalService.changeModalVisibility(true, { title: "Добавить комментарий", body: (<AddCommentModal onAddComment={(commentText) => this.addComment(commentText)} />) });
   }
 
   @Autobind addComment(commentText: string) {

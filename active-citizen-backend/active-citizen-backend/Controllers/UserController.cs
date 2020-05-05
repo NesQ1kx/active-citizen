@@ -51,17 +51,10 @@ namespace active_citizen_backend.Controllers
                 };
 
                 _userBll.AddUser(user);
+                _userBll.SendConfirmationEmail(model.Email);
 
 
-                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(GetJwtToken(user));
-
-                var response = new
-                {
-                    accessToken = encodedJwt,
-                    email = user.Email,
-                };
-             
-                return Ok(new ObjectResult(response));
+                return Ok();
             }        
             
             return BadRequest();
@@ -98,6 +91,31 @@ namespace active_citizen_backend.Controllers
 
             return BadRequest();
         }
+
+        [HttpPost("confirm")]
+        public ActionResult ConfirmEmail([FromBody] ConfirmEmailViewModel model)
+        {
+            string email = _userBll.GetEmailFromToken(model.Token);
+            var user = _userBll.GetUserByEmail(email);
+            if (user != null)
+            {
+                if (_userBll.ConfirmUserEmail(user.Id))
+                {
+                    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(GetJwtToken(user));
+
+                    var response = new
+                    {
+                        accessToken = encodedJwt,
+                        email = user.Email,
+                    };
+
+                    return Ok(Json(response));
+                }
+            }
+
+            return BadRequest();
+        }
+
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("get/{email}")]
@@ -150,6 +168,28 @@ namespace active_citizen_backend.Controllers
                     ClaimsIdentity.DefaultRoleClaimType);
 
             return claimsIdentity;
-        } 
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("get-by-id/{id}")]
+        public ActionResult GetUserById(int id)
+        {
+            return Ok(Json(_userBll.GetUserById(id)));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpGet("notify/{projectId}")]
+        public ActionResult NotifyUsers(int projectId)
+        {
+            try
+            {
+                _userBll.NotifyAboutProjectStart(projectId);
+                return Ok();
+            } catch(Exception e)
+            {
+                return BadRequest(Json(e));
+            }
+        }
+
     }
 }

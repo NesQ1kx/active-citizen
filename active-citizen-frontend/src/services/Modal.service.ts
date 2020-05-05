@@ -1,9 +1,9 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { ModalContent } from '../types';
 
 export class ModalService {
   private static instanceInternal: ModalService;
-  private isModalVisible: boolean = false;
-  public $modalVisibilityChange = new BehaviorSubject<boolean>(false);
+  public $modalVisibilityChange = new Subject<ModalContent | undefined>();
   
   public static get instance() {
     if (!ModalService.instanceInternal) {
@@ -13,8 +13,7 @@ export class ModalService {
     return ModalService.instanceInternal;
   }
 
-  public changeModalVisibility(value: boolean) {
-    this.isModalVisible = value;
-    this.$modalVisibilityChange.next(this.isModalVisible);
+  public changeModalVisibility(value: boolean, content?: ModalContent) {
+    this.$modalVisibilityChange.next(value ? content : undefined);
   }
 }

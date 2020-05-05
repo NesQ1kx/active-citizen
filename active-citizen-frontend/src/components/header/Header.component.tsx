@@ -37,7 +37,7 @@ export class Header extends Component<Props> {
           <div className="navigation-items">
             <Logo  />
             <NavLink to="" className="navigation-item">Как это работает</NavLink>
-            <NavLink to="" className="navigation-item">Выполненные проекты</NavLink>
+            <NavLink to="/finished-projects" activeClassName="active-link" className="navigation-item">Завершённые проекты</NavLink>
             <NavLink to="/current-projects" activeClassName="active-link" className="navigation-item">Текущие проекты</NavLink>
             {this.state.isAuthenticated && this.state.currentUser!.Role === Roles.Admin && (
               <div className="navigation-item with-drop-down"

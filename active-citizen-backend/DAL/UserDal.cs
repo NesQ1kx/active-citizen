@@ -34,5 +34,14 @@ namespace DAL
                 return db.Users.Find(id);
             }
         }
+
+        public bool ConfirmUserEmail(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.Users.Find(id).IsConfirmedEmail = true;
+                return db.SaveChanges() > 0;
+            }
+        }
     }
 }

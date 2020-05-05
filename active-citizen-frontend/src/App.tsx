@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
-import { Header, AcToast, SubHeader } from './components';
+import { Header, AcToast, SubHeader, AcModal } from './components';
 import { BrowserRouter as Router, Route, RouteComponentProps, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject, Direction, ProfilePage, AllIdeasPage, Idea } from './pages';
-import { UserService } from './services';
+import { LoginPage, NewsPage, SignupPage, CurrentProjects, LoadProject, ProjectPage, EditProject, Direction, ProfilePage, AllIdeasPage, Idea, EmailConfirmation, EmailComfirmed, FinishedProjects } from './pages';
+import { UserService, ModalService } from './services';
 
 import './App.scss';
 import { RouterService } from './services/Router.service';
+import { ModalContent } from './types';
 
 interface Props {}
 
 interface State {
   redirectTo?: string;
+  modalContent?: ModalContent;
 }
 
 class App extends Component<Props, State> {
   public state: State = {
     redirectTo: undefined,
+    modalContent: undefined,
   }
   private userService: UserService;
   private routerService: RouterService;
+  private modalService: ModalService;
 
   constructor(props: any) {
     super(props);
     this.userService = UserService.instance;
     this.routerService = RouterService.instance;
+    this.modalService = ModalService.instance;
   }
 
   public componentDidMount() {
@@ -34,6 +39,7 @@ class App extends Component<Props, State> {
     this.routerService.$routeChange.subscribe(route => {
       this.setState({ redirectTo: route });
     });
+    this.modalService.$modalVisibilityChange.subscribe(value => this.setState({ modalContent: value }));
   }
 
   public render() {
@@ -54,11 +60,15 @@ class App extends Component<Props, State> {
               <Route path="/profile/:userId" component={ProfilePage} />
               <Route path="/all-ideas/:directionId" component={AllIdeasPage} />
               <Route path="/idea/:ideaId" component={Idea} />
+              <Route path="/confirm" component={EmailConfirmation} />
+              <Route path="/confirmed/:token" component={EmailComfirmed} />
+              <Route path="/finished-projects" component={FinishedProjects} />
             </Switch>
           </div>
         {this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
         </Router>
         <AcToast />
+        <AcModal />
       </div>
     );
   }

@@ -11,3 +11,5 @@ export * from "./IdeaCard";
 export * from "./ReviewIdeaModal";
 export * from "./AddCommentModal";
 export * from "./Comment";
+export * from "./GeneratePDFModal";
+export * from "./FinishedProjectCard";

@@ -9,3 +9,6 @@ export * from "./Direction";
 export * from "./Profile";
 export * from "./AllIdeas";
 export * from "./Idea";
+export * from "./EmailConfirmation";
+export * from "./EmailConfirmed";
+export * from "./FinishedProjects";

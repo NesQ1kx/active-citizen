@@ -27,10 +27,15 @@ export class ProfilePage extends Component<Props, State> {
   }
 
   public componentDidMount() {
+    console.log('mount');
     this.userService.$currentUser.subscribe((user: any) => {
       this.setState({ currentUser: user }, () => {
         if (this.state.currentUser && (+this.props.match.params.userId === this.state.currentUser.Id)) {
           this.setState({ profileUser: this.state.currentUser });
+        } else {
+          this.userService.getUserById(this.props.match.params.userId).then((user: any) => {
+            this.setState({ profileUser: user });
+          });
         }
       });
     });
