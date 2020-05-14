@@ -21,7 +21,6 @@ interface State {
 }
 
 const CustomInput = ({ value, onClick }: any) => {
-  const [isActive, switchActive] = useState(false);
   return (
     <div className="custom-input" onClick={onClick}>
       { value }
@@ -43,12 +42,15 @@ export class AcDatePciker extends Component<Props, State> {
         <DatePicker
         minDate={this.props.minDate}
         maxDate={this.props.maxDate}
-        dateFormat="dd.MM.yyyy"
+        dateFormat="dd.MM.yyyy HH:mm"
         selected={new Date(+this.props.formInput!.value || Date.now())}
         onChange={this.onDateChange}
         customInput={<CustomInput />}
         showMonthDropdown
         showYearDropdown
+        showTimeSelect
+        timeCaption="time"
+        timeFormat="HH:mm"
         dropdownMode="select"
       />
       </div>

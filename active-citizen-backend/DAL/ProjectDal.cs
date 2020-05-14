@@ -10,6 +10,12 @@ namespace DAL
 {
     public class ProjectDal : IProjectDal
     {
+        private IUserDal _userDal;
+
+        public ProjectDal(IUserDal userDal)
+        {
+            _userDal = userDal;
+        }
         public void AddProject(Project project)
         {
             using (var db = new ActiveCitizenContext())
@@ -33,6 +39,7 @@ namespace DAL
             {
                 return db.Project.Where(p => p.Id == id)
                     .Include("ProjectDirection.DirectionIdea.User")
+                    .Include("ProjectDirection.DirectionIdea.IdeaComment.User")
                     .FirstOrDefault();
             }
         }
@@ -123,7 +130,8 @@ namespace DAL
                 db.DirectionIdea.Add(idea);
                 var direction = db.ProjectDirection.Find(idea.DirectionId);
                 db.Project.Find(direction.ProjectId).IdeasCount++;
-                return db.SaveChanges() > 0;
+                db.ProjectDirection.Find(idea.DirectionId).CountOfIdeas++;
+                return db.SaveChanges() > 2;
             }
         }
 
@@ -142,11 +150,11 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 db.Entry(db.DirectionIdea.Find(idea.Id)).CurrentValues.SetValues(idea);
-                if (idea.Status == 1)
-                {
-                    db.ProjectDirection.Find(idea.DirectionId).CountOfIdeas++;
-                    return db.SaveChanges() > 1;
-                }
+                //if (idea.Status == 1)
+                //{
+                //    db.ProjectDirection.Find(idea.DirectionId).CountOfIdeas++;
+                //    return db.SaveChanges() > 1;
+                //}
                 return db.SaveChanges() > 0;
             }
         }
@@ -204,6 +212,41 @@ namespace DAL
             using (var db = new ActiveCitizenContext())
             {
                 return db.Participating.Where(p => p.ProjectId == projectId).ToList();
+            }
+        }
+
+        public bool RealiseIdea(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.DirectionIdea.Find(id).IsRealised = true;
+                return db.SaveChanges() > 0;
+            }
+        }
+
+        public bool DeleteComment(int id)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                var comment = db.IdeaComment.Find(id);
+                db.DirectionIdea.Find(comment.IdeaId).CountOfComments--;
+                db.IdeaComment.Remove(comment);
+                return db.SaveChanges() > 0;
+            }
+        }
+
+        public IEnumerable<Users> GetProjectParticipants(int projectId)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                List<Users> users = new List<Users>();
+                var participations = db.Participating.Where(p => p.ProjectId == projectId).ToList();
+                foreach (var p in participations)
+                {
+                    users.Add(_userDal.GetUserById(p.UserId));
+                }
+
+                return users;
             }
         }
     }

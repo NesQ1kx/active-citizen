@@ -13,7 +13,8 @@ export class CommentsService {
                         transport: signalR.HttpTransportType.WebSockets
                       })
                       .build();
-  public comments$ = new Subject<IdeaComment>();
+  private comments$ = new Subject<IdeaComment>();
+  private deletedComment$ = new Subject<any>();
 
   public static get instance() {
     if (!CommentsService.instanceInternal) {
@@ -34,6 +35,15 @@ export class CommentsService {
       this.connection.on("SuccessfulAdd", () => {
         this.toastService.changeEvent({ message: "Комментарий добавлен", type: EventType.Success, show: true });
       });
+      this.connection.on("DeletedComment", (deletedComment) => {
+        this.deletedComment$.next(JSON.parse(deletedComment));
+      });
+      this.connection.on("SuccessfullDelete", () => {
+        this.toastService.changeEvent({ message: "Комментарий удалён", type: EventType.Success, show: true });
+      });
+      this.connection.on("ErrorWhileDeleting", () => {
+        this.toastService.changeEvent({ message: "Невозможно удалить комментарий", type: EventType.Error, show: true });
+      });
     }).catch(err => console.log(err));
   }
 
@@ -41,7 +51,15 @@ export class CommentsService {
     return this.comments$.asObservable();
   }
 
+  public onDeleteComment() {
+    return this.deletedComment$.asObservable();
+  }
+
   public sendComment(comment: IdeaComment) {
     this.connection.invoke("SendComment", comment);
+  }
+
+  public deleteComment(commentToDelete: any) {
+    this.connection.invoke("DeleteComment", commentToDelete);
   }
 }

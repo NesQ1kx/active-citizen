@@ -4,6 +4,7 @@ import { LoadProjectModel, UpdateProjectModel, AddIdeaModel } from './../types/F
 import { ToastService, HttpService } from ".";
 import { EventType } from '../types';
 import { Project } from '../models';
+import { resolve } from 'q';
 
 export class ProjectService {
   private toastService = ToastService.instance;
@@ -143,6 +144,22 @@ export class ProjectService {
       this.httpService.post(PROJECT.IS_VOTED, { UserId: voting.userId, IdeaId: voting.ideaId }).then(response => {
         resolve(response.data.Value);
       }, error => reject());
+    });
+  }
+
+  public realiseIdea(ideaId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.REALISE_IDEA}/${ideaId}`).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+  public getProjectParticipants(projectId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.PARTICIPANTS}/${projectId}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject);
     });
   }
 }

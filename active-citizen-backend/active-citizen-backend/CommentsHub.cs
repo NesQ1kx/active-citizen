@@ -1,4 +1,5 @@
-﻿using Common.Entities;
+﻿using active_citizen_backend.ViewModels;
+using Common.Entities;
 using DALContracts;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -46,6 +47,21 @@ namespace active_citizen_backend
                 await Clients.Caller.SendAsync("ErrorWhileAdding", e);
             }
            
+        }
+
+        public async Task DeleteComment(DeleteCommentViewModel model)
+        {
+            try
+            {
+                if (_projectDal.DeleteComment(model.CommentId))
+                {
+                    await Clients.All.SendAsync("DeletedComment", JsonConvert.SerializeObject(model));
+                    await Clients.Caller.SendAsync("SuccessfullDelete");
+                }
+            } catch (Exception e)
+            {
+                await Clients.Caller.SendAsync("ErrorWhileDeleting", e);
+            }
         }
     }
 }

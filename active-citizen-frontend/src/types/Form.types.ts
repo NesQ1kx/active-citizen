@@ -52,6 +52,8 @@ export interface UpdateProjectModel {
   IsProjectActive: boolean;
   ProjectImage: string;
   ProjectDirection: ProjectDirection[];
+  ParticipantsCount: number;
+  IdeasCount: number;
 }
 
 export interface AddIdeaModel {
@@ -60,4 +62,11 @@ export interface AddIdeaModel {
   DirectionId: number;
   UserId: number;
   CreateDate: number;
+}
+
+export interface AddNewsModel {
+  Text: string;
+  Title: string;
+  CreateDate: number;
+  Image: string;
 }

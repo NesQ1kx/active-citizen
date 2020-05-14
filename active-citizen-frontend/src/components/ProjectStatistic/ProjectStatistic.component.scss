@@ -1,0 +1,77 @@
+@import "../../assets/styles/variables.scss";
+
+.project-statistic {
+  h4 {
+    text-align: center;
+    color: $color-gray;
+  }
+
+  .statistic-section {
+    margin-bottom: 100px;
+  }
+
+  .average-age {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 700;
+    
+    .highlight {
+      color: $color-primary;
+    }
+  }
+
+  .active-users {
+    padding: 10px 40px;
+
+    .user {
+      display: flex;
+      padding: 2px;
+      background-color: #f1f0f0;
+      border-radius: 4px;
+      max-width: 300px;
+      margin-bottom: 20px;
+      
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        h4 {
+          transition: color .1s linear;
+        }
+
+        & h4:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  .project-scores {
+    margin-bottom: 100px;
+    .row {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+
+      .item {
+        display: flex;
+        color: $color-gray;
+        flex-direction: column;
+        align-items: center;
+        max-width: 300px;
+        text-align: center;
+
+        .value {
+          font-size: 40px;
+          font-weight: 500;
+        }
+
+        .text  {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

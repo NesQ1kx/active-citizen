@@ -49,6 +49,7 @@ export class Header extends Component<Props> {
                   <div className="drop-down">
                     <NavLink to="/load-project" className="navigation-item" activeClassName="active-link">Загрузить проект</NavLink>
                     <NavLink to="" className="navigation-item">Найти пользователя</NavLink>
+                    <NavLink to="/add-news" className="navigation-item">Добавить новость</NavLink>
                   </div>
                )}
               </div>

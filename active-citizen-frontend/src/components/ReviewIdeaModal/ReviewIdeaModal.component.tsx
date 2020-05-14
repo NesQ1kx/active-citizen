@@ -12,6 +12,8 @@ import { ProjectService, ToastService } from "../../services";
 const reasonToCode: any = {
   reason1: 1,
   reason2: 2,
+  reason3: 3,
+  reason4: 4,
 }
 
 interface FormFields {
@@ -112,13 +114,23 @@ export class ReviewIdeaModal extends Component<Props, State> {
               </i>
               <AcRadio
                 name="rejectReason"
-                label="Не соответсвует идее проекта"
-                onCheck={() => this.onRadioCheck("reason1", ["reason2"])}
+                label="Не соответсвует теме проекта"
+                onCheck={() => this.onRadioCheck("reason1", ["reason2", "reason3", "reason4"])}
+              />
+              <AcRadio
+                name="rejectReason"
+                label="Невозможно реализовать в рамках данного проекта"
+                onCheck={() => this.onRadioCheck("reason2", ["reason1", "reason3", "reason4"])}
+              />
+              <AcRadio
+                name="rejectReason"
+                label="Подобная идея уже существует"
+                onCheck={() => this.onRadioCheck("reason3", ["reason1", "reason2", "reason4"])}
               />
               <AcRadio
                 name="rejectReason"
                 label="Нарушает другие правила"
-                onCheck={() => this.onRadioCheck("reason2", ["reason1"])}
+                onCheck={() => this.onRadioCheck("reason4", ["reason1", "reason2", "reason3"])}
               />
             </div>
           )}
@@ -188,7 +200,8 @@ export class ReviewIdeaModal extends Component<Props, State> {
       Status: this.state.rejected ? -1 : 1,
       RejectReason: rejectReason,
       VotesCount: this.props.idea.VotesCount,
-      CountOfComments: this.props.idea.CountOfComments
+      CountOfComments: this.props.idea.CountOfComments,
+      IsRealised: this.props.idea.IsRealised,
     };
 
     this.projectService.updateIdea(model).then(() => {

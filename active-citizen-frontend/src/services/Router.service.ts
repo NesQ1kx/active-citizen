@@ -12,7 +12,7 @@ export class RouterService {
     return RouterService.instanceInternal;
   }
 
-  public redirect(route: string) {
+  public redirect(route?: string) {
     this.$routeChange.next(route);
   }
 }

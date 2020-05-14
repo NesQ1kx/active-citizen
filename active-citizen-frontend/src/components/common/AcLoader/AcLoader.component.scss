@@ -6,6 +6,7 @@
   .bluring-content {
     &.-loading {
       filter: blur(3px);
+      pointer-events: none;
     }
   }
 

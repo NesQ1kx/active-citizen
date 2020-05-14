@@ -31,7 +31,7 @@ namespace DAL
         {
             using (var db = new ActiveCitizenContext())
             {
-                return db.Users.Find(id);
+                return db.Users.Where(u => u.Id == id).Include("DistrictNavigation").FirstOrDefault();
             }
         }
 

@@ -13,3 +13,6 @@ export * from "./AddCommentModal";
 export * from "./Comment";
 export * from "./GeneratePDFModal";
 export * from "./FinishedProjectCard";
+export * from "./ProjectStatistic";
+export * from "./ProjectsSlider";
+export * from "./NewsCard";

@@ -105,22 +105,25 @@ export class EditProject extends Component<Props, State> {
             voteEndDate: { ...this.state.formState.voteEndDate, value: this.state.project!.VoteEndDate },
             isProjectActive: { ...this.state.formState.isProjectActive, value: this.state.project!.IsProjectActive },
           },
-         directions: this.state.project!.ProjectDirection.map(item => {
-           const direction: DirectionInternal = {
-             DirectionTitle: {
-               validationFunctions: [],
-               valid: true,
-               value: item.DirectionTitle
-             },
-             DirectionDescription: {
-               validationFunctions: [],
-               value: item.DirectionDescription,
-               valid: true,
-             }
-           }
-           return direction;
+          directions: this.state.project!.ProjectDirection.map(item => {
+            const direction: DirectionInternal = {
+              DirectionTitle: {
+                validationFunctions: [],
+                value: item.DirectionTitle,
+                valid: true,
+              },
+              DirectionDescription: {
+                validationFunctions: [],
+                value: item.DirectionDescription,
+                valid: true,
+              }
+            }
+            return direction;
          })
-        }, () => this.loadingService.changeLoader(false))
+        }, () => {
+          this.forceUpdate();
+          this.loadingService.changeLoader(false);
+        });
       });
     });
   }
@@ -231,9 +234,9 @@ export class EditProject extends Component<Props, State> {
   }
 
   @Autobind
-  private directionChange(filed: keyof DirectionInternal, value: any, index: number) {
+  private directionChange(field: keyof DirectionInternal, value: any, index: number) {
     this.setState({
-      directions: this.state.directions.map((item, i) => i === index ? { ...item, [filed]: { ...item[filed], value } } : item)
+      directions: this.state.directions.map((item, i) => i === index ? { ...item, [field]: { ...item[field], value } } : item)
     });
   }
   
@@ -278,7 +281,9 @@ export class EditProject extends Component<Props, State> {
           DirectionTitle: item.DirectionTitle.value,
           DirectionDescription: item.DirectionDescription.value
         };
-      })
+      }),
+      IdeasCount: this.state.project!.IdeasCount,
+      ParticipantsCount: this.state.project!.ParticipantsCount
     }
 
     this.loadingService.changeLoader(true);

@@ -1,5 +1,5 @@
 export * from "./LoginPage";
-export * from "./NewsPage";
+export * from "./MainPage";
 export * from "./SignupPage";
 export * from "./LoadProject";
 export * from "./CurrentProjects";
@@ -12,3 +12,6 @@ export * from "./Idea";
 export * from "./EmailConfirmation";
 export * from "./EmailConfirmed";
 export * from "./FinishedProjects";
+export * from "./FinishedProject";
+export * from "./AddNews";
+export * from "./News";

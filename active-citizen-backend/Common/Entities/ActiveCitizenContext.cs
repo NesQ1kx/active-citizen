@@ -18,6 +18,7 @@ namespace Common.Entities
         public virtual DbSet<DirectionIdea> DirectionIdea { get; set; }
         public virtual DbSet<Districts> Districts { get; set; }
         public virtual DbSet<IdeaComment> IdeaComment { get; set; }
+        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Participating> Participating { get; set; }
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<ProjectDirection> ProjectDirection { get; set; }
@@ -81,6 +82,17 @@ namespace Common.Entities
                     .WithMany(p => p.IdeaComment)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_IdeaComment_Users");
+            });
+
+            modelBuilder.Entity<News>(entity =>
+            {
+                entity.Property(e => e.Image).IsRequired();
+
+                entity.Property(e => e.Text).IsRequired();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(255);
             });
 
             modelBuilder.Entity<Participating>(entity =>
@@ -157,7 +169,6 @@ namespace Common.Entities
                 entity.HasOne(d => d.Idea)
                     .WithMany(p => p.Voting)
                     .HasForeignKey(d => d.IdeaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Voting_DirectionIdea");
 
                 entity.HasOne(d => d.User)

@@ -24,6 +24,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
+    color: $color-gray;
 
     
     .title {
@@ -33,10 +34,12 @@
     .statistic {
       display: flex;
       flex-direction: column;
+      align-items: center;
   
       .statistic-item {
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
       }
   
       .count {

@@ -10,8 +10,11 @@
     align-items: flex-start;
     .dates-group {
       display: flex;
-      width: 250px;
-      justify-content: space-between
+      justify-content: space-between;
+
+      & > div:not(:first-child) {
+        margin-left: 10px;
+      }
     }
 
     .directions-block {

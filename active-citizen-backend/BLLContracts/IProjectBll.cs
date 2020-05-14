@@ -21,5 +21,7 @@ namespace BLLContracts
         DirectionIdea GetIdeaById(int id);
         bool VoteForIdea(Voting voting);
         bool IsUserVoted(Voting voting);
+        bool RealiseIdea(int id);
+        IEnumerable<Users> GetProjectParticipants(int projectId);
     }
 }

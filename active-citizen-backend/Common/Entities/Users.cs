@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Common.Entities
@@ -22,6 +23,7 @@ namespace Common.Entities
         public int? District { get; set; }
         public int Sex { get; set; }
         public bool IsBlocked { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
         public bool IsConfirmedEmail { get; set; }
         public int Role { get; set; }

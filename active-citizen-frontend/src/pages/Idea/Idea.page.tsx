@@ -58,6 +58,13 @@ export class Idea extends Component<Props, State> {
         this.setState({ ideaComments: comments, countOfComments });
       }
     });
+    this.commentsService.onDeleteComment().subscribe(deletedComment => {
+      if (this.state.idea!.Id === deletedComment.IdeaId) {
+        const comments = this.state.ideaComments;
+        const countOfComments = this.state.countOfComments - 1;
+        this.setState({ ideaComments: comments.filter(c => c.Id !== deletedComment.CommentId), countOfComments });
+      }
+    })
   }
 
   public render() {
@@ -65,14 +72,6 @@ export class Idea extends Component<Props, State> {
     return (
       this.state.idea && (
         <Page title="">
-        {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
-          <div className="page-actions">
-            <AcButton 
-              type="negative"
-              title="Удалить"
-            />
-          </div>
-        )}
         <div className="idea-page">
           <div className="main-content">
             {user && (
@@ -137,7 +136,7 @@ export class Idea extends Component<Props, State> {
           <div className="comments-block">
             {this.state.ideaComments.length 
               ? (this.state.ideaComments.map((item, index) => (
-                !item.ParrentComment && <Comment comment={item} key={index} parentComments={this.state.ideaComments.filter(comment => comment.ParrentComment === item.Id)} />
+                !item.ParrentComment && <Comment onDeleteComment={(id) => this.deleteComment(id)} comment={item} key={index} parentComments={this.state.ideaComments.filter(comment => comment.ParrentComment === item.Id)} />
               )))
               : (<AcEmptyState text="Пока что никто не оставлял комментариев." />)
             }
@@ -187,5 +186,10 @@ export class Idea extends Component<Props, State> {
     }
     this.commentsService.sendComment(comment);
     this.modalService.changeModalVisibility(false);
+  }
+
+  @Autobind
+  private deleteComment(commentId: number) {
+    this.commentsService.deleteComment({ CommentId: commentId, IdeaId: this.state.idea!.Id });
   }
 }

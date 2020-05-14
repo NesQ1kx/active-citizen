@@ -8,11 +8,12 @@ import { AcModal, AcButton } from "../common";
 import { AddCommentModal } from "../AddCommentModal";
 import { Autobind } from "../../helpers";
 import { ModalService, CommentsService, UserService } from "../../services";
-import { User } from "../../models";
+import { User, Roles } from "../../models";
 
 interface Props {
   comment: IdeaComment;
   parentComments: IdeaComment[];
+  onDeleteComment?: (id: number) => void;
 }
 
 interface State {
@@ -50,9 +51,14 @@ export class Comment extends Component<Props, State> {
             <div className="info">
               <h4>{user!.LastName} {user!.FirstName}</h4>
               <div className="text">{this.props.comment.CommentText}</div>
-              {!this.props.comment.ParrentComment && (
-                <span className="link" onClick={this.openAddCommentModal} >Ответить</span>
-              )}
+              <div className="button-container">
+                {this.state.currentUser && this.state.currentUser!.Role === Roles.Admin && (
+                  <span className="link" onClick={() => this.handleDeleteCommentClick(this.props.comment.Id!)} >Удалить</span>
+                )}
+                {!this.props.comment.ParrentComment && (
+                  <span className="link" onClick={this.openAddCommentModal} >Ответить</span>
+                )}
+              </div>
             </div>
           </div>
           <div className="create-date">
@@ -60,7 +66,7 @@ export class Comment extends Component<Props, State> {
           </div>
         </div>
         <div className="child-comments">
-          {this.props.parentComments.map((item, index) => <Comment comment={item} key={index} parentComments={[]} /> )}
+          {this.props.parentComments.map((item, index) => <Comment  onDeleteComment={(id) => this.handleDeleteCommentClick(id)} comment={item} key={index} parentComments={[]} /> )}
         </div>
       </div>
     );
@@ -84,5 +90,10 @@ export class Comment extends Component<Props, State> {
     console.log(comment);
     this.commentsService.sendComment(comment);
     this.modalService.changeModalVisibility(false);
+  }
+
+  @Autobind
+  private handleDeleteCommentClick(commentId: number) {
+    this.props.onDeleteComment && this.props.onDeleteComment(commentId);
   }
 }

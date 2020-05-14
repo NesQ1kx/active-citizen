@@ -47,6 +47,8 @@ namespace active_citizen_backend
             services.AddScoped<IUserBll, UserBll>();
             services.AddScoped<IProjectDal, ProjectDal>();
             services.AddScoped<IProjectBll, ProjectBll>();
+            services.AddScoped<ICommonBll, CommonBll>();
+            services.AddScoped<ICommonDal, CommonDal>();
             services.AddScoped<EmailSender>();
             services.AddCors();
             services.AddSignalR();

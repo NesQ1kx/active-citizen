@@ -5,3 +5,5 @@ export * from "./Loading.service";
 export * from "./Project.service";
 export * from "./Modal.service";
 export * from "./Comments.service";
+export * from "./Router.service";
+export * from "./Common.service";

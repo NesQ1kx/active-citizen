@@ -64,14 +64,12 @@ export class Direction extends Component<Props, State> {
                     projectPhase === "VOTING" && (<AcAlert text="Фаза подачи идей завершена. Вы можете ознакомиться с идеями и поддержать понравившуюся"/>) ||
                     projectPhase === "PROPOSE" && (
                       <div className="button-container">
-                      {this.state.currentUser!.Role === Roles.User && (
-                        <AcButton 
-                          title="Предложить идею"
-                          type="secondary"
-                          onClick={this.openProposeForm}
-                        />
-                      )}
-                      {this.state.currentUser!.Role === Roles.Expert && (
+                      <AcButton 
+                        title="Предложить идею"
+                        type="secondary"
+                        onClick={this.openProposeForm}
+                      />
+                      {this.state.currentUser!.Role === Roles.Admin && (
                         <AcButton 
                           title="Рассмотрение идей"
                           type="secondary"
@@ -83,34 +81,8 @@ export class Direction extends Component<Props, State> {
                   : (<AcAlert text="Подвердите участие на странице проекта" type="negative" />)
                  : (<AcAlert text="Войдите в систему" type="negative" />)   
               }
-              {/* {this.state.currentUser
-              ? (
-                Date.now() > this.state.direction!.Project.ProposeStartDate
-                ? Date.now() < this.state.direction!.Project.ProposeEndDate
-                  ? this.state.isUserParticipate 
-                    ? (
-                      <div className="button-container">
-                        {this.state.currentUser!.Role === Roles.User && (
-                          <AcButton 
-                            title="Предложить идею"
-                            type="secondary"
-                            onClick={this.openProposeForm}
-                          />
-                        )}
-                        {this.state.currentUser!.Role === Roles.Expert && (
-                          <AcButton 
-                            title="Рассмотрение идей"
-                            type="secondary"
-                            onClick={this.openReviewIdeaPage}
-                          />
-                        )}
-                      </div>)
-                    : (<AcAlert text="Подвердите участие на странице проекта" type="negative" />)
-                  : (<AcAlert text="Фаза подачи идей завершена. Вы можете ознакомиться с идеями и поддержать понравившуюся"/>)
-                :  (<AcAlert text="Дождитесь начала проекта" />)
-              )
-              : (<AcAlert text="Войдите в систему" type="negative" />)} */}
               <div className="divider"></div>
+              <h3>Идеи, отобранные экспертами</h3>
               {ideasToShow.length ? (
                 <div className="ideas">
                   {ideasToShow.map((item, index) => (

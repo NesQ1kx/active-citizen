@@ -24,5 +24,10 @@ export const PROJECT = {
   GET_IDEA: `${url}/project/idea`,
   VOTE: `${url}/project/vote`,
   IS_VOTED: `${url}/project/isVoted`,
-
+  REALISE_IDEA: `${url}/project/realise-idea`,
+  PARTICIPANTS: `${url}/project/participants`,
+}
+export const COMMON = {
+  ADD_NEWS: `${url}/common/add-news`,
+  GET_ALL_NEWS: `${url}/common/get-all-news`,
 }

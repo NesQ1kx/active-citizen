@@ -7,7 +7,7 @@ import { Project, User, Roles } from '../../models';
 import "./Project.page.scss";
 import { Link, Redirect } from 'react-router-dom';
 import { EventType } from '../../types';
-import { Autobind, GetProjectPhase } from '../../helpers';
+import { Autobind, GetProjectPhase, DateFormatter } from '../../helpers';
 import { RouterService } from '../../services/Router.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -91,8 +91,7 @@ export class ProjectPage extends Component<Props, State> {
               )}
             <div className="project-page">
               <div className="dates">
-                <span>{ new Date(this.state.project!.ProposeStartDate).toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) } </span>-
-                <span> { new Date(this.state.project!.VoteEndDate).toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) }</span>
+                <span>{DateFormatter(this.state.project!.ProposeStartDate)} - {DateFormatter(this.state.project!.VoteEndDate)}</span>
               </div>
               <div className="content">
                 <pre style={{whiteSpace: "pre-wrap"}}>
@@ -115,19 +114,6 @@ export class ProjectPage extends Component<Props, State> {
                   </div>)
                 : (<AcAlert text="Войдите в систему, чтобы принять участие в проекте." type="negative" />)}
               {projectPhase === "FINISHED" && (<AcAlert text="Проект завершён. Дожтитесь сбора статистики и реализации идей" type="negative" />)}
-              {projectPhase === "VOTING" && (
-                <div className="button-container">
-                  <AcButton 
-                    type="secondary"
-                    title="Сгенерировать отчёт"
-                    onClick={this.openModal}
-                  />
-                  <AcButton 
-                    type="secondary"
-                    title="Сгенерировать статистику"
-                  />
-                </div>
-              )}
               <div className="divider"></div>
               <div className="direction-block">
                 {this.state.project!.ProjectDirection.map((item, index) => (

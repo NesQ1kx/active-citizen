@@ -28,5 +28,8 @@ namespace DALContracts
         bool AddComment(IdeaComment comment);
         IdeaComment GetCommentById(int id);
         List<Participating> GetParticipants(int projectId);
+        bool RealiseIdea(int id);
+        bool DeleteComment(int id);
+        IEnumerable<Users> GetProjectParticipants(int porjectId);
     }
 }

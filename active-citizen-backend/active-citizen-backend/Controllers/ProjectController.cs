@@ -144,6 +144,7 @@ namespace active_citizen_backend.Controllers
                 Status = 0,
                 RejectReason = 0,
                 CreateDate = model.CreateDate,
+                IsRealised = false,
             };
 
             if (_projectBll.AddIdea(idea))
@@ -196,6 +197,23 @@ namespace active_citizen_backend.Controllers
         public ActionResult IsUserVoted([FromBody] Voting voting)
         {
             return Ok(Json(new { isVoted = _projectBll.IsUserVoted(voting) }));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpGet("realise-idea/{ideaId}")]
+        public ActionResult RealiseIdea(int ideaId)
+        {
+            if (_projectBll.RealiseIdea(ideaId)) {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("participants/{projectId}")]
+        public ActionResult GetProjectParticipants(int projectId)
+        {
+            return Ok(Json(_projectBll.GetProjectParticipants(projectId)));
         }
 
     }

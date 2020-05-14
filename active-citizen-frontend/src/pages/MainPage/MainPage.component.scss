@@ -1,0 +1,24 @@
+@import "../../assets/styles/variables.scss";
+
+.main-page {
+  .slider-container {
+    position: relative;
+    margin-bottom: 50px;
+
+    .line {
+      width: 100%;
+      height: 200px;
+      background-color: $color-primary-light;
+      position: absolute;
+      bottom: 50px;
+      z-index: -1;;
+    }
+  }
+
+  .all-news-page {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    padding: 20px 20px;
+  }
+}

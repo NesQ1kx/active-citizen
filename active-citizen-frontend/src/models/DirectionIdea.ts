@@ -17,4 +17,5 @@ export interface DirectionIdea {
   Direction?: ProjectDirection
   CountOfComments: number;
   IdeaComment?: IdeaComment[];
+  IsRealised: boolean;
 }

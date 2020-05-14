@@ -49,7 +49,9 @@ input::-webkit-inner-spin-button {
   display: flex;
 
   & > button:not(:last-child),
-      a:not(:last-child)  {
+      a:not(:last-child),
+      span:not(:last-child),
+      div:not(:last-child)  {
         margin-right: 20px;
   }
 }

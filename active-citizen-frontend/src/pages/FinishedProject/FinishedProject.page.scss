@@ -1,0 +1,93 @@
+@import "../../assets/styles/variables.scss";
+
+.finished-project {
+  line-height: 30px;
+
+  h3 {
+    text-align: center;
+  }
+  
+  .scores {
+    display: flex;
+    justify-content: center;
+    color: $color-primary;
+
+    & > div:not(:first-child) {
+      margin-left: 40px;
+    }
+
+    .statistic-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .count {
+      font-size: 28px;
+      font-weight: bold;
+      margin-left: 20px;
+    }
+  }
+
+  .description {
+    margin-top: 20px;
+  
+    .highlight {
+      color: $color-primary;
+      font-weight: bold;
+    }
+
+    .direction {
+      display: flex;
+      align-items: center;
+  
+      .dot {
+        background-color: $color-primary;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  
+
+  .ideas {
+    margin-bottom: 40px;
+
+    .direction {
+      margin-top: 10px;
+
+      .title {
+        color: $color-gray;
+      }
+      .idea {
+        line-height: 20px;
+        display: flex;
+        margin-bottom: 5px;
+
+        .index {
+          margin-right: 10px;
+        }
+
+        .content {
+          display: flex;
+          flex-direction: column;
+
+          .link {
+            margin-top: 5px;
+            color: gray;
+            font-size: $font-size-default;
+            text-decoration: underline;
+            cursor: pointer;
+            width: 100%;
+    
+            &:hover {
+              color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

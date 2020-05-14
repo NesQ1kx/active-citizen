@@ -21,6 +21,7 @@ namespace Common.Entities
         public int RejectReason { get; set; }
         public long CreateDate { get; set; }
         public int? CountOfComments { get; set; }
+        public bool IsRealised { get; set; }
 
         public virtual ProjectDirection Direction { get; set; }
         public virtual Users User { get; set; }

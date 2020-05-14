@@ -11,7 +11,7 @@ interface Props {
 export class FinishedProjectCard extends Component<Props> {
   public render() {
     return (
-      <Link to="/">
+      <Link to={`/finished-projects/${this.props.project.Id}`}>
         <div className="finished-project-card">
           <div className="card-image">
             <img src={this.props.project.ProjectImage} alt=""/>
@@ -24,7 +24,7 @@ export class FinishedProjectCard extends Component<Props> {
                 <span className="count">{this.props.project.IdeasCount}</span>
               </div>
               <div className="statistic-item">
-              <i className="fas fa-user-alt fa-2x"></i>
+                <i className="fas fa-user-alt fa-2x"></i>
                 <span className="count">{this.props.project.ParticipantsCount}</span>
               </div>
             </div>

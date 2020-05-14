@@ -4,6 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 20;
   
   .wrapper {
     width: 100vw;
@@ -18,11 +19,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
+    z-index: 20;
     background-color: white;
     border-radius: 4px;
     min-width: 320px;
     max-height: 90%;
+    overflow-y: auto;
 
     .head {
       display: flex;
