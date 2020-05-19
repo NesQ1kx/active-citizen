@@ -16,3 +16,5 @@ export * from "./FinishedProjectCard";
 export * from "./ProjectStatistic";
 export * from "./ProjectsSlider";
 export * from "./NewsCard";
+export * from "./EditAvatarModal";
+export * from "./EditProfileModal";

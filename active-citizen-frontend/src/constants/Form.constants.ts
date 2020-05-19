@@ -2,7 +2,7 @@ import { ValidationResult } from "../types"
 
 export const requireValidationFunction = (value: string) => {
   return {
-    isValid: !!value.trim(),
+    isValid: !!value.toString().trim(),
     errorMessage: "Это поле необходимо заполнить",
   }
 }
@@ -23,7 +23,7 @@ export const passwordValidationFunction = (value: string) => {
 
 export const snilsValidationFunction = (value: string) => {
   return {
-    isValid: validateSnils(value),
+    isValid: validateSnils(value.toString()),
     errorMessage: "Неверный СНИЛС",
   }
 }

@@ -1,6 +1,65 @@
+@import "../../assets/styles/variables.scss";
+
 .user-profile {
   .user-info {
     display: flex;
-    
+
+    .avatar {
+      height: max-content;
+      cursor: pointer;
+      position: relative;
+
+      .overlay {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0,0,0, 0.8);
+        color: white;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .info {
+      margin-left: 20px;
+      .role {
+        color: $color-gray2;
+        font-size: $font-size-default;
+      }
+
+      .info-row {
+        margin-top: 20px;
+      }
+    }
+
+    .actions {
+      margin-left: auto;
+      
+      & > button:not(:first-child),
+          div:not(:first-child) {
+            margin-top: 10px;
+          }
+    }
   }
+}
+
+.avatar-enter {
+  opacity: 0;
+}
+
+.avatar-enter.avatar-enter-active {
+  opacity: 1;
+  transition: opacity 100ms linear;
+}
+
+.avatar-leave {
+  opacity: 1;
+}
+
+.avatar-leave.avatar-leave-active {
+  opacity: 0;
+  transition: opacity 100ms linear;
 }

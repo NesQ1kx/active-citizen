@@ -7,6 +7,12 @@ export const USER = {
   GET_USER_BY_ID: `${url}/user/get-by-id`,
   CONFIRM_EMAIL: `${url}/user/confirm`,
   NOTIFY: `${url}/user/notify`,
+  UPDATE_USER: `${url}/user/update-role`,
+  TOGGLE_BLOCK: `${url}/user/toggle-block`,
+  UPDATE_AVATAR: `${url}/user/update-avatar`,
+  DELETE_AVATAR: `${url}/user/delete-avatar`,
+  EDIT_PROFILE: `${url}/user/edit-profile`,
+  SEARCH_USERS: `${url}/user/search-users`,
 }
 
 export const PROJECT = {
@@ -30,4 +36,7 @@ export const PROJECT = {
 export const COMMON = {
   ADD_NEWS: `${url}/common/add-news`,
   GET_ALL_NEWS: `${url}/common/get-all-news`,
+  GET_NEWS: `${url}/common/get-news`,
+  DELETE_NEWS: `${url}/common/delete-news`,
+  EDIT_NEWS: `${url}/common/edit-news`
 }

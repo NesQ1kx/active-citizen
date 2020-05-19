@@ -119,5 +119,40 @@ namespace BLL
                 _emailSender.SendEmail(u.Email, "Оповещение о начале проекта", message);
             }
         }
+
+        public bool UpdateUserRole(int userId, int role)
+        {
+            return _userDal.UpdateUserRole(userId, role);
+        }
+
+        public bool ToggleUserBlock(int userId)
+        {
+            return _userDal.ToggleUserBlock(userId);
+        }
+
+        public bool UpdateUserAvatar(int userId, string avatar)
+        {
+            return _userDal.UpdateUserAvatar(userId, avatar);
+        }
+
+        public bool DeleteUserAvatar(int userId)
+        {
+            return _userDal.DeleteUserAvatar(userId);
+        }
+
+        public bool EditUserProfile(Users user)
+        {
+            return _userDal.EditUserProfile(user);
+        }
+        
+        public IEnumerable<Users> SearchByEmail(string fragment)
+        {
+            return _userDal.SearchByEmail(fragment);
+        }
+
+        public IEnumerable<Users> SearchByFio(string fragment)
+        {
+            return _userDal.SearchByFio(fragment);
+        }
     }
 }   

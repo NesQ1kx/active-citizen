@@ -69,7 +69,7 @@ export class Direction extends Component<Props, State> {
                         type="secondary"
                         onClick={this.openProposeForm}
                       />
-                      {this.state.currentUser!.Role === Roles.Admin && (
+                      {this.state.currentUser!.Role === Roles.Expert && (
                         <AcButton 
                           title="Рассмотрение идей"
                           type="secondary"

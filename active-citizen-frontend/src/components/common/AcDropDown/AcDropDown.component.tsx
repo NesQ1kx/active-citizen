@@ -3,6 +3,7 @@ import { LabelWithHover } from "../../LabelWithHover";
 
 import "./AcDropDown.component.scss";
 import { Autobind } from "../../../helpers";
+import { FormInput } from "../../../types";
 
 interface Props {
   label?: string;
@@ -11,6 +12,7 @@ interface Props {
   hintText?: string;
   onChange?: (value: any) => void;
   list: any[];
+  formInput: FormInput;
 }
 
 interface State {
@@ -24,6 +26,14 @@ export class AcDropDown extends Component<Props, State> {
     isValid: true,
     isListOpen: false,
     selectedItem: this.props.list[0]
+  }
+
+  public componentDidMount() {
+    this.forceUpdate();
+  }
+
+  public componentWillReceiveProps(nextProps: Props) {
+    this.setState({ selectedItem: nextProps.formInput.value });
   }
 
   public render() {
@@ -71,6 +81,6 @@ export class AcDropDown extends Component<Props, State> {
   private selectItem(item: any) {
     this.setState({
       selectedItem: item
-    }, () => this.props.onChange && this.props.onChange(item.key));
+    }, () => this.props.onChange && this.props.onChange(item));
   }
 }

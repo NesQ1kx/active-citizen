@@ -33,6 +33,8 @@ interface State {
   rejected: boolean;
   reason1: boolean;
   reason2: boolean;
+  reason3: boolean;
+  reason4: boolean;
 }
 
 
@@ -45,6 +47,8 @@ export class ReviewIdeaModal extends Component<Props, State> {
     rejected: false,
     reason1: false,
     reason2: false,
+    reason3: false,
+    reason4: false,
     formState: {
       ideaTitle: {
         value: '',

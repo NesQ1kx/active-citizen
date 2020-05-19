@@ -1,10 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
 import { HttpService } from './Http.service';
-import { SignupModel, SiginModel } from './../types/Form.types';
+import { SignupModel, SiginModel, EditUserProfileModel } from './../types/Form.types';
 import { ToastService } from './Toast.service';
 import { EventType } from '../types';
 import { USER } from '../constants/Endpoints.constant';
 import { User } from '../models';
+import { resolve } from 'path';
 
 export class UserService {
   private static instanceInternal: UserService;
@@ -95,6 +96,54 @@ export class UserService {
       }, error => reject());
     });
   }
+
+  public updateUserRole(userId: number, role: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.put(USER.UPDATE_USER, { UserId: userId, Role: role }).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+  public toggleUserBlock(userId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${USER.TOGGLE_BLOCK}/${userId}`).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+  public updateUserAvatar(userId: number, avatar: string) {
+    return new Promise((resolve, reject) => {
+      this.httpService.put(USER.UPDATE_AVATAR, { UserId: userId, Avatar: avatar }).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+  public deleteUserAvatar(userId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${USER.DELETE_AVATAR}/${userId}`).then(response => {
+        resolve();
+      }, error => reject());
+    });
+  }
+
+ public editUserProfile(model: EditUserProfileModel) {
+   return new Promise((resolve, reject) => {
+     this.httpService.put(USER.EDIT_PROFILE, model).then(response => {
+      resolve();
+     }, error => reject());
+   });
+ }
+
+ public searchUsers(searchType: string, fragment: string) {
+   return new Promise((resolve, reject) => {
+     this.httpService.post(USER.SEARCH_USERS, { SearchType: searchType, Fragment: fragment }).then(response => {
+       resolve(response.data.Value);
+     }, error => reject());
+   });
+ }
 
   private constructor() {}
 }

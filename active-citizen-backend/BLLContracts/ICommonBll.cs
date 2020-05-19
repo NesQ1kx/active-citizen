@@ -9,5 +9,8 @@ namespace BLLContracts
     {
         bool AddNews(News news);
         IEnumerable<News> GetAllNews();
+        News GetNewsById(int id);
+        bool DeleteNews(int id);
+        bool EditNews(News news);
     }
 }

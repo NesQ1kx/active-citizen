@@ -24,5 +24,20 @@ namespace BLL
         {
             return _commonDal.GetAllNews();
         }
+
+        public News GetNewsById(int id)
+        {
+            return _commonDal.GetNewsById(id);
+        }
+
+        public bool DeleteNews(int id)
+        {
+            return _commonDal.DeleteNews(id);
+        }
+
+        public bool EditNews(News news)
+        {
+            return _commonDal.EditNews(news);
+        }
     }
 }

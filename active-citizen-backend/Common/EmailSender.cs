@@ -20,7 +20,7 @@ namespace Common
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("111gosha11@gmail.com", "Goshak_1998"),
+                Credentials = new NetworkCredential("111gosha11@gmail.com", ""),
                 Timeout = 20000,
             };
         }

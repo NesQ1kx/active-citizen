@@ -5,7 +5,6 @@ import { requireValidationFunction } from "../../constants";
 import { LoadingService, CommonService, ToastService } from "../../services";
 import { RouterService } from "../../services/Router.service";
 import { Autobind } from "../../helpers";
-import { isValid } from "date-fns";
 
 interface FormFields {
   newsTitle: FormInput;
@@ -74,6 +73,7 @@ export class AddNews extends Component {
             hintText="Форматирование будет сохранено"
           />
           <AcFileInput
+            formInput={this.state.formState.newsImage}
             title="Изображение для новости"
             onChange={(value) => this.inputChange("newsImage", value, true)}
           />

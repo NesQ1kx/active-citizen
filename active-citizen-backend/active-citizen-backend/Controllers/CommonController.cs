@@ -48,5 +48,35 @@ namespace active_citizen_backend.Controllers
         {
             return Ok(Json(_commonBll.GetAllNews().ToArray()));
         }
+
+        [HttpGet("get-news/{id}")]
+        public ActionResult GetNewsById(int id)
+        {
+            return Ok(Json(_commonBll.GetNewsById(id)));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpGet("delete-news/{id}")]
+        public ActionResult DeleteNews(int id)
+        {
+            if (_commonBll.DeleteNews(id))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpPut("edit-news")]
+        public ActionResult EditNews([FromBody] News news)
+        {
+            if (_commonBll.EditNews(news))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
     }
 }

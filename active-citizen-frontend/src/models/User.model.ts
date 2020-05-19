@@ -6,6 +6,7 @@ export interface User {
   FirstName: string;
   LastName: string;
   Patronym: string;
+  District: number;
   DistrictNavigation: District;
   Snils: string;
   Role: Roles;

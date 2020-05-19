@@ -76,6 +76,11 @@ namespace active_citizen_backend.Controllers
                 }
 
                 var user = _userBll.GetUserByEmail(model.Email);
+
+                if (user.IsBlocked)
+                {
+                    return BadRequest(new { message = "Ваш аккаунт заблокирован" });
+                }
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(GetJwtToken(user));
 
                 var response = new
@@ -127,7 +132,8 @@ namespace active_citizen_backend.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Patronym = user.Patronym,
-                District = user.DistrictNavigation,
+                District = user.District,
+                DistrictNavigation = user.DistrictNavigation,
                 Snils = user.Snils,
                 Role = user.Role,
                 Email = user.Email,
@@ -189,6 +195,103 @@ namespace active_citizen_backend.Controllers
             {
                 return BadRequest(Json(e));
             }
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpPut("update-role")]
+        public ActionResult UpdateUserRole([FromBody] UpdateUserRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_userBll.UpdateUserRole(model.UserId, model.Role))
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpGet("toggle-block/{id}")]
+        public ActionResult ToggleUserBlock(int id)
+        {
+            if (_userBll.ToggleUserBlock(id))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("update-avatar")]
+        public ActionResult UpdateUserAvatar([FromBody] UpdateAvatarViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_userBll.UpdateUserAvatar(model.UserId, model.Avatar))
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("delete-avatar/{userId}")]
+        public ActionResult DeleteUserAvatar(int userId)
+        {
+            if (_userBll.DeleteUserAvatar(userId))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("edit-profile")]
+        public ActionResult EdituserProfile([FromBody] EditUserProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userBll.GetUserById(model.Id);
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Patronym = model.Patronym;
+                user.Snils = model.Snils;
+                user.DateOfBirth = model.DateOfBirth;
+                user.District = model.District;
+
+                if (_userBll.EditUserProfile(user))
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "3")]
+        [HttpPost("search-users")]
+        public ActionResult SearchUsers([FromBody] SearchUsersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.SearchType == "FIO")
+                {
+                    return Ok(Json(_userBll.SearchByFio(model.Fragment)));
+                } else
+                {
+                    return Ok(Json(_userBll.SearchByEmail(model.Fragment)));
+                }
+            }
+
+            return BadRequest();
         }
 
     }

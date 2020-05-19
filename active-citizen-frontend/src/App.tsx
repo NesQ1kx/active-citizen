@@ -17,7 +17,10 @@ import { LoginPage,
          FinishedProjects,
          FinishedProject, 
          AddNews,
-         NewsPage} from './pages';
+         NewsPage,
+         EditNews,
+         SearchUsers,
+         HowItWorks} from './pages';
 import { UserService, ModalService } from './services';
 
 import './App.scss';
@@ -83,6 +86,9 @@ class App extends Component<Props, State> {
               <Route path="/finished-projects" component={FinishedProjects} />
               <Route path="/add-news" component={AddNews} />
               <Route path="/news/:newsId" component={NewsPage}/>
+              <Route path="/edit-news/:newsId" component={EditNews}/>
+              <Route path="/search-users" component={SearchUsers} />
+              <Route path="/how-it-works" component={HowItWorks} />
             </Switch>
           </div>
         </Router>

@@ -43,7 +43,7 @@ export class SignupPage extends Component<Props, State> {
     isFormValid: false,
     formState: {
       district:  {
-        value: '1',
+        value: districts[0],
         validationFunctions: [requireValidationFunction],
         valid: true,
       },
@@ -63,7 +63,7 @@ export class SignupPage extends Component<Props, State> {
         valid: false,
       },
       sex: {
-        value: '1',
+        value: sex[0],
         validationFunctions: [requireValidationFunction],
         valid: true,
       },
@@ -145,6 +145,7 @@ export class SignupPage extends Component<Props, State> {
             </div>
             <div>
               <AcDropDown label="Район проживания"
+                formInput={this.state.formState.district}
                 list={districts}
                 isRequired={true}
                 onChange={(value) => this.inputChange("district", value, true)}
@@ -157,6 +158,7 @@ export class SignupPage extends Component<Props, State> {
                 onChange={(value) => this.inputChange("dateOfBirth", value, true)}
               />
               <AcDropDown list={sex}
+                formInput={this.state.formState.sex}
                 label="Пол"
                 isRequired={true}
                 onChange={(value) => this.inputChange("sex", value, true)}
@@ -176,7 +178,8 @@ export class SignupPage extends Component<Props, State> {
                 onChange={(value, isValid) => this.inputChange("passwordRepeat", value, isValid)}
                 formInput={this.state.formState.passwordRepeat}
               />
-              <AcFileInput 
+              <AcFileInput
+                formInput={this.state.formState.userAvatar}
                 onChange={(value) => this.inputChange("userAvatar", value, true)}
                 title="Изображение пользователя"
               />
@@ -214,13 +217,13 @@ export class SignupPage extends Component<Props, State> {
   @Autobind
   private signup() {
     const model: SignupModel = {
-      District: +this.state.formState.district.value,
+      District: +this.state.formState.district.value.key,
       FirstName: this.state.formState.firstName.value,
       LastName: this.state.formState.lastName.value,
       Patronym: this.state.formState.patronym.value,
       Email: this.state.formState.email.value,
       Snils: +this.state.formState.snils.value,
-      Sex: +this.state.formState.sex.value,
+      Sex: +this.state.formState.sex.value.key,
       Password: this.state.formState.password.value,
       PasswordRepeat: this.state.formState.passwordRepeat.value,
       DateOfBirth: +this.state.formState.dateOfBirth.value,

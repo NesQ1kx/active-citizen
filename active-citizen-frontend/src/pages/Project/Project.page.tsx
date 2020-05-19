@@ -65,7 +65,7 @@ export class ProjectPage extends Component<Props, State> {
     const projectPhase = this.state.project && GetProjectPhase(this.state.project!);
     return (
       this.state.project && (
-        <Page title={`Проект: ${this.state.project!.ProjectTitle}`}>
+        <Page title={`Проект: ${this.state.project.ProjectTitle}`}>
           <AcLoader>
             {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
               <div className="page-actions">

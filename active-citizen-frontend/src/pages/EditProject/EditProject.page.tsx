@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Page, AcInput, AcDatePciker, AcTextArea, AcButton, AcToggle, AcLoader } from "../../components";
+import { Page, AcInput, AcDatePciker, AcTextArea, AcButton, AcToggle, AcLoader, AcFileInput } from "../../components";
 import { FormInput, UpdateProjectModel, EventType } from "../../types";
 import { Autobind } from "../../helpers";
 
@@ -22,6 +22,7 @@ interface FormFields {
   voteStartDate: FormInput;
   voteEndDate: FormInput;
   isProjectActive: FormInput;
+  projectImage: FormInput;
 }
 
 interface Props {
@@ -80,6 +81,11 @@ export class EditProject extends Component<Props, State> {
         validationFunctions: [],
         value: ''
       },
+      projectImage: {
+        valid: true,
+        validationFunctions: [],
+        value: '',
+      },
     },
   }
 
@@ -104,6 +110,7 @@ export class EditProject extends Component<Props, State> {
             voteStartDate: { ...this.state.formState.voteStartDate, value: this.state.project!.VoteStartDate },
             voteEndDate: { ...this.state.formState.voteEndDate, value: this.state.project!.VoteEndDate },
             isProjectActive: { ...this.state.formState.isProjectActive, value: this.state.project!.IsProjectActive },
+            projectImage: { ...this.state.formState.projectImage, value: this.state.project!.ProjectImage },
           },
           directions: this.state.project!.ProjectDirection.map(item => {
             const direction: DirectionInternal = {
@@ -186,6 +193,11 @@ export class EditProject extends Component<Props, State> {
                 title="Активный проект"
                 formInput={this.state.formState!.isProjectActive}
                 onChange={(value) => this.inputChange("isProjectActive", value, true)}
+              />
+              <AcFileInput
+                title="Изображение для проекта"
+                formInput={this.state.formState.projectImage}
+                onChange={(value) => this.inputChange("projectImage", value, true)}
               />
               <div className="directions-block">
               <AcButton 
@@ -274,7 +286,7 @@ export class EditProject extends Component<Props, State> {
       VoteStartDate: + this.state.formState.voteStartDate.value,
       VoteEndDate: +this.state.formState.voteEndDate.value,
       IsProjectActive: this.state.formState.isProjectActive.value,
-      ProjectImage: this.state.project!.ProjectImage,
+      ProjectImage: this.state.formState.projectImage.value,
       ProjectDirection: this.state.directions.map((item, index) => {
         return {
           ...this.state.project!.ProjectDirection[index],

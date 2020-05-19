@@ -35,7 +35,7 @@ export class MainPage extends Component<Props> {
     });
 
     this.commonService.getAllNews().then((news: any) => {
-      this.setState({ news }, () => console.log(news));
+      this.setState({ news });
     });
   }
 

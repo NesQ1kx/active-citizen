@@ -36,7 +36,7 @@ export class Header extends Component<Props> {
         <nav className="nav-container">
           <div className="navigation-items">
             <Logo  />
-            <NavLink to="" className="navigation-item">Как это работает</NavLink>
+            <NavLink to="/how-it-works" activeClassName="active-link" className="navigation-item">Как это работает</NavLink>
             <NavLink to="/finished-projects" activeClassName="active-link" className="navigation-item">Завершённые проекты</NavLink>
             <NavLink to="/current-projects" activeClassName="active-link" className="navigation-item">Текущие проекты</NavLink>
             {this.state.isAuthenticated && this.state.currentUser!.Role === Roles.Admin && (
@@ -48,8 +48,8 @@ export class Header extends Component<Props> {
                {this.state.isDropDownVisible && (
                   <div className="drop-down">
                     <NavLink to="/load-project" className="navigation-item" activeClassName="active-link">Загрузить проект</NavLink>
-                    <NavLink to="" className="navigation-item">Найти пользователя</NavLink>
-                    <NavLink to="/add-news" className="navigation-item">Добавить новость</NavLink>
+                    <NavLink to="/search-users" className="navigation-item" activeClassName="active-link">Найти пользователя</NavLink>
+                    <NavLink to="/add-news" className="navigation-item" activeClassName="active-link">Добавить новость</NavLink>
                   </div>
                )}
               </div>

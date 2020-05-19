@@ -70,3 +70,13 @@ export interface AddNewsModel {
   CreateDate: number;
   Image: string;
 }
+
+export interface EditUserProfileModel {
+  Id: number;
+  FirstName: string;
+  LastName: string;
+  Patronym: string;
+  DateOfBirth: number;
+  District: number
+  Snils: number;
+}

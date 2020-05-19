@@ -15,3 +15,6 @@ export * from "./FinishedProjects";
 export * from "./FinishedProject";
 export * from "./AddNews";
 export * from "./News";
+export * from "./EditNews";
+export * from "./SearchUsers";
+export * from "./HowItWorks";

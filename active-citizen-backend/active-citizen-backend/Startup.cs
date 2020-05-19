@@ -43,13 +43,13 @@ namespace active_citizen_backend
                 });
 
             services.AddControllers();
-            services.AddScoped<IUserDal, UserDal>();
-            services.AddScoped<IUserBll, UserBll>();
-            services.AddScoped<IProjectDal, ProjectDal>();
-            services.AddScoped<IProjectBll, ProjectBll>();
-            services.AddScoped<ICommonBll, CommonBll>();
-            services.AddScoped<ICommonDal, CommonDal>();
-            services.AddScoped<EmailSender>();
+            services.AddSingleton<IUserDal, UserDal>();
+            services.AddSingleton<IUserBll, UserBll>();
+            services.AddSingleton<IProjectDal, ProjectDal>();
+            services.AddSingleton<IProjectBll, ProjectBll>();
+            services.AddSingleton<ICommonBll, CommonBll>();
+            services.AddSingleton<ICommonDal, CommonDal>();
+            services.AddSingleton<EmailSender>();
             services.AddCors();
             services.AddSignalR();
             services.AddMvc().AddNewtonsoftJson(options =>

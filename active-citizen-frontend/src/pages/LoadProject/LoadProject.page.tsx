@@ -148,6 +148,7 @@ export class LoadProject extends Component {
                 formInput={this.state.formState.isProjectActive.value}
               />
               <AcFileInput
+                formInput={this.state.formState.projectImage}
                 title="Изображение для проекта"
                 onChange={(value) => this.inputChange("projectImage", value, true)}
               />

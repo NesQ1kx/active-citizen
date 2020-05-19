@@ -1,0 +1,22 @@
+@import "../../assets/styles/variables.scss";
+
+.user-card {
+  padding: 10px;
+  background-color: #f1f0f0;
+  display: flex;
+  margin-bottom: 20px;
+
+  .user-info {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h4 {
+      transition: color .1s linear;
+    }
+    & h4:hover {
+      color: $color-primary;
+    }
+  }
+}
