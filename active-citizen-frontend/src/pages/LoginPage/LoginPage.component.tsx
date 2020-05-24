@@ -5,10 +5,10 @@ import { FormInput, SiginModel } from "../../types";
 import { requireValidationFunction, emailValidationFunction, passwordValidationFunction } from "../../constants";
 import { Autobind } from "../../helpers";
 import { UserService, LoadingService } from "../../services";
-import { Redirect } from "react-router";
 
 import "./LoginPage.component.scss";
 import { RouterService } from "../../services/Router.service";
+import { Link } from "react-router-dom";
 
 interface Props extends RouteComponentProps<any> {}
 
@@ -71,11 +71,16 @@ export class LoginPage extends Component<Props, State> {
               <div className="hint">
                 *-поля, обязательные для заполнения
               </div>
-              <AcButton title="Войти"
-                type="primary"
-                onClick={this.signin}
-                disabled={!this.state.isFormValid}/>
-            </div>
+                <div className="button-container">
+                  <AcButton title="Войти"
+                    type="primary"
+                    onClick={this.signin}
+                    disabled={!this.state.isFormValid}/>
+                  <Link to="/request-reset">
+                    <span className="link">Забыли пароль?</span>
+                  </Link>
+                </div>
+              </div>
           </div>
         </AcLoader>
       </Page>

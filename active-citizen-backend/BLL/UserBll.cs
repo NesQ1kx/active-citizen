@@ -68,7 +68,9 @@ namespace BLL
             string s = GenerateToken(email);
             string token = HttpUtility.UrlEncode(s);
             string confirmationLink = $"http://localhost:3000/confirmed/{token}";
-            string message = $"Для завершения регистрации перейдите по ссылке: <a href={confirmationLink}>{confirmationLink}</a>";
+            string message = $"<div style=\"width: 400px\">" +
+                $"<div style=\"font-size: 16px;\">Для завершения регистраци нажмите кнопку ниже.</div>" +
+                $"<a style=\"display: inline-block; padding: 10px 10px; background-color: #0085FF; text-decoration: none; margin-top: 20px; border-radius: 2px; color: white \" href={confirmationLink}>Завершить регистрацию</a></div>";
             _emailSender.SendEmail(email, "Подтверждение регистрации", message);
         }
 
@@ -114,8 +116,9 @@ namespace BLL
             foreach(var u in participants)
             {
                 string link = $"http://localhost:3000/current-projects/{projectId}";
-                string message = $"Уважаемый(ая) {u.FirstName} {u.Patronym}, совсем скоро стартует проект, на который Вы регистрировались. \n " +
-                    $"Вы можете найти его здесь: <a href={link}>{link}</a>";
+                string message = $"<div style=\"width: 400px\">" +
+                    $"<div style=\"font-size: 16px;\">Уважаемый(ая) {u.FirstName} {u.Patronym}, совсем скоро стартует проект, на который Вы регистрировались.</div>" +
+                    $"<a style=\"display: inline-block; padding: 10px 10px; background-color: #0085FF; text-decoration: none; margin-top: 20px; border-radius: 2px; color: white \" href={link}>Перейти к проекту</a></div>";
                 _emailSender.SendEmail(u.Email, "Оповещение о начале проекта", message);
             }
         }
@@ -153,6 +156,22 @@ namespace BLL
         public IEnumerable<Users> SearchByFio(string fragment)
         {
             return _userDal.SearchByFio(fragment);
+        }
+
+        public bool ChangePassword(string email, string password)
+        {
+            return _userDal.ChangePassword(email, password);
+        }
+
+        public void SendResetRequest(string email)
+        {
+            string s = GenerateToken(email);
+            string token = HttpUtility.UrlEncode(s);
+            string confirmationLink = $"http://localhost:3000/reset-password/{token}";
+            string message = $"<div style=\"width: 400px\">" +
+               $"<div style=\"font-size: 16px;\">Вы запросили сброс пароля. Если вы этого не делали, пожалуйста, далее не совершайте никаких действий</div>" +
+               $"<a style=\"display: inline-block; padding: 10px 10px; background-color: #0085FF; text-decoration: none; margin-top: 20px; border-radius: 2px; color: white \" href={confirmationLink}>Сбросить пароль</a></div>";
+            _emailSender.SendEmail(email, "Сброс пароля", message);
         }
     }
 }   

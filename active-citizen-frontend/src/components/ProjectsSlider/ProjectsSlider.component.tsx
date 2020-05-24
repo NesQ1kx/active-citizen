@@ -32,19 +32,19 @@ export class ProjectsSlider extends Component<Props, State> {
 
   public componentDidMount() {
     this.projectService.getAllProjects().then((projects: any) => {
-      this.setState({ projects });
+      const projectsToShow: Project[] = projects.some((p: Project) => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
+      ? projects.filter((p: Project) => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
+      : projects;
+      this.setState({ projects: projectsToShow });
     });
     this.startTimer();
   }
 
   public render() {
-    const projects = this.state.projects.some(p => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
-    ? this.state.projects.filter(p => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
-    : this.state.projects;
     return (
       <div className="projects-slider">
           <div className="project-container">
-            {projects.map((project, index) => (
+            {this.state.projects.map((project, index) => (
               this.state.activeIndex === index && (
                 <div className="project" key={index}>
                   <div className="image">

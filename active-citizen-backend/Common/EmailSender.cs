@@ -20,14 +20,14 @@ namespace Common
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("111gosha11@gmail.com", ""),
+                Credentials = new NetworkCredential("active.citizen.tech@gmail.com", "activecitizen1234"),
                 Timeout = 20000,
             };
         }
 
         public void SendEmail(string userEmail, string messageSubject, string emailText)
         {
-            MailAddress from = new MailAddress("111gosha11@gmail.com");
+            MailAddress from = new MailAddress("active.citizen.tech@gmail.com");
             MailAddress to = new MailAddress(userEmail);
             MailMessage message = new MailMessage(from, to);
             message.Body = emailText;

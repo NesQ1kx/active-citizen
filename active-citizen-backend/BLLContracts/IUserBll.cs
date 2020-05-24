@@ -24,6 +24,8 @@ namespace BLLContracts
         bool EditUserProfile(Users user);
         IEnumerable<Users> SearchByEmail(string fragment);
         IEnumerable<Users> SearchByFio(string fragment);
+        bool ChangePassword(string email, string password);
+        void SendResetRequest(string email);
     }
 
 }

@@ -20,7 +20,9 @@ import { LoginPage,
          NewsPage,
          EditNews,
          SearchUsers,
-         HowItWorks} from './pages';
+         HowItWorks,
+         RequestReset,
+         ResetPassword} from './pages';
 import { UserService, ModalService } from './services';
 
 import './App.scss';
@@ -89,6 +91,8 @@ class App extends Component<Props, State> {
               <Route path="/edit-news/:newsId" component={EditNews}/>
               <Route path="/search-users" component={SearchUsers} />
               <Route path="/how-it-works" component={HowItWorks} />
+              <Route path="/request-reset" component={RequestReset} />
+              <Route path="/reset-password/:token" component={ResetPassword} />
             </Switch>
           </div>
         </Router>

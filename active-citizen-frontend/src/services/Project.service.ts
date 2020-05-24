@@ -159,7 +159,15 @@ export class ProjectService {
     return new Promise((resolve, reject) => {
       this.httpService.get(`${PROJECT.PARTICIPANTS}/${projectId}`).then(response => {
         resolve(response.data.Value);
-      }, error => reject);
+      }, error => reject());
+    });
+  }
+
+  public getUserIdeas(userId: number) {
+    return new Promise((resolve, reject) => {
+      this.httpService.get(`${PROJECT.USER_IDEAS}/${userId}`).then(response => {
+        resolve(response.data.Value);
+      }, error => reject());
     });
   }
 }

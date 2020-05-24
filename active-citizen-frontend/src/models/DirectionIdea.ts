@@ -1,5 +1,4 @@
 import { ProjectDirection } from './ProjectDirection';
-import { Project } from './Project.model';
 import { User } from ".";
 import { IdeaComment } from './IdeaComment';
 

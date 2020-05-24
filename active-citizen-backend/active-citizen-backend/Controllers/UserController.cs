@@ -81,6 +81,11 @@ namespace active_citizen_backend.Controllers
                 {
                     return BadRequest(new { message = "Ваш аккаунт заблокирован" });
                 }
+
+                if (!user.IsConfirmedEmail)
+                {
+                    return BadRequest(new { message = "Почта не подтверждена" });
+                }
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(GetJwtToken(user));
 
                 var response = new
@@ -289,6 +294,70 @@ namespace active_citizen_backend.Controllers
                 {
                     return Ok(Json(_userBll.SearchByEmail(model.Fragment)));
                 }
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("change-password")]
+        public ActionResult ChangePassword([FromBody] ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_userBll.VerifyUser(model.Email, model.OldPassword))
+                {
+                   if (_userBll.HashPassword(model.OldPassword) == _userBll.HashPassword(model.NewPassword))
+                    {
+                        return BadRequest(new { message = "Старый и новый пароли не могут совпадать" });
+                    }
+                    else if (_userBll.ChangePassword(model.Email, _userBll.HashPassword(model.NewPassword)))
+                    {
+                        return Ok();
+                    }
+
+                }
+
+                return BadRequest(new { message = "Неверный пароль" });
+
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("request-reset/{email}")]
+        public ActionResult RequestPasswordReset(string email)
+        {
+            var user = _userBll.GetUserByEmail(email);
+            if (user != null)
+            {
+                try
+                {
+                    _userBll.SendResetRequest(email);
+                    return Ok();
+                } catch (Exception e)
+                {
+                    return BadRequest(new { message = "Ошибка сервера" });
+                }
+            } else
+            {
+                return BadRequest(new { message = "Пользователя не существует" });
+            }
+        }
+
+        [HttpPut("reset-password")]
+        public ActionResult ResetPassword([FromBody] ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string email = _userBll.GetEmailFromToken(model.Token);
+                if (_userBll.ChangePassword(email, _userBll.HashPassword(model.Password)))
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
+
             }
 
             return BadRequest();

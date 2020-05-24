@@ -18,3 +18,4 @@ export * from "./ProjectsSlider";
 export * from "./NewsCard";
 export * from "./EditAvatarModal";
 export * from "./EditProfileModal";
+export * from "./ChangePasswordModal";

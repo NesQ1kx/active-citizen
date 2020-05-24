@@ -107,5 +107,14 @@ namespace DAL
                 return db.Users.Where(u => u.FirstName.Contains(fragment) || u.LastName.Contains(fragment) || u.Patronym.Contains(fragment)).ToArray();
             }
         }
+
+        public bool ChangePassword(string email, string password)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                db.Users.Where(u => u.Email == email).FirstOrDefault().Password = password;
+                return db.SaveChanges() > 0;
+            }
+        }
     }
 }

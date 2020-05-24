@@ -18,3 +18,5 @@ export * from "./News";
 export * from "./EditNews";
 export * from "./SearchUsers";
 export * from "./HowItWorks";
+export * from "./RequestReset";
+export * from "./ResetPassword";

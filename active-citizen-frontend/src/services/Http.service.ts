@@ -19,7 +19,7 @@ function axiosInstance() {
 
     if (error.response.status === 401) {
       localStorage.removeItem("AccessToken");
-      ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Сессия истекла. Необхоима аутентификация" });
+      ToastService.instance.changeEvent({ show: true, type: EventType.Error, message: "Необхоима аутентификация" });
       UserService.instance.$currentUser.next(undefined);
       RouterService.instance.redirect("/signin");
     }

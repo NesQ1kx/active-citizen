@@ -10,8 +10,8 @@
   .scores {
     display: flex;
     justify-content: center;
-    color: $color-primary;
-
+    font-size: 28px;
+    font-weight: 500;
     & > div:not(:first-child) {
       margin-left: 40px;
     }
@@ -80,7 +80,7 @@
             font-size: $font-size-default;
             text-decoration: underline;
             cursor: pointer;
-            width: 100%;
+            width: max-content;
     
             &:hover {
               color: $color-primary;

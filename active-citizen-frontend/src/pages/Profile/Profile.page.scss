@@ -44,6 +44,40 @@
           }
     }
   }
+  
+  .user-ideas {
+    .idea {
+      background-color: #f1f0f0;
+      padding: 10px;
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 4px;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .status {
+        margin-left: 10px;
+        font-weight: bold;
+        font-style: italic;
+        width: 200px;
+
+        &.-approved {
+          color: $color-green;
+        }
+
+        &.-review {
+          color: $color-yellow;
+        }
+
+        &.-rejected {
+          color: $color-red;
+        }
+      }
+    }
+  }
 }
 
 .avatar-enter {

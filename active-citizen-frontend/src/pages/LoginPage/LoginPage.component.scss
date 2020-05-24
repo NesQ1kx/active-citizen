@@ -7,5 +7,18 @@
   
   & > div {
     flex-direction: column;
+
+    .link {
+      margin-top: auto;
+      color: gray;
+      font-size: $font-size-default;
+      text-decoration: underline;
+      cursor: pointer;
+      width: max-content;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
   }
 }

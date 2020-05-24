@@ -34,7 +34,7 @@ export class FinishedProjects extends Component {
   }
 
   public render() {
-    const projectsToShow = this.state.projects.filter(Boolean);
+    const projectsToShow = this.state.projects.filter(p => !p.IsProjectActive && GetProjectPhase(p) === "FINISHED");
     return (
       <Page title="Заверёшнные проекты" width="1192">
         <AcLoader>

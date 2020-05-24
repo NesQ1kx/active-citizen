@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Page, UserAvatar, AcButton, AcInput, AcDropDown, AcLoader, EditAvatarModal, EditProfileModal } from "../../components";
-import { User, Roles } from "../../models";
-import { UserService, LoadingService, ToastService, ModalService } from "../../services";
+import { Page, UserAvatar, AcButton, AcInput, AcDropDown, AcLoader, EditAvatarModal, EditProfileModal, ChangePasswordModal, AcEmptyState } from "../../components";
+import { User, Roles, DirectionIdea } from "../../models";
+import { UserService, LoadingService, ToastService, ModalService, ProjectService } from "../../services";
 import { GetDefaultAvatar } from "../../helpers/GetDefaultAvatar.helper";
 
 import "./Profile.page.scss";
@@ -24,6 +24,13 @@ const rolesList = [
     value: "Администратор"
   },
 ]
+
+const rejectReasons: any = {
+  1: "Не соответсвует теме проекта",
+  2: "Невозможно реализовать в рамках данного проекта",
+  3: "Подобная идея уже существует",
+  4: "Нарушает другие правила"
+}
  
 interface Props {
   match: any;
@@ -34,10 +41,12 @@ interface State {
   currentUser?: User;
   userRole: FormInput;
   hovered: boolean;
+  userIdeas: DirectionIdea[];
 }
 
 export class ProfilePage extends Component<Props, State> {
   public state: State = {
+    userIdeas: [],
     hovered: false,
     currentUser: undefined,
     profileUser: undefined,
@@ -52,6 +61,7 @@ export class ProfilePage extends Component<Props, State> {
   private loadingService: LoadingService;
   private toastService: ToastService;
   private modalService: ModalService;
+  private projectService: ProjectService;
 
   constructor(props: Props) {
     super(props);
@@ -59,6 +69,7 @@ export class ProfilePage extends Component<Props, State> {
     this.loadingService = LoadingService.instance;
     this.toastService = ToastService.instance;
     this.modalService = ModalService.instance;
+    this.projectService = ProjectService.instance;
   }
 
   public componentDidMount() {
@@ -134,6 +145,13 @@ export class ProfilePage extends Component<Props, State> {
                     onClick={this.openEditProfileModal}
                   />
                )}
+               {isOwnProfile && (
+                  <AcButton
+                  type="primary"
+                  title="Сменить пароль"
+                  onClick={this.openChangePasswordModal}
+                />
+               )}
                {currentUser && !isOwnProfile && currentUser.Role === Roles.Admin && (
                  <div>
                    <AcButton
@@ -151,7 +169,37 @@ export class ProfilePage extends Component<Props, State> {
               </div>
             </div>
             <div className="divider"></div>
-          </div>
+              {(isOwnProfile || (currentUser && currentUser.Role === Roles.Admin)) && (
+                <div>
+                  <h3>Идеи пользователя</h3>
+                  {this.state.userIdeas.length ? (
+                    <div className="user-ideas">
+                      {this.state.userIdeas.map((idea, index) => (
+                        <div className="idea" key={index}>
+                          <div className="info">
+                            <h4>{idea.IdeaTitle}</h4>
+                            <div>{idea.IdeaDescription}</div>
+                          </div>
+                          <div className={`status ${idea.Status === -1 && "-rejected"} ${idea.Status === 0 && "-review"} ${idea.Status === 1 && "-approved"}`}>
+                            {idea.Status === 1 && (<div>Одобрена</div>)}
+                            {idea.Status === -1 && (
+                              <div>
+                                <div>Отклонена:</div>
+                                <div>{rejectReasons[idea.RejectReason]}</div>
+                              </div>
+                            )}
+                            {idea.Status === 0 && (<div>На рассмотрении</div>)}
+
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                  : (<AcEmptyState text="Пользователь не предлагал идей" />)
+                }
+                </div>
+              )}
+            </div>
         )}
         </AcLoader>
       </Page>
@@ -166,12 +214,22 @@ export class ProfilePage extends Component<Props, State> {
         if (this.state.currentUser && (+this.props.match.params.userId === this.state.currentUser.Id)) {
           this.setState({
             profileUser: this.state.currentUser,
-            userRole: { ...this.state.userRole, value: rolesList.find(i => i.key === this.state.currentUser!.Role) } }, () => this.forceUpdate());
+            userRole: { ...this.state.userRole, value: rolesList.find(i => i.key === this.state.currentUser!.Role) } }, () => {
+              this.forceUpdate();
+              this.projectService.getUserIdeas(this.state.profileUser!.Id).then((data: any) => {
+                this.setState({ userIdeas: data });
+              });
+            });
         } else {
           this.userService.getUserById(this.props.match.params.userId).then((profileUser: any) => {
             this.setState({
               profileUser,
-              userRole: { ...this.state.userRole, value: rolesList.find(i => i.key === profileUser.Role) } }, () => this.forceUpdate());
+              userRole: { ...this.state.userRole, value: rolesList.find(i => i.key === profileUser.Role) } }, () => {
+                this.forceUpdate();
+                this.projectService.getUserIdeas(this.state.profileUser!.Id).then((data: any) => {
+                  this.setState({ userIdeas: data });
+                });
+              });
           });
         }
         this.loadingService.changeLoader(false);
@@ -241,6 +299,24 @@ export class ProfilePage extends Component<Props, State> {
       this.userService.getUserData(this.state.profileUser!.Email);
     }, () => {
       this.toastService.changeEvent({ message: "Не удалось обновить профиль", type: EventType.Error, show: true });
+    });
+  }
+
+  @Autobind
+  private openChangePasswordModal() {
+    this.modalService.changeModalVisibility(true, {
+      title: "Смнеить пароль",
+      body: <ChangePasswordModal onSave={this.onChangePassword}/>
+    })
+  }
+
+  @Autobind
+  private onChangePassword(oldPassword: string, newPassword: string) {
+    this.userService.changePassword(this.state.profileUser!.Email, oldPassword, newPassword).then(() => {
+      this.toastService.changeEvent({ message: "Пароль обновлён", type: EventType.Success, show: true });
+      this.modalService.changeModalVisibility(false);
+    }, error => {
+      this.toastService.changeEvent({ message: error, type: EventType.Error, show: true });
     });
   }
 }

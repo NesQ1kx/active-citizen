@@ -120,5 +120,10 @@ namespace BLL
         {
             return _projectDal.GetProjectParticipants(projectId);
         }
+
+        public IEnumerable<DirectionIdea> GetUserIdeas(int userId)
+        {
+            return _projectDal.GetUserIdeas(userId);
+        }
     }
 }

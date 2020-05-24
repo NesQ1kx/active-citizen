@@ -31,5 +31,6 @@ namespace DALContracts
         bool RealiseIdea(int id);
         bool DeleteComment(int id);
         IEnumerable<Users> GetProjectParticipants(int porjectId);
+        IEnumerable<DirectionIdea> GetUserIdeas(int userId);
     }
 }

@@ -170,7 +170,6 @@ export class SignupPage extends Component<Props, State> {
                 hintText={"Пароль не может быть короче 8 символов и должен содержать латинские буквы и цифры"}
                 onChange={(value, isValid) => this.inputChange("password", value, isValid)}
                 formInput={this.state.formState.password}
-
               />
               <AcInput inputType="password"
                 label="Повторите пароль"

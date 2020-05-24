@@ -6,7 +6,7 @@ import { ProjectService, UserService, LoadingService, ToastService } from "../..
 import { Page, AcLoader, AcEmptyState, ProjectStatistic, AcButton } from "../../components";
 import { GetIdeaSpelling } from "../../helpers/GetIdeaSpelling.helper";
 import { EventType } from "../../types";
-import { Autobind } from "../../helpers";
+import { Autobind, DateFormatter } from "../../helpers";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -53,14 +53,15 @@ export class FinishedProject extends Component<Props, State> {
           <AcLoader>
             <div className="finished-project">
               <div className="scores">
-                <div className="statistic-item">
+                {/* <div className="statistic-item">
                   <i className="far fa-lightbulb fa-2x"></i>
                   <span className="count">{project.IdeasCount}</span>
                 </div>
                 <div className="statistic-item">
                   <i className="fas fa-user-alt fa-2x"></i>
                   <span className="count">{project.ParticipantsCount}</span>
-                </div>
+                </div> */}
+                {DateFormatter(project.ProposeStartDate)} - {DateFormatter(project.VoteEndDate)}
               </div>
               <div className="description">
                 <span>В ходе проекта его участники предложили <span className="highlight">{project.IdeasCount}
@@ -124,16 +125,16 @@ export class FinishedProject extends Component<Props, State> {
                 }
               </div>
               <div className="divider"></div>
-              <div >
+              <div>
                 <h3>Статистика проекта</h3>
                 <ProjectStatistic project={this.state.project!} />
               </div>
-              <div className="divider"></div>
+              {/* <div className="divider"></div>
               <AcButton
                 title="Выгрузить статистику"
                 type="secondary"
                 onClick={this.generatePDF}
-              />
+              /> */}
             </div>
           </AcLoader>
         </Page> 
@@ -161,11 +162,13 @@ export class FinishedProject extends Component<Props, State> {
   private generatePDF() {
     const input = document.getElementById("to-pdf");
      if (input) {
+       console.log(input);
       html2canvas(input).then(canvas => {
-        console.log(canvas.toDataURL("image/jpeg"));
-        const doc = new jsPDF({ orientation: 'p', format: 'a4' });
-        doc.addImage(canvas.toDataURL(), "PNG", 0, 0);
-        doc.save(`Статистика проекта: ${this.state.project!.ProjectTitle}`);
+        const doc = new jsPDF();
+        console.log(canvas);
+        document.body.appendChild(canvas);
+        doc.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0);
+        // doc.save(`Статистика проекта: ${this.state.project!.ProjectTitle}`);
       });
      }
   }

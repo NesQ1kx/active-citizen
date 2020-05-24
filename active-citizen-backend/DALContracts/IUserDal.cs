@@ -17,6 +17,7 @@ namespace DALContracts
         bool EditUserProfile(Users user);
         IEnumerable<Users> SearchByEmail(string fragment);
         IEnumerable<Users> SearchByFio(string fragment);
+        bool ChangePassword(string email, string password);
 
     }
 }

@@ -216,5 +216,11 @@ namespace active_citizen_backend.Controllers
             return Ok(Json(_projectBll.GetProjectParticipants(projectId)));
         }
 
+        [HttpGet("user-ideas/{id}")]
+        public ActionResult GetUserIdeas(int id)
+        {
+            return Ok(Json(_projectBll.GetUserIdeas(id)));
+        }
+
     }
 }

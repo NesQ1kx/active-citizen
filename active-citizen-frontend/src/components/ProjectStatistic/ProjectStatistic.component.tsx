@@ -38,7 +38,7 @@ export class ProjectStatistic extends Component<Props, State> {
 
   public render() {
     return (
-      <div className="project-statistic" id="to-pdf">
+      <div className="project-statistic">
         {this.renderProjectScores()}
         {this.renderDistrictsStatistic()}
         {this.renderIdeasStatistic()}

@@ -145,5 +145,29 @@ export class UserService {
    });
  }
 
+ public changePassword(Email: string, OldPassword: string, NewPassword: string) {
+   return new Promise((resolve, reject) => {
+     this.httpService.put(USER.CHANGE_PASSWORD, { Email, OldPassword, NewPassword }).then(response => {
+       resolve();
+     }, error => reject(error.response.data.message));
+   });
+ }
+
+ public requestPasswordReset(email: string) {
+   return new Promise((resolve, reject) => {
+     this.httpService.get(`${USER.REQUEST_RESET}/${email}`).then(response => {
+       resolve();
+     }, error => reject(error.response.data.message));
+   });
+ }
+
+ public resetPassword(token: string, password: string) {
+   return new Promise((resolve, reject) => {
+     this.httpService.put(USER.RESET_PASSWORD, { Token: token, Password: password }).then(() => {
+       resolve();
+     }, error => reject(error.response.data.message));
+   });
+ }
+
   private constructor() {}
 }

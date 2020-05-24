@@ -13,6 +13,9 @@ export const USER = {
   DELETE_AVATAR: `${url}/user/delete-avatar`,
   EDIT_PROFILE: `${url}/user/edit-profile`,
   SEARCH_USERS: `${url}/user/search-users`,
+  CHANGE_PASSWORD: `${url}/user/change-password`,
+  REQUEST_RESET: `${url}/user/request-reset`,
+  RESET_PASSWORD: `${url}/user/reset-password`,
 }
 
 export const PROJECT = {
@@ -32,6 +35,7 @@ export const PROJECT = {
   IS_VOTED: `${url}/project/isVoted`,
   REALISE_IDEA: `${url}/project/realise-idea`,
   PARTICIPANTS: `${url}/project/participants`,
+  USER_IDEAS: `${url}/project/user-ideas`,
 }
 export const COMMON = {
   ADD_NEWS: `${url}/common/add-news`,

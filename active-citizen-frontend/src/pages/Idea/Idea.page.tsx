@@ -6,7 +6,7 @@ import { DirectionIdea, User, Roles } from "../../models";
 import "./Idea.page.scss";
 import { GetDefaultAvatar } from "../../helpers/GetDefaultAvatar.helper";
 import { NavLink } from "react-router-dom";
-import { Autobind } from "../../helpers";
+import { Autobind, GetProjectPhase } from "../../helpers";
 import { EventType } from "../../types";
 import { IdeaComment } from "../../models/IdeaComment";
 
@@ -119,7 +119,7 @@ export class Idea extends Component<Props, State> {
           </div>
           <div className="divider"></div>
           <div className="button-container">
-            {!this.state.isVoted && (
+            {!this.state.isVoted && GetProjectPhase(this.state.idea!.Direction!.Project) === "VOTING" && (
               <AcButton
                 type="secondary"
                 title="Поддержать идею"

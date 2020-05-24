@@ -249,5 +249,13 @@ namespace DAL
                 return users;
             }
         }
+
+        public IEnumerable<DirectionIdea> GetUserIdeas(int userId)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.DirectionIdea.Where(i => i.UserId == userId).ToList();
+            }
+        }
     }
 }

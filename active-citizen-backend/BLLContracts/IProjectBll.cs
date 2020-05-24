@@ -23,5 +23,6 @@ namespace BLLContracts
         bool IsUserVoted(Voting voting);
         bool RealiseIdea(int id);
         IEnumerable<Users> GetProjectParticipants(int projectId);
+        IEnumerable<DirectionIdea> GetUserIdeas(int userId);
     }
 }
