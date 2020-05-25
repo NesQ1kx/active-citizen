@@ -50,7 +50,7 @@ export class Direction extends Component<Props, State> {
     const projectPhase = this.state.direction && GetProjectPhase(this.state.direction.Project);
     return (
       this.state.direction && (
-        <Page title={`Направление: "${this.state.direction!.DirectionTitle}"`}>
+        <Page title={this.state.direction!.DirectionTitle}>
           <AcLoader>
             <div className="direction-page">
               <div className="description">

@@ -9,6 +9,7 @@ import { EventType } from "../../types";
 import { Autobind, DateFormatter } from "../../helpers";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import domtoimage from 'dom-to-image';
 
 interface Props {
   match: any;
@@ -49,7 +50,7 @@ export class FinishedProject extends Component<Props, State> {
     const project = this.state.project!;
     return (
       project && (
-        <Page title={`Завершённый проект: ${project.ProjectTitle}`}>
+        <Page title={project.ProjectTitle}>
           <AcLoader>
             <div className="finished-project">
               <div className="scores">
@@ -84,7 +85,7 @@ export class FinishedProject extends Component<Props, State> {
                       {direction.DirectionIdea.some(idea => !idea.IsRealised && idea.Status === 1) && (
                         <div className="direction">
                           <h4 className="title">Направление: "{direction.DirectionTitle}"</h4>
-                          {direction.DirectionIdea.filter(idea => idea.Status === 1 && !idea.IsRealised).map((idea, key) => (
+                          {direction.DirectionIdea.filter(idea => idea.Status === 1 && !idea.IsRealised).slice(0, 10).map((idea, key) => (
                             <div className="idea" key={key}>
                               <div className="index">{key + 1}. </div>
                               <div className="content">
@@ -129,12 +130,12 @@ export class FinishedProject extends Component<Props, State> {
                 <h3>Статистика проекта</h3>
                 <ProjectStatistic project={this.state.project!} />
               </div>
-              {/* <div className="divider"></div>
+              <div className="divider"></div>
               <AcButton
                 title="Выгрузить статистику"
                 type="secondary"
                 onClick={this.generatePDF}
-              /> */}
+              />
             </div>
           </AcLoader>
         </Page> 
@@ -160,16 +161,24 @@ export class FinishedProject extends Component<Props, State> {
 
   @Autobind
   private generatePDF() {
-    const input = document.getElementById("to-pdf");
-     if (input) {
-       console.log(input);
-      html2canvas(input).then(canvas => {
-        const doc = new jsPDF();
-        console.log(canvas);
-        document.body.appendChild(canvas);
-        doc.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0);
-        // doc.save(`Статистика проекта: ${this.state.project!.ProjectTitle}`);
+    const input1 = document.getElementById("to-pdf1");
+    const input2 = document.getElementById("to-pdf2");
+    const input3 = document.getElementById("to-pdf3");
+    const doc = new jsPDF();
+
+    domtoimage.toPng(input1!).then(dataUrl1 => {
+      doc.addImage(dataUrl1, "PNG", 0, 0);
+      doc.addPage();
+
+      domtoimage.toPng(input2!).then(dataUrl2 => {
+        doc.addImage(dataUrl2, "PNG", 0, 0);
+        doc.addPage();
+
+        domtoimage.toPng(input3!).then(dataUrl3 => {
+          doc.addImage(dataUrl3, "PNG", 0, 0);
+          doc.save(`Статистика проекта: ${this.state.project!.ProjectTitle}`);
+        });
       });
-     }
+    });
   }
 }

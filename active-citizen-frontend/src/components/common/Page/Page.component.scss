@@ -4,9 +4,13 @@
     display: grid;
     justify-self: center;
     margin: 20px;
+    margin-top: 40px;
 
   .page-title {
     margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   .page-content {

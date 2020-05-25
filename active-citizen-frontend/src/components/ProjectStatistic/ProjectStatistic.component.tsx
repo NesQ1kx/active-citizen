@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Project, User, DirectionIdea } from "../../models";
-import {Doughnut, HorizontalBar, Bar, Pie} from 'react-chartjs-2';
+import {Doughnut, Bar, Pie} from 'react-chartjs-2';
 
 import "./ProjectStatistic.component.scss";
 import { ProjectService } from "../../services";
@@ -39,11 +39,17 @@ export class ProjectStatistic extends Component<Props, State> {
   public render() {
     return (
       <div className="project-statistic">
-        {this.renderProjectScores()}
-        {this.renderDistrictsStatistic()}
-        {this.renderIdeasStatistic()}
-        {this.renderPartisipantsStatistic()}
-        {this.renderActiveParticipants()}
+        <div id="to-pdf1">
+          {this.renderProjectScores()}
+          {this.renderDistrictsStatistic()}
+        </div>
+        <div id="to-pdf2">
+          {this.renderIdeasStatistic()}
+          {this.renderPartisipantsStatistic()}
+        </div>
+        <div id="to-pdf3">
+          {this.renderActiveParticipants()}
+        </div>
       </div>
     );
   }
@@ -54,7 +60,7 @@ export class ProjectStatistic extends Component<Props, State> {
     let ideasToRealise: DirectionIdea[] = [];
     let commentsCount = 0;
     this.props.project.ProjectDirection.forEach(d => {
-      ideasToRealise = [...ideasToRealise, ...d.DirectionIdea.filter(idea => idea.Status === 1).sort((a, b) => a.VotesCount - b.VotesCount).slice(0, 4)];
+      ideasToRealise = [...ideasToRealise, ...d.DirectionIdea.filter(idea => idea.Status === 1).sort((a, b) => a.VotesCount - b.VotesCount).slice(0, 10)];
       commentsCount += d.DirectionIdea.map(item => item.CountOfComments).reduce((sum, value) => sum + value, 0)
     });
     return (

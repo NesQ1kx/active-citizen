@@ -62,7 +62,7 @@ export class HowItWorks extends Component {
                   <img src={require("../../assets/images/realise.jpg")} alt=""/>
                 </div>
                 <div className="flip-card-back">
-                  Лучшие идеи будут реализованы городом
+                  ТОП-10 лучших идей по итогам голосования будут реализованы городом
                 </div>
               </div>
               <h3>Реализация</h3>

@@ -34,7 +34,7 @@ export class ProjectsSlider extends Component<Props, State> {
     this.projectService.getAllProjects().then((projects: any) => {
       const projectsToShow: Project[] = projects.some((p: Project) => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
       ? projects.filter((p: Project) => GetProjectPhase(p) !== "FINISHED" && p.IsProjectActive)
-      : projects;
+      : projects.filter((p: Project) => GetProjectPhase(p) === "FINISHED");
       this.setState({ projects: projectsToShow });
     });
     this.startTimer();

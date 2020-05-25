@@ -65,7 +65,7 @@ export class ProjectPage extends Component<Props, State> {
     const projectPhase = this.state.project && GetProjectPhase(this.state.project!);
     return (
       this.state.project && (
-        <Page title={`Проект: ${this.state.project.ProjectTitle}`}>
+        <Page title={this.state.project.ProjectTitle}>
           <AcLoader>
             {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
               <div className="page-actions">
@@ -91,7 +91,12 @@ export class ProjectPage extends Component<Props, State> {
               )}
             <div className="project-page">
               <div className="dates">
-                <span>{DateFormatter(this.state.project!.ProposeStartDate)} - {DateFormatter(this.state.project!.VoteEndDate)}</span>
+                <div className={`date ${projectPhase === "PROPOSE" ? "-propose" : ""}`}>{DateFormatter(this.state.project!.ProposeStartDate)} - {DateFormatter(this.state.project!.ProposeEndDate)} Фаза подачи идей
+                  {projectPhase === "PROPOSE" && (<i className="fas fa-angle-double-left"></i>)}
+                </div>
+                <div className={`date ${projectPhase === "VOTING" ? "-voting" : ""}`}>{DateFormatter(this.state.project!.VoteStartDate)} - {DateFormatter(this.state.project!.VoteEndDate)} Фаза голосования
+                  {projectPhase === "VOTING" && (<i className="fas fa-angle-double-left"></i>)}
+                </div>
               </div>
               <div className="content">
                 <pre style={{whiteSpace: "pre-wrap"}}>

@@ -4,6 +4,23 @@
   .dates {
     font-weight: bold;
     font-size: $font-size-large;
+
+    .date {
+      display: flex;
+      align-items: center;
+
+      & > i {
+        margin-left: 10px;
+      }
+
+      &.-propose {
+        color: $color-green;
+      }
+
+      &.-voting {
+        color: $color-yellow;
+      }
+    }
   }
 
   .content {
