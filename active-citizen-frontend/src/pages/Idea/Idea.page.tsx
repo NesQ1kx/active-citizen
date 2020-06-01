@@ -84,10 +84,10 @@ export class Idea extends Component<Props, State> {
                     <h4>{user!.LastName} {user!.FirstName}</h4>
                   </NavLink> 
                   <span style={{margin: "0 5px"}}>предложил{user!.Sex === 2 ? 'a' : ''}</span>
-                  <h4>{this.state.idea!.IdeaTitle}</h4>
                 </div>
               )}
               <div className="description">
+                <h4>{this.state.idea!.IdeaTitle}</h4>
                 <pre style={{whiteSpace: "pre-wrap"}}>
                   {this.state.idea!.IdeaDescription}
                 </pre>

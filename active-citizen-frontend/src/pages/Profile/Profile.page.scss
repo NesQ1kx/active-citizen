@@ -46,6 +46,8 @@
   }
   
   .user-ideas {
+    margin-top: 10px;
+
     .idea {
       background-color: #f1f0f0;
       padding: 10px;
@@ -63,6 +65,9 @@
         font-weight: bold;
         font-style: italic;
         width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
 
         &.-approved {
           color: $color-green;

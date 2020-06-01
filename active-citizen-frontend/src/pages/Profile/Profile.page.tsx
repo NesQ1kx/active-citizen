@@ -13,7 +13,7 @@ import { districts } from "../SignupPage/Constants";
 const rolesList = [
   {
     key: 1,
-    value: "Пользователь"
+    value: "Участник"
   },
   {
     key: 2,
@@ -184,8 +184,8 @@ export class ProfilePage extends Component<Props, State> {
                             {idea.Status === 1 && (<div>Одобрена</div>)}
                             {idea.Status === -1 && (
                               <div>
-                                <div>Отклонена:</div>
-                                <div>{rejectReasons[idea.RejectReason]}</div>
+                                <div style={{ textAlign: 'end' }}>Отклонена:</div>
+                                <div style={{ textAlign: 'end' }}>{rejectReasons[idea.RejectReason]}</div>
                               </div>
                             )}
                             {idea.Status === 0 && (<div>На рассмотрении</div>)}
@@ -305,7 +305,7 @@ export class ProfilePage extends Component<Props, State> {
   @Autobind
   private openChangePasswordModal() {
     this.modalService.changeModalVisibility(true, {
-      title: "Смнеить пароль",
+      title: "Сменить пароль",
       body: <ChangePasswordModal onSave={this.onChangePassword}/>
     })
   }

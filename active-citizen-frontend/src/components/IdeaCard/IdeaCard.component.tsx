@@ -4,6 +4,7 @@ import { DirectionIdea } from "../../models";
 import "./IdeaCard.component.scss";
 import { UserAvatar } from "../UserAvatar";
 import { GetDefaultAvatar } from "../../helpers/GetDefaultAvatar.helper";
+import { DateFormatter } from "../../helpers";
 
 interface Props {
   idea: DirectionIdea;
@@ -19,12 +20,14 @@ export class IdeaCard extends Component<Props> {
           <div className="user">
             <h4>{User!.LastName} {User!.FirstName}</h4> 
             <span style={{margin: "0 5px"}}>предложил{User!.Sex === 2 ? 'a' : ''}</span>
-            <h4>{this.props.idea.IdeaTitle}</h4>
           </div>
-          <div className="description">{this.props.idea.IdeaDescription}</div>
+          <div className="description">
+            <h4>{this.props.idea.IdeaTitle}</h4>
+            {this.props.idea.IdeaDescription}
+          </div>
         </div>
         <span className="create-date">
-          {new Date(this.props.idea.CreateDate).toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}
+          {DateFormatter(this.props.idea.CreateDate, true)}
         </span>
       </div>
     )

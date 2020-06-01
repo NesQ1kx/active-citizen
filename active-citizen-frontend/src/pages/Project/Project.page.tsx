@@ -70,11 +70,13 @@ export class ProjectPage extends Component<Props, State> {
             {this.state.currentUser && this.state.currentUser.Role === Roles.Admin && (
               <div className="page-actions">
                 <div className="button-container">
-                  <AcButton 
-                    type="primary"
-                    title="Оповестить о начале проекта" 
-                    onClick={this.notifyUsers}              
-                  />
+                  {projectPhase === "NOT_STARTED" && (
+                    <AcButton 
+                      type="primary"
+                      title="Оповестить о начале проекта" 
+                      onClick={this.notifyUsers}              
+                    />
+                  )}
                   <Link to={`/edit-project/${this.state.project!.Id}`}>
                     <AcButton
                       type="primary"

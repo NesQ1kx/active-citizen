@@ -35,9 +35,10 @@ export class RequestReset extends Component<Props, State> {
 
   public render() {
     return (
-      <Page title="Запрос на сброс пароля" width="440">
+      <Page title="" width="440">
         <AcLoader>
           <div className="request-reset">
+            <h3>Запрос на сброс пароля</h3>
             <span>
               Укажите свой электронный адрес
             </span>
