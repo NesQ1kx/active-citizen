@@ -26,6 +26,7 @@ namespace BLLContracts
         IEnumerable<Users> SearchByFio(string fragment);
         bool ChangePassword(string email, string password);
         void SendResetRequest(string email);
+        bool IsSnilsUnique(long snils);
     }
 
 }

@@ -173,5 +173,10 @@ namespace BLL
                $"<a style=\"display: inline-block; padding: 10px 10px; background-color: #0085FF; text-decoration: none; margin-top: 20px; border-radius: 2px; color: white \" href={confirmationLink}>Сбросить пароль</a></div>";
             _emailSender.SendEmail(email, "Сброс пароля", message);
         }
+
+        public bool IsSnilsUnique(long snils)
+        {
+            return _userDal.GetUserBySnils(snils) == null;
+        }
     }
 }   

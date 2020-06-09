@@ -33,6 +33,11 @@ namespace active_citizen_backend.Controllers
                     return BadRequest(new ObjectResult(new { message = "Пользователь с таким адресом уже существует" }));
                 }
 
+                if (!_userBll.IsSnilsUnique(model.Snils))
+                {
+                    return BadRequest(new ObjectResult(new { message = "Пользователь с таким СНИЛС уже существует" }));
+                }
+
                 Users user = new Users()
                 {
                     FirstName = model.FirstName,
@@ -86,6 +91,7 @@ namespace active_citizen_backend.Controllers
                 {
                     return BadRequest(new { message = "Почта не подтверждена" });
                 }
+
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(GetJwtToken(user));
 
                 var response = new

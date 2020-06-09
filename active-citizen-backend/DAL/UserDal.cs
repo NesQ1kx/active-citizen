@@ -116,5 +116,13 @@ namespace DAL
                 return db.SaveChanges() > 0;
             }
         }
+
+        public Users GetUserBySnils(long snils)
+        {
+            using (var db = new ActiveCitizenContext())
+            {
+                return db.Users.Where(u => u.Snils == snils).FirstOrDefault();
+            }
+        }
     }
 }

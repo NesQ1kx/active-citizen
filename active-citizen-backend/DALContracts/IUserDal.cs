@@ -18,6 +18,6 @@ namespace DALContracts
         IEnumerable<Users> SearchByEmail(string fragment);
         IEnumerable<Users> SearchByFio(string fragment);
         bool ChangePassword(string email, string password);
-
+        Users GetUserBySnils(long snils);
     }
 }
