@@ -24,7 +24,7 @@
     "date-fns": "^2.13.0",
     "dom-to-image": "^2.6.0",
     "html2canvas": "^1.0.0-rc.5",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-addons-css-transition-group": "^15.6.2",
